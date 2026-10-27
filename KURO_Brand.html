@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KURO — Brand Identity v1</title>
+<style>
+  :root{
+    --ink:#0B0B0C; --panel:#1B1B1E; --paper:#F5F2EF; --acid:#C8E634; --mut:#8A8A8E; --line:#2A2A2E;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--ink);color:#fff;font-family:'Archivo','Poppins','Segoe UI',sans-serif;padding:34px 24px 46px;max-width:1100px;overflow-x:hidden}
+  .kick{font-size:10px;letter-spacing:.45em;text-transform:uppercase;color:var(--mut);margin-bottom:12px}
+  h1{font-weight:900;font-size:clamp(40px,7vw,72px);letter-spacing:-2px;text-transform:uppercase;line-height:.95}
+  h1 span{color:var(--acid);font-style:italic}
+  .sub{color:var(--mut);font-size:13.5px;max-width:600px;line-height:1.65;margin:14px 0 8px}
+  .kanji-bg{position:fixed;right:-60px;top:80px;font-size:420px;font-weight:900;color:rgba(255,255,255,.03);pointer-events:none;line-height:1;z-index:0;font-family:serif}
+  section{position:relative;z-index:1}
+  .sec-kick{font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--mut);margin:44px 0 18px;border-bottom:1px solid var(--line);padding-bottom:10px}
+
+  .swatches{display:flex;gap:12px;flex-wrap:wrap}
+  .sw{flex:1 1 150px;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .sw .fill{height:74px}
+  .sw .lbl{padding:10px 12px;background:var(--panel);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--mut)}
+  .sw .lbl b{display:block;color:#fff;font-size:11px;letter-spacing:.05em}
+
+  .logos{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+  .logo-card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:28px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:170px;gap:14px;position:relative;transition:transform .2s ease,border-color .2s ease}
+  .logo-card:hover{transform:translateY(-4px);border-color:#3a3a40}
+  .logo-card .tag{position:absolute;top:12px;left:14px;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--mut)}
+
+  .lw{font-weight:900;font-size:44px;letter-spacing:.08em;display:flex;align-items:center;gap:2px}
+  .lw .o{width:34px;height:34px;border-radius:50%;background:var(--acid);display:inline-block}
+  .lw .o.ink{background:#fff}
+  .stack{font-weight:900;font-size:34px;line-height:.85;letter-spacing:.06em;text-align:left}
+  .stack em{font-style:normal;color:var(--acid)}
+  .brack{font-weight:800;font-size:30px;letter-spacing:.14em}
+  .brack .b{color:var(--acid)}
+  .kmark{font-size:64px;font-weight:900;color:#fff;line-height:1;position:relative}
+  .kmark::after{content:'';position:absolute;right:-16px;bottom:10px;width:12px;height:12px;border-radius:50%;background:var(--acid)}
+  .mono-note{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--mut);text-align:center}
+
+  .hero{background:radial-gradient(80% 120% at 50% 30%,#2A2A2E 0%,#131316 75%);border:1px solid var(--line);border-radius:22px;position:relative;padding:70px 20px;text-align:center;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.45)}
+  .hero .rail{position:absolute;left:16px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px}
+  .hero .rail i{width:9px;height:9px;border:1px solid var(--mut);border-radius:2px;display:block}
+  .hero .scroll{position:absolute;right:14px;bottom:16px;font-size:8px;letter-spacing:.4em;color:var(--mut);writing-mode:vertical-rl;display:flex;align-items:center;gap:7px}
+  .hero .scroll::before{content:'';width:1px;height:22px;background:var(--line)}
+  .hero .k{font-size:10px;letter-spacing:.5em;text-transform:uppercase;color:var(--mut)}
+  .hero .big{font-weight:900;font-size:clamp(64px,14vw,120px);letter-spacing:.1em;margin:10px 0;text-shadow:0 0 60px rgba(200,230,52,.12)}
+  .hero .role{font-size:9px;letter-spacing:.45em;text-transform:uppercase;color:var(--mut)}
+
+  footer{margin-top:40px;border-top:1px solid var(--line);padding-top:18px;color:var(--mut);font-size:12.5px;line-height:1.7;max-width:760px}
+  footer b{color:#fff}
+  .domains{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .dom{border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:11px;color:#fff;background:var(--panel)}
+  .dom.open{border-color:var(--acid);color:var(--acid)}
+  .dom.taken{opacity:.45;text-decoration:line-through}
+</style>
+</head>
+<body>
+  <div class="kanji-bg">黒</div>
+
+  <section>
+    <div class="kick">KURO &middot; Brand Identity &middot; v1 &middot; Riu + Kai + Rishabh</div>
+    <h1>KURO<span>.</span> Black is the brand.</h1>
+    <p class="sub">Kuro = <b style="color:#fff">black</b> in Japanese. K for <b style="color:#fff">Kai</b>, R for <b style="color:#fff">Riu</b> &amp; <b style="color:#fff">Rishabh</b>. Your whole style library is dark-mode &mdash; the agency name now proves it.</p>
+  </section>
+
+  <section>
+    <div class="sec-kick">Palette &mdash; 80 / 15 / 5</div>
+    <div class="swatches">
+      <div class="sw"><div class="fill" style="background:#0B0B0C"></div><div class="lbl"><b>Ink</b>#0B0B0C &middot; 80%</div></div>
+      <div class="sw"><div class="fill" style="background:#F5F2EF"></div><div class="lbl"><b>Paper</b>#F5F2EF &middot; 15%</div></div>
+      <div class="sw"><div class="fill" style="background:#C8E634"></div><div class="lbl"><b>Acid</b>#C8E634 &middot; 5%</div></div>
+      <div class="sw"><div class="fill" style="background:#8A8A8E"></div><div class="lbl"><b>Muted</b>#8A8A8E</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-kick">Logo concepts &mdash; one typeface, four marks</div>
+    <div class="logos">
+      <div class="logo-card"><span class="tag">A &middot; Wordmark</span>
+        <div class="lw">KUR<span class="o ink"></span></div>
+        <div class="mono-note">The O becomes the pupil</div>
+      </div>
+      <div class="logo-card"><span class="tag">B &middot; Stack mark</span>
+        <div class="stack">KU<br>R<em>O</em></div>
+        <div class="mono-note">2&times;2 &middot; favicon-ready</div>
+      </div>
+      <div class="logo-card"><span class="tag">C &middot; Brackets</span>
+        <div class="brack"><span class="b">「</span>KURO<span class="b">」</span></div>
+        <div class="mono-note">Japanese quote frame</div>
+      </div>
+      <div class="logo-card"><span class="tag">D &middot; Glyph</span>
+        <div class="kmark">K<span style="color:var(--acid)">.</span></div>
+        <div class="mono-note">K + dot &mdash; app icon / social</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-kick">Hero &mdash; live in the TURA system</div>
+    <div class="hero">
+      <div class="rail"><i></i><i></i><i></i></div>
+      <div class="scroll">SCROLL</div>
+      <div class="k">WE ARE</div>
+      <div class="big">KURO</div>
+      <div class="role">A web design trio &middot; est. 2026</div>
+    </div>
+  </section>
+
+  <footer>
+    <p><b>Domains</b> &mdash; scanned live (DNS heuristic; confirm at the registrar):</p>
+    <div class="domains">
+      <span class="dom open">kuro.graphics &nbsp;OPEN</span>
+      <span class="dom open">studiokuro.com &nbsp;OPEN</span>
+      <span class="dom taken">kuro.studio</span>
+      <span class="dom taken">kuro.design</span>
+      <span class="dom taken">kuro.in</span>
+      <span class="dom taken">kurostudio.com</span>
+    </div>
+    <p style="margin-top:14px"><b>Saved:</b> agency name + founders stored in permanent memory. Next up: logo file set, agency site, or client pitch deck &mdash; say the word.</p>
+  </footer>
+</body>
+</html>
