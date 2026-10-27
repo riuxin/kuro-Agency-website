@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KURO — An Agency Trio</title>
+<meta name="description" content="KURO — an agency trio. Web design, automation, editing, and more.">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B0B0C; --panel:#1B1B1E; --panel2:#232327; --paper:#F5F2EF;
+    --acid:#C8E634; --mut:#8A8A8E; --line:#26262B;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;overflow-x:hidden;overflow-x:clip}
+  body{background:var(--ink);color:#fff;font-family:'Archivo','Segoe UI',system-ui,sans-serif;overflow-x:hidden}
+  body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:5;
+    background:radial-gradient(120% 90% at 50% 30%,transparent 55%,rgba(0,0,0,.5) 100%)}
+  .grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:6;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation:grain 8s steps(10) infinite}
+  @keyframes grain{0%,100%{transform:translate(0,0)}20%{transform:translate(-2%,3%)}40%{transform:translate(3%,-2%)}60%{transform:translate(-3%,-3%)}80%{transform:translate(2%,2%)}}
+  .kanji{position:fixed;right:-90px;top:12vh;font-size:46vw;font-weight:900;color:rgba(255,255,255,.025);line-height:1;pointer-events:none;z-index:0;font-family:serif;user-select:none}
+  ::selection{background:var(--acid);color:#0B0B0C}
+
+  .label{font-size:10px;letter-spacing:.42em;text-transform:uppercase;color:var(--mut)}
+
+  /* WELCOME SPLASH */
+  #loader{position:fixed;inset:0;background:var(--ink);z-index:100;display:flex;align-items:center;justify-content:center;transition:transform .8s cubic-bezier(.77,0,.18,1)}
+  #loader .w-kick{text-align:center;font-size:10px;letter-spacing:.55em;text-indent:.55em;text-transform:uppercase;color:var(--mut)}
+  #loader .w-big{font-weight:900;font-size:clamp(56px,11vw,130px);letter-spacing:.14em;text-indent:.14em;line-height:1;margin:16px 0 10px;text-align:center;text-shadow:0 0 70px rgba(200,230,52,.16)}
+  #loader .w-big .w-o{display:inline-block;width:.5em;height:.5em;border-radius:50%;background:var(--acid);margin-left:.06em}
+  #loader .w-sub{text-align:center;font-size:11px;letter-spacing:.6em;text-indent:.6em;text-transform:uppercase;color:#fff}
+  #loader .bar{position:absolute;bottom:0;left:0;height:3px;background:var(--acid);width:0%;animation:loadbar 1.7s ease forwards}
+  @keyframes loadbar{to{width:100%}}
+  #loader.done{transform:translateY(-100%)}
+
+  /* BANNER */
+  .banner{border-bottom:1px solid var(--line);padding:18px 5vw;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  .banner .q{font-weight:700;font-size:15px;letter-spacing:.02em}
+  .banner .q span{color:var(--acid)}
+  .banner .avail{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
+  .banner .avail b{color:#fff;font-weight:500}
+
+  /* HEADER */
+  header{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;row-gap:8px;padding:16px 5vw;background:rgba(11,11,12,.72);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  @media(max-width:760px){
+    header{padding:12px 5vw}
+    nav{order:3;width:100%;justify-content:center;gap:22px;padding-top:6px;border-top:1px solid var(--line)}
+    nav a{font-size:9px;letter-spacing:.22em}
+    .clock{font-size:9px;letter-spacing:.15em}
+  }
+  .logo{font-weight:900;font-size:22px;letter-spacing:.22em;display:flex;align-items:center;text-decoration:none;color:#fff}
+  .logo .o{width:11px;height:11px;border-radius:50%;background:var(--acid);display:inline-block;margin-left:2px}
+  nav{display:flex;gap:34px}
+  nav a{color:var(--mut);text-decoration:none;font-size:10px;letter-spacing:.3em;text-transform:uppercase;transition:color .2s}
+  nav a:hover{color:#fff}
+  .clock{font-size:10px;letter-spacing:.25em;color:var(--mut);font-variant-numeric:tabular-nums}
+  .clock b{color:#fff;font-weight:500}
+
+  /* HERO */
+  .hero{position:relative;min-height:88vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:60px 5vw}
+  .hero .glow{position:absolute;inset:0;background:radial-gradient(50% 45% at 50% 45%,rgba(200,230,52,.07),transparent 70%)}
+  .hero .rail{position:absolute;left:22px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:14px}
+  .hero .rail i{width:9px;height:9px;border:1px solid var(--mut);border-radius:2px;display:block;transition:.2s}
+  .hero .rail i:hover{border-color:var(--acid);background:var(--acid)}
+  .hero .scrollcue{position:absolute;right:22px;bottom:30px;font-size:9px;letter-spacing:.42em;color:var(--mut);writing-mode:vertical-rl;display:flex;align-items:center;gap:8px}
+  .hero .scrollcue::before{content:'';width:1px;height:34px;background:var(--line);animation:drop 2s ease infinite}
+  @keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+  .hero .k{font-size:11px;letter-spacing:.55em;text-transform:uppercase;color:var(--mut)}
+  .hero .big{font-weight:900;font-size:clamp(64px,17vw,220px);letter-spacing:.12em;text-indent:.12em;line-height:1;margin:18px 0;text-shadow:0 0 90px rgba(200,230,52,.14)}
+  .hero .role{font-size:10px;letter-spacing:.5em;text-transform:uppercase;color:var(--mut)}
+  .hero .role b{color:#fff;font-weight:500}
+
+  /* WORKS */
+  .works{padding:10px 5vw 90px}
+  .sec-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:8px}
+  .sec-head h2{font-size:12px;letter-spacing:.4em;text-transform:uppercase;font-weight:700}
+  .sec-head .count{font-size:11px;color:var(--mut);letter-spacing:.2em}
+  .work{display:grid;grid-template-columns:64px 1.1fr 1.6fr 90px 70px 44px;align-items:center;gap:18px;padding:26px 0;border-bottom:1px solid var(--line);text-decoration:none;color:#fff;position:relative;transition:padding .25s}
+  .work:hover{padding-left:14px}
+  .work .idx{font-size:12px;color:var(--mut);letter-spacing:.15em}
+  .work .meta{display:flex;flex-direction:column;gap:5px}
+  .work .meta .label{font-size:9px}
+  .work .title{font-weight:900;font-size:clamp(20px,3.4vw,34px);letter-spacing:.02em;text-transform:uppercase;display:flex;align-items:center;gap:14px}
+  .work .title .arr{width:30px;height:30px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;font-size:13px;color:var(--acid);opacity:0;transform:translateX(-8px);transition:.25s}
+  .work:hover .title .arr{opacity:1;transform:none}
+  .work:hover .title{color:var(--acid)}
+  .work .dur,.work .yr{font-size:11px;letter-spacing:.2em;color:var(--mut);text-transform:uppercase}
+  .work .thumb{width:100%;aspect-ratio:4/3;border-radius:6px;overflow:hidden;position:relative;background:var(--panel)}
+  .work .thumb span{position:absolute;inset:0;display:grid;place-items:center;font-weight:900;font-size:44px;color:rgba(255,255,255,.14);transition:transform .4s ease}
+  .work:hover .thumb span{transform:scale(1.12)}
+  .work .thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,rgba(11,11,12,0) 40%,rgba(11,11,12,.55))}
+  @media(max-width:740px){
+    .work{grid-template-columns:40px 1fr 60px;grid-template-rows:auto auto;row-gap:10px}
+    .work .thumb{grid-column:1/-1;order:-1}
+    .work .dur,.work .yr{display:none}
+    .work .title{font-size:20px}
+  }
+
+  /* FREE SAMPLE */
+  .sample{padding:90px 5vw;border-top:1px solid var(--line)}
+  .sample-note{color:var(--mut);font-size:13px;letter-spacing:.06em;margin:16px 0 26px;max-width:640px;line-height:1.7}
+  .frame{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel);box-shadow:0 30px 60px rgba(0,0,0,.45)}
+  .frame-bar{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel2)}
+  .frame-bar i{width:9px;height:9px;border-radius:50%;background:#3a3a40}
+  .frame-bar i.on{background:var(--acid)}
+  .frame-bar .url{margin-left:10px;font-size:10px;letter-spacing:.25em;color:var(--mut);text-transform:uppercase}
+  .frame iframe{width:100%;height:520px;border:0;display:block}
+  @media(max-width:700px){.frame iframe{height:430px}}
+  .sample-cta{margin-top:26px}
+  .pillbtn{display:inline-block;border:1px solid var(--acid);color:var(--acid);border-radius:999px;padding:12px 26px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;text-decoration:none;transition:.2s}
+  .pillbtn:hover{background:var(--acid);color:#0B0B0C}
+  .demo-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0 16px}
+  .tab{border:1px solid var(--line);background:transparent;color:var(--mut);padding:9px 18px;border-radius:999px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;transition:.2s;font-family:inherit}
+  .tab:hover{color:#fff;border-color:#3a3a40}
+  .tab.on{border-color:var(--acid);color:var(--acid)}
+
+  /* MARQUEE */
+  .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:22px 0;background:var(--panel)}
+  .track{display:flex;gap:0;width:max-content;animation:mq 26s linear infinite}
+  .track span{font-weight:900;font-size:clamp(20px,3.4vw,34px);letter-spacing:.08em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1px var(--mut);white-space:nowrap;display:flex;align-items:center}
+  .track span::after{content:'';width:9px;height:9px;border-radius:50%;background:var(--acid);margin:0 26px}
+  .track span:nth-child(even){color:#fff;-webkit-text-stroke:0}
+  @keyframes mq{to{transform:translateX(-50%)}}
+
+  /* STUDIO */
+  .studio{padding:90px 5vw}
+  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .member{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:30px 24px;position:relative;transition:transform .25s,border-color .25s}
+  .member:hover{transform:translateY(-5px);border-color:#3a3a40}
+  .member .n{font-size:11px;color:var(--mut);letter-spacing:.3em}
+  .member .initial{font-weight:900;font-size:64px;letter-spacing:.02em;margin:14px 0 6px}
+  .member .name{font-weight:700;font-size:16px;letter-spacing:.18em;text-transform:uppercase}
+  .member .role{margin-top:8px}
+  .member .dot{position:absolute;top:24px;right:24px;width:10px;height:10px;border-radius:50%;background:var(--acid);animation:pulse 2s ease infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(200,230,52,.55);opacity:1}50%{box-shadow:0 0 0 9px rgba(200,230,52,0);opacity:.55}}
+  @media(max-width:740px){.trio{grid-template-columns:1fr}}
+
+  /* CONTACT */
+  .contact{padding:90px 5vw 60px;border-top:1px solid var(--line);display:grid;grid-template-columns:1.1fr .9fr;gap:60px}
+  .contact .big{font-weight:900;font-size:clamp(30px,4.6vw,52px);line-height:1.05;text-transform:uppercase;letter-spacing:-.01em;margin:18px 0 30px}
+  .contact .big em{font-style:italic;color:var(--acid)}
+  .contact .info{display:flex;flex-direction:column;gap:0;margin-top:8px}
+  .contact .info .row{padding:16px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline;gap:14px}
+  .contact .info .row .label{flex:0 0 auto}
+  .contact .info .row .val{color:#fff;font-size:14px;letter-spacing:.06em;text-align:right;text-decoration:none}
+  a.val:hover{color:var(--acid)}
+  .form{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:34px 30px;box-shadow:0 30px 60px rgba(0,0,0,.45);align-self:start}
+  .form h3{text-align:center;font-size:13px;letter-spacing:.34em;text-transform:uppercase;font-weight:700;margin-bottom:28px}
+  .form input,.form textarea{width:100%;background:transparent;border:0;border-bottom:1px solid #4a4a4e;color:#fff;padding:14px 2px;font-family:inherit;font-size:13px;letter-spacing:.08em;outline:none;resize:vertical}
+  .form input::placeholder,.form textarea::placeholder{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--mut)}
+  .form input:focus,.form textarea:focus{border-bottom-color:#fff}
+  .form .btn{margin-top:30px;width:100%;background:var(--acid);color:#0B0B0C;border:0;padding:16px;font-weight:900;font-size:11px;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;transition:.2s}
+  .form .btn:hover{background:#fff}
+  @media(max-width:740px){.contact{grid-template-columns:1fr}}
+
+  footer.site{padding:26px 5vw 34px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+  footer.site p{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+  footer.site p b{color:#fff;font-weight:500}
+
+  /* REVEAL */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (prefers-reduced-motion: reduce){
+    .grain{animation:none}
+    .track{animation:none}
+    .hero .scrollcue::before{animation:none}
+    .member .dot{animation:none}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="kanji">黒</div>
+
+<!-- WELCOME SPLASH -->
+<div id="loader" aria-hidden="true">
+  <div>
+    <div class="w-kick">WELCOME TO</div>
+    <div class="w-big">KURO<span class="w-o"></span></div>
+    <div class="w-sub">AGENCY</div>
+  </div>
+  <div class="bar" id="bar"></div>
+</div>
+
+<div class="banner">
+  <div class="q">Something in mind?<br>Let's create <span>something meaningful</span> together.</div>
+</div>
+
+<header>
+  <a class="logo" href="#top">KUR<span class="o"></span></a>
+  <nav>
+    <a href="#works">Works</a>
+    <a href="#sample">Sample</a>
+    <a href="#studio">Studio</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="clock"><b id="time">--:--</b></div>
+</header>
+
+<section class="hero" id="top">
+  <div class="glow"></div>
+  <div class="rail"><i></i><i></i><i></i></div>
+  <div class="scrollcue">SCROLL</div>
+  <div>
+    <div class="k">WE ARE</div>
+    <h1 class="big">KURO</h1>
+    <div class="role">AN <b>AGENCY TRIO</b> &middot; EST. 2026</div>
+  </div>
+</section>
+
+<section class="works" id="works">
+  <div class="sec-head reveal">
+    <h2>Selected Works</h2>
+    <div class="count">01 — 05</div>
+  </div>
+
+  <!-- Replace these demo entries with real client projects; keep the meta grid -->
+  <a class="work reveal" href="#contact">
+    <div class="idx">.01</div>
+    <div class="meta"><span class="label">Agency Site</span><span class="label">Studio KURO</span></div>
+    <div class="title">KURO <span class="arr">&rarr;</span></div>
+    <div class="dur">06 PG</div>
+    <div class="yr">2026</div>
+    <div class="thumb" style="background:linear-gradient(135deg,#1d1d22,#101013)"><span>黒</span></div>
+  </a>
+
+  <a class="work reveal" href="https://www.kouragefitness.in/" target="_blank" rel="noopener">
+    <div class="idx">.02</div>
+    <div class="meta"><span class="label">Client Site &middot; Live</span><span class="label">Kourage Fitness</span></div>
+    <div class="title">Forge Your Legacy <span class="arr">&rarr;</span></div>
+    <div class="dur">LIVE</div>
+    <div class="yr">2026</div>
+    <div class="thumb" style="background:linear-gradient(135deg,#2a1f18,#141110)"><span>02</span></div>
+  </a>
+
+  <a class="work reveal" href="#contact">
+    <div class="idx">.03</div>
+    <div class="meta"><span class="label">Portfolio</span><span class="label">Riu</span></div>
+    <div class="title">Personal Site <span class="arr">&rarr;</span></div>
+    <div class="dur">04 PG</div>
+    <div class="yr">2026</div>
+    <div class="thumb" style="background:linear-gradient(135deg,#18222b,#0e1216)"><span>03</span></div>
+  </a>
+
+  <a class="work reveal" href="#contact">
+    <div class="idx">.04</div>
+    <div class="meta"><span class="label">Landing Page</span><span class="label">Nova Labs</span></div>
+    <div class="title">Nova <span class="arr">&rarr;</span></div>
+    <div class="dur">01 PG</div>
+    <div class="yr">2026</div>
+    <div class="thumb" style="background:linear-gradient(135deg,#241833,#0f0e16)"><span>04</span></div>
+  </a>
+
+  <a class="work reveal" href="#contact">
+    <div class="idx">.05</div>
+    <div class="meta"><span class="label">Brand Site</span><span class="label">Aurora</span></div>
+    <div class="title">Aurora <span class="arr">&rarr;</span></div>
+    <div class="dur">05 PG</div>
+    <div class="yr">2026</div>
+    <div class="thumb" style="background:linear-gradient(135deg,#1c2b1c,#0e140d)"><span>05</span></div>
+  </a>
+</section>
+
+<section class="sample" id="sample">
+  <div class="sec-head reveal">
+    <h2>Free Sample</h2>
+    <div class="count">01 — 04</div>
+  </div>
+  <p class="sample-note reveal">Free samples — full websites we built for customers, completely open to explore. Switch between them below: this is the quality KURO delivers.</p>
+  <div class="demo-tabs reveal" id="demoTabs">
+    <button class="tab on" data-s="0">.01 &middot; Cafe</button>
+    <button class="tab" data-s="1">.02 &middot; Kourage</button>
+    <button class="tab" data-s="2">.03 &middot; Portfolio</button>
+    <button class="tab" data-s="3">.04 &middot; Store</button>
+  </div>
+  <div class="frame reveal">
+    <div class="frame-bar"><i></i><i></i><i class="on"></i><span class="url" id="demoUrl">keetcafe &middot; sample</span></div>
+    <iframe id="demoFrame" title="Free sample website by KURO" loading="lazy"></iframe>
+  </div>
+  <div class="sample-cta reveal"><a class="pillbtn" href="#contact">Want one like this? Let's talk &rarr;</a></div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="track" id="mq">
+    <span>Web Design</span><span>Automation</span><span>Editing</span><span>UI / UX</span><span>Frontend</span><span>Branding</span><span>Motion</span><span>E-Commerce</span><span>SEO</span><span>Landing Pages</span>
+  </div>
+</div>
+
+<section class="studio" id="studio">
+  <div class="sec-head reveal">
+    <h2>The Trio</h2>
+    <div class="count">COLOR &middot; &#9679;</div>
+  </div>
+  <div class="trio">
+    <div class="member reveal"><span class="dot"></span>
+      <div class="n">.01</div>
+      <div class="initial">R</div>
+      <div class="name">Riu</div>
+    </div>
+    <div class="member reveal"><span class="dot"></span>
+    <div class="n">.02</div>
+      <div class="initial">K</div>
+      <div class="name">Kai</div>
+    </div>
+    <div class="member reveal"><span class="dot"></span>
+    <div class="n">.03</div>
+      <div class="initial">R</div>
+      <div class="name">Rishabh</div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="reveal">
+    <div class="label">Contact</div>
+    <div class="big">Let's create something<br><em>meaningful</em> together.</div>
+    <div class="info">
+      <div class="row"><span class="label">Studio</span><span class="val">Available worldwide</span></div>
+      <div class="row"><span class="label">E-mail</span><a class="val" href="mailto:hello@kuro.graphics">hello@kuro.graphics</a></div>
+      <div class="row"><span class="label">Socials</span><span class="val">Instagram &middot; Behance &middot; LinkedIn</span></div>
+    </div>
+  </div>
+  <form class="form reveal" onsubmit="location.href='mailto:hello@kuro.graphics?subject=Project%20inquiry&body='+encodeURIComponent(this.message.value);return false">
+    <h3>Contact Form</h3>
+    <input type="text" placeholder="Your name" required>
+    <input type="text" placeholder="Your brand / company">
+    <input type="email" placeholder="Your e-mail" required>
+    <textarea rows="4" placeholder="Message"></textarea>
+    <button class="btn" type="submit">SEND MESSAGE +</button>
+  </form>
+</section>
+
+<footer class="site">
+  <p><b>KURO</b> — an agency trio, available worldwide</p>
+  <p>&copy; 2026 &middot; 黒</p>
+</footer>
+
+<script>
+  // Welcome splash: hold ~1.9s, then curtain up
+  const loader=document.getElementById('loader');
+  setTimeout(()=>{loader.classList.add('done');loader.addEventListener('transitionend',()=>loader.remove());},1900);
+
+  // Mumbai (IST) clock
+  const time=document.getElementById('time');
+  const tick=()=>time.textContent=new Intl.DateTimeFormat('en-GB',{hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'Asia/Kolkata'}).format(new Date())+' IST';
+  tick();setInterval(tick,10000);
+
+  // Duplicate marquee content for seamless loop
+  const mq=document.getElementById('mq');mq.innerHTML+=mq.innerHTML;
+
+  // Scroll reveal
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6)*70+'ms';io.observe(el);});
+
+  // Free samples gallery — to add sample .05, .06 ... just push another entry into SAMPLES
+  const SAMPLES=[
+    {url:'keetcafe &middot; sample',html:`<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia,'Times New Roman',serif;background:#FDF0D5;color:#61210F}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 7%;border-bottom:1px solid rgba(97,33,15,.15)}
+nav b{letter-spacing:.3em;font-size:13px}
+nav span{font-size:11px;letter-spacing:.25em}
+.hero{padding:64px 7% 56px;text-align:center}
+.hero .tag{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:#B4784A}
+.hero h1{font-size:clamp(34px,6vw,58px);font-style:italic;font-weight:700;margin:16px 0 10px}
+.hero p{font-size:15px;color:#8a5a3b;letter-spacing:.05em}
+.btn{display:inline-block;margin-top:26px;background:#61210F;color:#FDF0D5;padding:13px 34px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;text-decoration:none;border-radius:999px}
+.menu{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:10px 7% 50px}
+.card{background:#fff;border-radius:14px;padding:26px 18px;border:1px solid rgba(97,33,15,.12)}
+.card i{display:block;width:34px;height:34px;border-radius:50%;background:#F2C879;margin:0 auto 12px}
+.card b{font-size:14px;letter-spacing:.12em;text-transform:uppercase}
+.card p{font-size:12px;color:#8a5a3b;margin-top:6px}
+.foot{background:#61210F;text-align:center;padding:22px;font-size:11px;letter-spacing:.3em;color:#FDF0D5}
+@media(max-width:700px){.menu{grid-template-columns:1fr}}
+</style></head><body>
+<nav><b>KEET CAFE</b><span>MENU &middot; VISIT &middot; ORDER</span></nav>
+<div class="hero">
+  <div class="tag">Est. 2026 &middot; Fresh Daily</div>
+  <h1>Welcome to Keet Cafe</h1>
+  <p>Homemade baking. Tasty drinks. Warm corners.</p>
+  <a class="btn" href="#">SEE MENU</a>
+</div>
+<div class="menu">
+  <div class="card"><i></i><b>Fresh Bakes</b><p>Croissants, buns &amp; sourdough from the morning oven.</p></div>
+  <div class="card"><i style="background:#EE6E4D"></i><b>Filter Coffee</b><p>Slow-brewed, strong, served the classic way.</p></div>
+  <div class="card"><i style="background:#2C666E"></i><b>Desserts</b><p>Whatever the season brings &mdash; always homemade.</p></div>
+</div>
+<div class="foot">KEET CAFE &mdash; SAMPLE SITE BY KURO</div>
+</body></html>`},
+    {url:'kouragefitness.in &middot; live',html:`<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#0D0C0A;color:#F5EFE2}
+nav{display:flex;justify-content:space-between;align-items:center;padding:16px 6%;border-bottom:1px solid rgba(212,169,74,.25)}
+nav b{letter-spacing:.22em;font-size:13px;color:#D4A94A}
+nav span{font-size:9px;letter-spacing:.3em;color:#8b8577}
+.hero{padding:56px 6% 44px;background:linear-gradient(160deg,#171310,#0D0C0A 65%);border-bottom:1px solid rgba(212,169,74,.15)}
+.hero .k{font-size:10px;letter-spacing:.45em;color:#D4A94A;text-transform:uppercase}
+.hero h1{font-size:clamp(38px,8vw,74px);font-weight:900;text-transform:uppercase;line-height:.95;letter-spacing:-1px;margin:14px 0 12px}
+.hero h1 em{font-style:normal;color:#D4A94A}
+.hero p{color:#a99f8d;font-size:13px;letter-spacing:.05em;max-width:520px}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.cta a{display:inline-block;padding:12px 22px;font-size:10px;letter-spacing:.25em;text-transform:uppercase;text-decoration:none;font-weight:700}
+.cta .w{background:#25D366;color:#08110b;border-radius:999px}
+.cta .v{border:1px solid #D4A94A;color:#D4A94A;border-radius:999px}
+.zones{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:34px 6% 10px}
+.z{border:1px solid rgba(212,169,74,.25);border-radius:10px;padding:16px 14px}
+.z b{font-size:11px;letter-spacing:.18em;color:#D4A94A;text-transform:uppercase;display:block}
+.z p{font-size:11px;color:#a99f8d;margin-top:5px}
+.founder{margin:26px 6% 40px;border:1px solid rgba(212,169,74,.25);border-radius:12px;padding:22px;background:#12100D}
+.founder .n{font-size:9px;letter-spacing:.35em;color:#8b8577;text-transform:uppercase}
+.founder h2{font-size:24px;font-weight:900;text-transform:uppercase;letter-spacing:.05em;margin:6px 0 4px}
+.founder .role{font-size:11px;color:#D4A94A;letter-spacing:.15em;text-transform:uppercase}
+ul.aw{list-style:none;margin-top:12px;display:grid;gap:6px}
+ul.aw li{font-size:12px;color:#cfc6b4}
+ul.aw li b{color:#D4A94A}
+.foot{border-top:1px solid rgba(212,169,74,.2);text-align:center;padding:18px;font-size:9px;letter-spacing:.3em;color:#8b8577}
+@media(max-width:700px){.zones{grid-template-columns:1fr 1fr}}
+</style></head><body>
+<nav><b>KOURAGE FITNESS</b><span>MULUND WEST &middot; MUMBAI</span></nav>
+<div class="hero">
+  <div class="k">Best Gym In Mulund</div>
+  <h1>Forge Your <em>Legacy</em></h1>
+  <p>Push past your limits &mdash; Mulund's most premium fitness experience with expert trainers and world-class equipment.</p>
+  <div class="cta">
+    <a class="w" href="https://wa.me/918169455350" target="_blank">ENQUIRE ON WHATSAPP</a>
+    <a class="v" href="https://www.kouragefitness.in/" target="_blank">VISIT LIVE SITE &nearr;</a>
+  </div>
+</div>
+<div class="zones">
+  <div class="z"><b>Strength Zone</b><p>Biomechanical machines built for maximum power development.</p></div>
+  <div class="z"><b>Cardio Suite</b><p>High-performance treadmills, spin bikes &amp; ellipticals.</p></div>
+  <div class="z"><b>Free Weights</b><p>Calibrated dumbbells up to elite loads with a custom rack.</p></div>
+  <div class="z"><b>Functional</b><p>Dual cable crossover for total-body definition.</p></div>
+  <div class="z"><b>Isolation</b><p>Plate-loaded hypertrophy suites for precise muscle work.</p></div>
+  <div class="z"><b>Aerial Yoga</b><p>Anti-gravity hammocks for decompression &amp; core.</p></div>
+</div>
+<div class="founder">
+  <div class="n">Founder &amp; Mentor</div>
+  <h2>Jagesh Dait</h2>
+  <div class="role">International Athlete &middot; Elite Trainer</div>
+  <ul class="aw">
+    <li><b>2018</b> &mdash; IFBB Diamond Cup &middot; Gold Medal</li>
+    <li><b>2019</b> &mdash; IFBB Diamond Cup &middot; Bronze Medal</li>
+    <li><b>2022</b> &mdash; Mr. Universe &middot; Bronze Medal</li>
+  </ul>
+</div>
+<div class="foot">KOURAGE FITNESS &mdash; A KURO CLIENT PROJECT &middot; LIVE</div>
+</body></html>`},
+    {url:'aurastudio &middot; sample',html:`<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#1B1B1E;color:#fff}
+nav{display:flex;justify-content:space-between;padding:18px 6%;border-bottom:1px solid #2a2a2e}
+nav b{font-weight:900;letter-spacing:.25em}
+nav span{font-size:10px;letter-spacing:.3em;color:#8A8A8E}
+.hero{padding:56px 6% 30px;text-align:center}
+.hero .t{font-size:10px;letter-spacing:.5em;color:#8A8A8E;text-transform:uppercase}
+.hero h1{font-weight:900;font-size:clamp(36px,8vw,72px);letter-spacing:.12em;margin:12px 0}
+.hero p{font-size:10px;letter-spacing:.4em;color:#8A8A8E;text-transform:uppercase}
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:10px 6% 50px}
+.gal div{aspect-ratio:1/1;background:linear-gradient(135deg,#2b2b30,#1f1f24);border-radius:6px;display:grid;place-items:center;color:#4a4a52;font-weight:900;font-size:22px}
+.foot{text-align:center;padding:18px;font-size:10px;letter-spacing:.3em;color:#8A8A8E;border-top:1px solid #2a2a2e}
+@media(max-width:700px){.gal{grid-template-columns:1fr 1fr}}
+</style></head><body>
+<nav><b>AURA</b><span>WORK &middot; ABOUT &middot; CONTACT</span></nav>
+<div class="hero"><div class="t">I AM</div><h1>AURA</h1><p>PHOTOGRAPHER &middot; MUMBAI</p></div>
+<div class="gal"><div>.01</div><div>.02</div><div>.03</div><div>.04</div><div>.05</div><div>.06</div></div>
+<div class="foot">AURA STUDIO &mdash; SAMPLE SITE BY KURO</div>
+</body></html>`},
+    {url:'urbanthreads &middot; sample',html:`<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#F4F4F6;color:#1A1A2E}
+nav{display:flex;justify-content:space-between;align-items:center;padding:16px 6%;background:#fff;border-bottom:1px solid #e4e4ea}
+nav b{font-weight:900;letter-spacing:.15em}
+nav span{font-size:11px;letter-spacing:.25em;color:#2563EB;font-weight:700}
+.hero{padding:54px 6% 36px;text-align:center}
+.hero h1{font-size:clamp(34px,7vw,60px);font-weight:900;letter-spacing:-1px;text-transform:uppercase}
+.hero h1 em{font-style:normal;color:#2563EB}
+.hero p{color:#6B7280;font-size:13px;margin-top:10px;letter-spacing:.05em}
+.prods{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:6px 6% 50px}
+.p{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 6px 18px rgba(20,20,40,.06)}
+.p .im{height:110px;display:grid;place-items:center;font-weight:900;font-size:26px;color:#fff}
+.p .im.c1{background:linear-gradient(135deg,#2563EB,#1A1A2E)}
+.p .im.c2{background:linear-gradient(135deg,#EE6E4D,#61210F)}
+.p .im.c3{background:linear-gradient(135deg,#00D4FF,#020024)}
+.p .info{padding:14px 16px}
+.p b{font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.p span{display:block;font-size:12px;color:#6B7280;margin-top:4px}
+.foot{background:#1A1A2E;color:#fff;text-align:center;padding:16px;font-size:10px;letter-spacing:.3em}
+@media(max-width:700px){.prods{grid-template-columns:1fr}}
+</style></head><body>
+<nav><b>URBAN THREADS</b><span>CART (0)</span></nav>
+<div class="hero"><h1>Wear The <em>Streets</em></h1><p>New drop every month. Limited runs only.</p></div>
+<div class="prods">
+  <div class="p"><div class="im c1">UT</div><div class="info"><b>Oversized Tee</b><span>&#8377;799 &middot; S M L XL</span></div></div>
+  <div class="p"><div class="im c2">UT</div><div class="info"><b>Cargo Pants</b><span>&#8377;1,499 &middot; 30 32 34</span></div></div>
+  <div class="p"><div class="im c3">UT</div><div class="info"><b>Windbreaker</b><span>&#8377;1,999 &middot; M L XL</span></div></div>
+</div>
+<div class="foot">URBAN THREADS &mdash; SAMPLE SITE BY KURO</div>
+</body></html>`}
+  ];
+  const demoFrame=document.getElementById('demoFrame'),demoUrl=document.getElementById('demoUrl'),demoTabs=document.getElementById('demoTabs');
+  const renderSample=i=>{
+    demoFrame.srcdoc=SAMPLES[i].html;
+    demoUrl.innerHTML=SAMPLES[i].url;
+    demoTabs.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on',j===i));
+  };
+  demoTabs.addEventListener('click',e=>{const b=e.target.closest('.tab');if(b)renderSample(+b.dataset.s);});
+  renderSample(0);
+</script>
+</body>
+</html>
