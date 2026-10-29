@@ -1,1 +1,12 @@
 .taste-lint.txt
+.claude/
+.codex/
+*.exe
+.agents/skills/clarify
+.agents/skills/data-viz
+.agents/skills/design-for-ai
+.agents/skills/impeccable
+.agents/skills/lenis
+.agents/skills/prototype
+.agents/skills/usability
+
