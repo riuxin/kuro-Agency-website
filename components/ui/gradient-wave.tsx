@@ -7,12 +7,14 @@ export interface GradientWaveProps {
 	colors?: string[];
 	noiseSpeed?: number;
 	className?: string;
+	isPlaying?: boolean;
 }
 
 export const GradientWave: React.FC<GradientWaveProps> = ({
 	colors = ["#2b080c", "#4a0e17", "#721422", "#1a0b0b", "#d4af37"],
 	noiseSpeed = 0.000009,
 	className = "absolute inset-0 w-full h-full -z-10 pointer-events-none",
+	isPlaying = true,
 }) => {
 	const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -250,7 +252,7 @@ export const GradientWave: React.FC<GradientWaveProps> = ({
 
 			gl.drawArrays(gl.TRIANGLES, 0, 6);
 
-			if (!reducedMotion) {
+			if (isPlaying && !reducedMotion) {
 				animId = requestAnimationFrame(render);
 			}
 		};
@@ -261,7 +263,9 @@ export const GradientWave: React.FC<GradientWaveProps> = ({
 		window.addEventListener("resize", resize, { passive: true });
 
 		return () => {
-			cancelAnimationFrame(animId);
+			if (animId) {
+				cancelAnimationFrame(animId);
+			}
 			window.removeEventListener("resize", resize);
 			if (program && gl) {
 				gl.deleteProgram(program);
@@ -270,9 +274,15 @@ export const GradientWave: React.FC<GradientWaveProps> = ({
 			if (fs && gl) gl.deleteShader(fs);
 			if (posBuffer && gl) gl.deleteBuffer(posBuffer);
 		};
-	}, [colors, noiseSpeed]);
+	}, [colors, noiseSpeed, isPlaying]);
 
-	return <canvas ref={canvasRef} className={className} />;
+	return (
+		<canvas
+			ref={canvasRef}
+			className={className}
+			style={{ width: "100%", height: "100%" }}
+		/>
+	);
 };
 
 export default GradientWave;

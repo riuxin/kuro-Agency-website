@@ -4,14 +4,14 @@ import { GradientWave } from "./ui/gradient-wave";
 export const Hero: React.FC = () => {
 	return (
 		<section
-			className="relative min-h-[100dvh] flex items-center justify-center pt-[110px] pb-[60px] bg-[#2b080c] overflow-hidden"
+			className="relative w-full min-h-screen overflow-hidden flex items-center justify-center pt-[110px] pb-[60px]"
 			id="top"
 		>
 			{/* WebGL GradientWave Background: Strictly in background behind all text/CTAs */}
 			<GradientWave
+				className="absolute inset-0 w-full h-full -z-10"
 				colors={["#2b080c", "#4a0e17", "#721422", "#1a0b0b", "#d4af37"]}
-				noiseSpeed={0.000009}
-				className="absolute inset-0 w-full h-full -z-10 pointer-events-none"
+				isPlaying={true}
 			/>
 
 			{/* Foreground Hero Content: Fully interactive, high-contrast, untouched typography */}
