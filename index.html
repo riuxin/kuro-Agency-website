@@ -46,8 +46,8 @@
   header{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;row-gap:8px;padding:16px 5vw;background:rgba(11,11,12,.72);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
   @media(max-width:760px){
     header{padding:12px 5vw}
-    nav{order:3;width:100%;justify-content:center;gap:22px;padding-top:6px;border-top:1px solid var(--line)}
-    nav a{font-size:9px;letter-spacing:.22em}
+    header nav{order:3;width:100%;justify-content:center;gap:22px;padding-top:6px;border-top:1px solid var(--line)}
+    header nav a{font-size:9px;letter-spacing:.22em}
     .clock{font-size:9px;letter-spacing:.15em}
   }
   .logo{font-weight:900;font-size:22px;letter-spacing:.22em;display:flex;align-items:center;text-decoration:none;color:#fff}
@@ -183,6 +183,41 @@
     .edit-modal-hint{display:none}
   }
 
+  /* PERFORMANCE & RESULTS */
+  .results{padding:96px 5vw;border-top:1px solid var(--line)}
+  .results-head{max-width:1180px;margin:0 auto 52px;text-align:center}
+  .results-head .label{display:block;margin-bottom:18px}
+  .results-head h2{font-weight:900;font-size:clamp(32px,6vw,68px);line-height:.98;letter-spacing:-.02em;text-transform:uppercase}
+  .results-head h2 span{color:var(--acid)}
+  .results-sub{max-width:520px;margin:20px auto 0;color:var(--mut);font-size:13.5px;line-height:1.75;letter-spacing:.02em}
+  .bento{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .bento-card{position:relative;display:block;margin:0;aspect-ratio:16/9;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:linear-gradient(160deg,#16161B 0%,#0C0C0F 72%);box-shadow:0 30px 60px -42px rgba(0,0,0,.95);transition:border-color .35s ease,transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s ease}
+  .bento-card:hover{border-color:rgba(200,230,52,.42);transform:translateY(-5px);box-shadow:0 45px 90px -42px rgba(0,0,0,1),0 0 0 1px rgba(200,230,52,.16)}
+  .bento-card.wide{grid-column:span 2}
+  .bento-card.tall{grid-row:span 2;aspect-ratio:auto}
+  .bento-media{position:absolute;inset:0;background:radial-gradient(120% 120% at 25% 8%,#1D1D25 0%,#0A0A0C 68%)}
+  .bento-media img{position:absolute;inset:0;z-index:1;display:block;width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .8s cubic-bezier(.2,.8,.2,1),opacity .3s ease}
+  .bento-card.tall .bento-media img{object-fit:contain;object-position:center}
+  .bento-card:hover .bento-media img{transform:scale(1.015)}
+  .bento-card.no-img .bento-media img{opacity:0}
+  .bento-ph{position:absolute;inset:0;z-index:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:24px;text-align:center}
+  .bento-ph::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 1px,transparent 1px 7px);opacity:.55}
+  .bento-ph span{position:relative;font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--acid)}
+  .bento-ph b{position:relative;font-weight:900;font-size:clamp(12px,1.3vw,15px);letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.24)}
+  .bento-card::after{content:'';position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(8,8,10,.55) 0%,rgba(8,8,10,0) 26%,rgba(8,8,10,0) 82%,rgba(8,8,10,.42) 100%);pointer-events:none}
+  .bento-badge{position:absolute;left:14px;top:14px;z-index:3;display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:rgba(10,10,12,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;font-size:8.5px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;white-space:nowrap}
+  .bento-badge i{width:5px;height:5px;border-radius:50%;background:var(--acid);box-shadow:0 0 9px rgba(200,230,52,.85)}
+  .bento-idx{position:absolute;right:14px;bottom:10px;z-index:3;font-weight:900;font-size:clamp(22px,2.4vw,30px);line-height:1;letter-spacing:-.02em;color:rgba(255,255,255,.16)}
+  @media(max-width:900px){
+    .results{padding:70px 5vw}
+    .bento{grid-template-columns:1fr;gap:18px;max-width:640px}
+    .results-head{margin-bottom:36px}
+    .bento-card{aspect-ratio:16/10}
+    .bento-card.wide{grid-column:auto}
+    .bento-card.tall{grid-row:auto;aspect-ratio:9/16;order:4}
+    .bento-badge{left:12px;top:12px;padding:6px 11px;font-size:8px}
+  }
+
   /* CONTACT */
   .contact{padding:90px 5vw 60px;border-top:1px solid var(--line);display:grid;grid-template-columns:1.1fr .9fr;gap:60px}
   .contact .big{font-weight:900;font-size:clamp(30px,4.6vw,52px);line-height:1.05;text-transform:uppercase;letter-spacing:-.01em;margin:18px 0 30px}
@@ -243,6 +278,7 @@
   <nav>
     <a href="#works">Works</a>
     <a href="#edits">Edits</a>
+    <a href="#results">Results</a>
     <a href="#contact">Contact</a>
   </nav>
   <div class="clock"><b id="time">--:--</b></div>
@@ -423,6 +459,52 @@
   </div>
 </section>
 
+<section class="results" id="results" aria-labelledby="results-title">
+  <div class="results-head reveal">
+    <span class="label">Analytics</span>
+    <h2 id="results-title">Performance <span>&amp; Results</span></h2>
+    <p class="results-sub">Real numbers from live campaigns and channels &mdash; the receipts behind the creative.</p>
+  </div>
+
+  <div class="bento">
+    <figure class="bento-card wide reveal">
+      <div class="bento-media">
+        <div class="bento-ph" aria-hidden="true"><span>Meta Ads</span><b>Asset placeholder</b></div>
+        <img src="[ADS_DESKTOP_IMG]" alt="Meta Ads Manager dashboard showing campaign spend, reach and return on ad spend" loading="lazy" decoding="async">
+      </div>
+      <span class="bento-badge"><i aria-hidden="true"></i>Meta Ads ROI</span>
+      <span class="bento-idx" aria-hidden="true">01</span>
+    </figure>
+
+    <figure class="bento-card tall reveal">
+      <div class="bento-media">
+        <div class="bento-ph" aria-hidden="true"><span>Instagram</span><b>Asset placeholder</b></div>
+        <img src="[IG_MOBILE_IMG]" alt="Instagram insights screen on mobile showing views and reach" loading="lazy" decoding="async">
+      </div>
+      <span class="bento-badge"><i aria-hidden="true"></i>Instagram Reach</span>
+      <span class="bento-idx" aria-hidden="true">04</span>
+    </figure>
+
+    <figure class="bento-card reveal">
+      <div class="bento-media">
+        <div class="bento-ph" aria-hidden="true"><span>YouTube Studio</span><b>Asset placeholder</b></div>
+        <img src="[YT_DESKTOP_IMG_1]" alt="YouTube Studio analytics overview showing views and watch time growth" loading="lazy" decoding="async">
+      </div>
+      <span class="bento-badge"><i aria-hidden="true"></i>YouTube Growth</span>
+      <span class="bento-idx" aria-hidden="true">02</span>
+    </figure>
+
+    <figure class="bento-card reveal">
+      <div class="bento-media">
+        <div class="bento-ph" aria-hidden="true"><span>YouTube Studio</span><b>Asset placeholder</b></div>
+        <img src="[YT_DESKTOP_IMG_2]" alt="YouTube Studio analytics detail showing impressions and click-through rate" loading="lazy" decoding="async">
+      </div>
+      <span class="bento-badge"><i aria-hidden="true"></i>YouTube Impressions</span>
+      <span class="bento-idx" aria-hidden="true">03</span>
+    </figure>
+  </div>
+</section>
+
 <section class="contact" id="contact">
   <div class="reveal">
     <div class="label">Contact</div>
@@ -566,6 +648,15 @@
     const first = items[0], last = items[items.length - 1];
     if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
     else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  // Performance bento — swap in the designed placeholder until a real asset exists
+  document.querySelectorAll('.bento-card img').forEach(img => {
+    const card = img.closest('.bento-card');
+    const fail = () => card.classList.add('no-img');
+    if (img.complete && img.naturalWidth === 0) fail();
+    img.addEventListener('error', fail);
+    img.addEventListener('load', () => card.classList.remove('no-img'));
   });
 </script>
 </body>
