@@ -72,31 +72,10 @@
   .hero .role{font-size:10px;letter-spacing:.5em;text-transform:uppercase;color:var(--mut)}
   .hero .role b{color:#fff;font-weight:500}
 
-  /* WORKS */
-  .works{padding:10px 5vw 90px}
+  /* SECTION HEAD */
   .sec-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:8px}
   .sec-head h2{font-size:12px;letter-spacing:.4em;text-transform:uppercase;font-weight:700}
   .sec-head .count{font-size:11px;color:var(--mut);letter-spacing:.2em}
-  .work{display:grid;grid-template-columns:64px 1.1fr 1.6fr 90px 70px 44px;align-items:center;gap:18px;padding:26px 0;border-bottom:1px solid var(--line);text-decoration:none;color:#fff;position:relative;transition:padding .25s}
-  .work:hover{padding-left:14px}
-  .work .idx{font-size:12px;color:var(--mut);letter-spacing:.15em}
-  .work .meta{display:flex;flex-direction:column;gap:5px}
-  .work .meta .label{font-size:9px}
-  .work .title{font-weight:900;font-size:clamp(20px,3.4vw,34px);letter-spacing:.02em;text-transform:uppercase;display:flex;align-items:center;gap:14px}
-  .work .title .arr{width:30px;height:30px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;font-size:13px;color:var(--acid);opacity:0;transform:translateX(-8px);transition:.25s}
-  .work:hover .title .arr{opacity:1;transform:none}
-  .work:hover .title{color:var(--acid)}
-  .work .dur,.work .yr{font-size:11px;letter-spacing:.2em;color:var(--mut);text-transform:uppercase}
-  .work .thumb{width:100%;aspect-ratio:4/3;border-radius:6px;overflow:hidden;position:relative;background:var(--panel)}
-  .work .thumb span{position:absolute;inset:0;display:grid;place-items:center;font-weight:900;font-size:44px;color:rgba(255,255,255,.14);transition:transform .4s ease}
-  .work:hover .thumb span{transform:scale(1.12)}
-  .work .thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,rgba(11,11,12,0) 40%,rgba(11,11,12,.55))}
-  @media(max-width:740px){
-    .work{grid-template-columns:40px 1fr 60px;grid-template-rows:auto auto;row-gap:10px}
-    .work .thumb{grid-column:1/-1;order:-1}
-    .work .dur,.work .yr{display:none}
-    .work .title{font-size:20px}
-  }
 
   /* FREE SAMPLE */
   .sample{padding:90px 5vw;border-top:1px solid var(--line)}
@@ -193,7 +172,6 @@
 <header>
   <a class="logo" href="#top">KUR<span class="o"></span></a>
   <nav>
-    <a href="#works">Works</a>
     <a href="#sample">Sample</a>
     <a href="#studio">Studio</a>
     <a href="#contact">Contact</a>
@@ -210,59 +188,6 @@
     <h1 class="big">KURO</h1>
     <div class="role">AN <b>AGENCY TRIO</b> &middot; EST. 2026</div>
   </div>
-</section>
-
-<section class="works" id="works">
-  <div class="sec-head reveal">
-    <h2>Selected Works</h2>
-    <div class="count">01 — 05</div>
-  </div>
-
-  <!-- Replace these demo entries with real client projects; keep the meta grid -->
-  <a class="work reveal" href="#contact">
-    <div class="idx">.01</div>
-    <div class="meta"><span class="label">Agency Site</span><span class="label">Studio KURO</span></div>
-    <div class="title">KURO <span class="arr">&rarr;</span></div>
-    <div class="dur">06 PG</div>
-    <div class="yr">2026</div>
-    <div class="thumb" style="background:linear-gradient(135deg,#1d1d22,#101013)"><span>黒</span></div>
-  </a>
-
-  <a class="work reveal" href="#sample">
-    <div class="idx">.02</div>
-    <div class="meta"><span class="label">E-commerce</span><span class="label">Keet Cafe</span></div>
-    <div class="title">Homemade Baking <span class="arr">&rarr;</span></div>
-    <div class="dur">08 PG</div>
-    <div class="yr">2026</div>
-    <div class="thumb" style="background:linear-gradient(135deg,#2a1f18,#141110)"><span>02</span></div>
-  </a>
-
-  <a class="work reveal" href="#contact">
-    <div class="idx">.03</div>
-    <div class="meta"><span class="label">Portfolio</span><span class="label">Riu</span></div>
-    <div class="title">Personal Site <span class="arr">&rarr;</span></div>
-    <div class="dur">04 PG</div>
-    <div class="yr">2026</div>
-    <div class="thumb" style="background:linear-gradient(135deg,#18222b,#0e1216)"><span>03</span></div>
-  </a>
-
-  <a class="work reveal" href="#contact">
-    <div class="idx">.04</div>
-    <div class="meta"><span class="label">Landing Page</span><span class="label">Nova Labs</span></div>
-    <div class="title">Nova <span class="arr">&rarr;</span></div>
-    <div class="dur">01 PG</div>
-    <div class="yr">2026</div>
-    <div class="thumb" style="background:linear-gradient(135deg,#241833,#0f0e16)"><span>04</span></div>
-  </a>
-
-  <a class="work reveal" href="#contact">
-    <div class="idx">.05</div>
-    <div class="meta"><span class="label">Brand Site</span><span class="label">Aurora</span></div>
-    <div class="title">Aurora <span class="arr">&rarr;</span></div>
-    <div class="dur">05 PG</div>
-    <div class="yr">2026</div>
-    <div class="thumb" style="background:linear-gradient(135deg,#1c2b1c,#0e140d)"><span>05</span></div>
-  </a>
 </section>
 
 <section class="sample" id="sample">
