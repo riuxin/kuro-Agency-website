@@ -72,29 +72,6 @@
   .hero .role{font-size:10px;letter-spacing:.5em;text-transform:uppercase;color:var(--mut)}
   .hero .role b{color:#fff;font-weight:500}
 
-  /* SECTION HEAD */
-  .sec-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:8px}
-  .sec-head h2{font-size:12px;letter-spacing:.4em;text-transform:uppercase;font-weight:700}
-  .sec-head .count{font-size:11px;color:var(--mut);letter-spacing:.2em}
-
-  /* FREE SAMPLE */
-  .sample{padding:90px 5vw;border-top:1px solid var(--line)}
-  .sample-note{color:var(--mut);font-size:13px;letter-spacing:.06em;margin:16px 0 26px;max-width:640px;line-height:1.7}
-  .frame{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel);box-shadow:0 30px 60px rgba(0,0,0,.45)}
-  .frame-bar{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel2)}
-  .frame-bar i{width:9px;height:9px;border-radius:50%;background:#3a3a40}
-  .frame-bar i.on{background:var(--acid)}
-  .frame-bar .url{margin-left:10px;font-size:10px;letter-spacing:.25em;color:var(--mut);text-transform:uppercase}
-  .frame iframe{width:100%;height:520px;border:0;display:block}
-  @media(max-width:700px){.frame iframe{height:430px}}
-  .sample-cta{margin-top:26px}
-  .pillbtn{display:inline-block;border:1px solid var(--acid);color:var(--acid);border-radius:999px;padding:12px 26px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;text-decoration:none;transition:.2s}
-  .pillbtn:hover{background:var(--acid);color:#0B0B0C}
-  .demo-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0 16px}
-  .tab{border:1px solid var(--line);background:transparent;color:var(--mut);padding:9px 18px;border-radius:999px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;transition:.2s;font-family:inherit}
-  .tab:hover{color:#fff;border-color:#3a3a40}
-  .tab.on{border-color:var(--acid);color:var(--acid)}
-
   /* MARQUEE */
   .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:22px 0;background:var(--panel)}
   .track{display:flex;gap:0;width:max-content;animation:mq 26s linear infinite}
@@ -102,19 +79,6 @@
   .track span::after{content:'';width:9px;height:9px;border-radius:50%;background:var(--acid);margin:0 26px}
   .track span:nth-child(even){color:#fff;-webkit-text-stroke:0}
   @keyframes mq{to{transform:translateX(-50%)}}
-
-  /* STUDIO */
-  .studio{padding:90px 5vw}
-  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .member{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:30px 24px;position:relative;transition:transform .25s,border-color .25s}
-  .member:hover{transform:translateY(-5px);border-color:#3a3a40}
-  .member .n{font-size:11px;color:var(--mut);letter-spacing:.3em}
-  .member .initial{font-weight:900;font-size:64px;letter-spacing:.02em;margin:14px 0 6px}
-  .member .name{font-weight:700;font-size:16px;letter-spacing:.18em;text-transform:uppercase}
-  .member .role{margin-top:8px}
-  .member .dot{position:absolute;top:24px;right:24px;width:10px;height:10px;border-radius:50%;background:var(--acid);animation:pulse 2s ease infinite}
-  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(200,230,52,.55);opacity:1}50%{box-shadow:0 0 0 9px rgba(200,230,52,0);opacity:.55}}
-  @media(max-width:740px){.trio{grid-template-columns:1fr}}
 
   /* CONTACT */
   .contact{padding:90px 5vw 60px;border-top:1px solid var(--line);display:grid;grid-template-columns:1.1fr .9fr;gap:60px}
@@ -146,7 +110,6 @@
     .grain{animation:none}
     .track{animation:none}
     .hero .scrollcue::before{animation:none}
-    .member .dot{animation:none}
     html{scroll-behavior:auto}
   }
 </style>
@@ -172,8 +135,6 @@
 <header>
   <a class="logo" href="#top">KUR<span class="o"></span></a>
   <nav>
-    <a href="#sample">Sample</a>
-    <a href="#studio">Studio</a>
     <a href="#contact">Contact</a>
   </nav>
   <div class="clock"><b id="time">--:--</b></div>
@@ -190,54 +151,11 @@
   </div>
 </section>
 
-<section class="sample" id="sample">
-  <div class="sec-head reveal">
-    <h2>Free Sample</h2>
-    <div class="count">01 — 04</div>
-  </div>
-  <p class="sample-note reveal">Free samples — full websites we built for customers, completely open to explore. Switch between them below: this is the quality KURO delivers.</p>
-  <div class="demo-tabs reveal" id="demoTabs">
-    <button class="tab on" data-s="0">.01 &middot; Cafe</button>
-    <button class="tab" data-s="1">.02 &middot; Gym</button>
-    <button class="tab" data-s="2">.03 &middot; Portfolio</button>
-    <button class="tab" data-s="3">.04 &middot; Store</button>
-  </div>
-  <div class="frame reveal">
-    <div class="frame-bar"><i></i><i></i><i class="on"></i><span class="url" id="demoUrl">keetcafe &middot; sample</span></div>
-    <iframe id="demoFrame" title="Free sample website by KURO" loading="lazy"></iframe>
-  </div>
-  <div class="sample-cta reveal"><a class="pillbtn" href="#contact">Want one like this? Let's talk &rarr;</a></div>
-</section>
-
 <div class="marquee" aria-hidden="true">
   <div class="track" id="mq">
     <span>Web Design</span><span>Automation</span><span>Editing</span><span>UI / UX</span><span>Frontend</span><span>Branding</span><span>Motion</span><span>E-Commerce</span><span>SEO</span><span>Landing Pages</span>
   </div>
 </div>
-
-<section class="studio" id="studio">
-  <div class="sec-head reveal">
-    <h2>The Trio</h2>
-    <div class="count">COLOR &middot; &#9679;</div>
-  </div>
-  <div class="trio">
-    <div class="member reveal"><span class="dot"></span>
-      <div class="n">.01</div>
-      <div class="initial">R</div>
-      <div class="name">Riu</div>
-    </div>
-    <div class="member reveal"><span class="dot"></span>
-    <div class="n">.02</div>
-      <div class="initial">K</div>
-      <div class="name">Kai</div>
-    </div>
-    <div class="member reveal"><span class="dot"></span>
-    <div class="n">.03</div>
-      <div class="initial">R</div>
-      <div class="name">Rishabh</div>
-    </div>
-  </div>
-</section>
 
 <section class="contact" id="contact">
   <div class="reveal">
@@ -280,123 +198,6 @@
   // Scroll reveal
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
   document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6)*70+'ms';io.observe(el);});
-
-  // Free samples gallery — to add sample .05, .06 ... just push another entry into SAMPLES
-  const SAMPLES=[
-    {url:'keetcafe &middot; sample',html:`<!DOCTYPE html><html><head><meta charset="utf-8"><style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Georgia,'Times New Roman',serif;background:#FDF0D5;color:#61210F}
-nav{display:flex;justify-content:space-between;align-items:center;padding:18px 7%;border-bottom:1px solid rgba(97,33,15,.15)}
-nav b{letter-spacing:.3em;font-size:13px}
-nav span{font-size:11px;letter-spacing:.25em}
-.hero{padding:64px 7% 56px;text-align:center}
-.hero .tag{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:#B4784A}
-.hero h1{font-size:clamp(34px,6vw,58px);font-style:italic;font-weight:700;margin:16px 0 10px}
-.hero p{font-size:15px;color:#8a5a3b;letter-spacing:.05em}
-.btn{display:inline-block;margin-top:26px;background:#61210F;color:#FDF0D5;padding:13px 34px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;text-decoration:none;border-radius:999px}
-.menu{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:10px 7% 50px}
-.card{background:#fff;border-radius:14px;padding:26px 18px;border:1px solid rgba(97,33,15,.12)}
-.card i{display:block;width:34px;height:34px;border-radius:50%;background:#F2C879;margin:0 auto 12px}
-.card b{font-size:14px;letter-spacing:.12em;text-transform:uppercase}
-.card p{font-size:12px;color:#8a5a3b;margin-top:6px}
-.foot{background:#61210F;text-align:center;padding:22px;font-size:11px;letter-spacing:.3em;color:#FDF0D5}
-@media(max-width:700px){.menu{grid-template-columns:1fr}}
-</style></head><body>
-<nav><b>KEET CAFE</b><span>MENU &middot; VISIT &middot; ORDER</span></nav>
-<div class="hero">
-  <div class="tag">Est. 2026 &middot; Fresh Daily</div>
-  <h1>Welcome to Keet Cafe</h1>
-  <p>Homemade baking. Tasty drinks. Warm corners.</p>
-  <a class="btn" href="#">SEE MENU</a>
-</div>
-<div class="menu">
-  <div class="card"><i></i><b>Fresh Bakes</b><p>Croissants, buns &amp; sourdough from the morning oven.</p></div>
-  <div class="card"><i style="background:#EE6E4D"></i><b>Filter Coffee</b><p>Slow-brewed, strong, served the classic way.</p></div>
-  <div class="card"><i style="background:#2C666E"></i><b>Desserts</b><p>Whatever the season brings &mdash; always homemade.</p></div>
-</div>
-<div class="foot">KEET CAFE &mdash; SAMPLE SITE BY KURO</div>
-</body></html>`},
-    {url:'irongym &middot; sample',html:`<!DOCTYPE html><html><head><meta charset="utf-8"><style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,Helvetica,sans-serif;background:#0B0B0C;color:#fff}
-nav{display:flex;justify-content:space-between;padding:16px 6%;border-bottom:2px solid #C6FF00}
-nav b{letter-spacing:.2em;font-size:14px}
-nav span{font-size:10px;letter-spacing:.3em;color:#9a9aa0}
-.hero{padding:60px 6% 40px}
-.hero h1{font-size:clamp(40px,9vw,84px);font-weight:900;text-transform:uppercase;letter-spacing:-1px;line-height:.9}
-.hero h1 em{font-style:normal;color:#C6FF00}
-.hero p{color:#9a9aa0;font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-top:14px}
-.chips{display:flex;gap:10px;flex-wrap:wrap;padding:0 6% 40px}
-.chips span{border:2px solid #C6FF00;color:#C6FF00;padding:8px 16px;font-size:10px;letter-spacing:.2em;font-weight:700}
-.join{margin:0 6% 46px;background:#C6FF00;color:#000;text-align:center;padding:15px;font-weight:900;font-size:12px;letter-spacing:.3em}
-.foot{border-top:1px solid #26262B;color:#6a6a70;text-align:center;padding:16px;font-size:10px;letter-spacing:.25em}
-</style></head><body>
-<nav><b>IRON GYM</b><span>CLASSES &middot; COACHES &middot; JOIN</span></nav>
-<div class="hero"><h1>TRAIN<br><em>LOUD.</em></h1><p>Strength &middot; Conditioning &middot; Combat &mdash; no excuses</p></div>
-<div class="chips"><span>CROSSFIT</span><span>BOXING</span><span>POWERLIFTING</span><span>MMA</span></div>
-<div class="join">JOIN THE FLOOR &mdash; FIRST WEEK FREE</div>
-<div class="foot">IRON GYM &mdash; SAMPLE SITE BY KURO</div>
-</body></html>`},
-    {url:'aurastudio &middot; sample',html:`<!DOCTYPE html><html><head><meta charset="utf-8"><style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',Arial,sans-serif;background:#1B1B1E;color:#fff}
-nav{display:flex;justify-content:space-between;padding:18px 6%;border-bottom:1px solid #2a2a2e}
-nav b{font-weight:900;letter-spacing:.25em}
-nav span{font-size:10px;letter-spacing:.3em;color:#8A8A8E}
-.hero{padding:56px 6% 30px;text-align:center}
-.hero .t{font-size:10px;letter-spacing:.5em;color:#8A8A8E;text-transform:uppercase}
-.hero h1{font-weight:900;font-size:clamp(36px,8vw,72px);letter-spacing:.12em;margin:12px 0}
-.hero p{font-size:10px;letter-spacing:.4em;color:#8A8A8E;text-transform:uppercase}
-.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:10px 6% 50px}
-.gal div{aspect-ratio:1/1;background:linear-gradient(135deg,#2b2b30,#1f1f24);border-radius:6px;display:grid;place-items:center;color:#4a4a52;font-weight:900;font-size:22px}
-.foot{text-align:center;padding:18px;font-size:10px;letter-spacing:.3em;color:#8A8A8E;border-top:1px solid #2a2a2e}
-@media(max-width:700px){.gal{grid-template-columns:1fr 1fr}}
-</style></head><body>
-<nav><b>AURA</b><span>WORK &middot; ABOUT &middot; CONTACT</span></nav>
-<div class="hero"><div class="t">I AM</div><h1>AURA</h1><p>PHOTOGRAPHER &middot; MUMBAI</p></div>
-<div class="gal"><div>.01</div><div>.02</div><div>.03</div><div>.04</div><div>.05</div><div>.06</div></div>
-<div class="foot">AURA STUDIO &mdash; SAMPLE SITE BY KURO</div>
-</body></html>`},
-    {url:'urbanthreads &middot; sample',html:`<!DOCTYPE html><html><head><meta charset="utf-8"><style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',Arial,sans-serif;background:#F4F4F6;color:#1A1A2E}
-nav{display:flex;justify-content:space-between;align-items:center;padding:16px 6%;background:#fff;border-bottom:1px solid #e4e4ea}
-nav b{font-weight:900;letter-spacing:.15em}
-nav span{font-size:11px;letter-spacing:.25em;color:#2563EB;font-weight:700}
-.hero{padding:54px 6% 36px;text-align:center}
-.hero h1{font-size:clamp(34px,7vw,60px);font-weight:900;letter-spacing:-1px;text-transform:uppercase}
-.hero h1 em{font-style:normal;color:#2563EB}
-.hero p{color:#6B7280;font-size:13px;margin-top:10px;letter-spacing:.05em}
-.prods{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:6px 6% 50px}
-.p{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 6px 18px rgba(20,20,40,.06)}
-.p .im{height:110px;display:grid;place-items:center;font-weight:900;font-size:26px;color:#fff}
-.p .im.c1{background:linear-gradient(135deg,#2563EB,#1A1A2E)}
-.p .im.c2{background:linear-gradient(135deg,#EE6E4D,#61210F)}
-.p .im.c3{background:linear-gradient(135deg,#00D4FF,#020024)}
-.p .info{padding:14px 16px}
-.p b{font-size:13px;letter-spacing:.08em;text-transform:uppercase}
-.p span{display:block;font-size:12px;color:#6B7280;margin-top:4px}
-.foot{background:#1A1A2E;color:#fff;text-align:center;padding:16px;font-size:10px;letter-spacing:.3em}
-@media(max-width:700px){.prods{grid-template-columns:1fr}}
-</style></head><body>
-<nav><b>URBAN THREADS</b><span>CART (0)</span></nav>
-<div class="hero"><h1>Wear The <em>Streets</em></h1><p>New drop every month. Limited runs only.</p></div>
-<div class="prods">
-  <div class="p"><div class="im c1">UT</div><div class="info"><b>Oversized Tee</b><span>&#8377;799 &middot; S M L XL</span></div></div>
-  <div class="p"><div class="im c2">UT</div><div class="info"><b>Cargo Pants</b><span>&#8377;1,499 &middot; 30 32 34</span></div></div>
-  <div class="p"><div class="im c3">UT</div><div class="info"><b>Windbreaker</b><span>&#8377;1,999 &middot; M L XL</span></div></div>
-</div>
-<div class="foot">URBAN THREADS &mdash; SAMPLE SITE BY KURO</div>
-</body></html>`}
-  ];
-  const demoFrame=document.getElementById('demoFrame'),demoUrl=document.getElementById('demoUrl'),demoTabs=document.getElementById('demoTabs');
-  const renderSample=i=>{
-    demoFrame.srcdoc=SAMPLES[i].html;
-    demoUrl.innerHTML=SAMPLES[i].url;
-    demoTabs.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on',j===i));
-  };
-  demoTabs.addEventListener('click',e=>{const b=e.target.closest('.tab');if(b)renderSample(+b.dataset.s);});
-  renderSample(0);
 </script>
 </body>
 </html>
