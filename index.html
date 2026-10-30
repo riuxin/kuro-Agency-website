@@ -80,6 +80,36 @@
   .track span:nth-child(even){color:#fff;-webkit-text-stroke:0}
   @keyframes mq{to{transform:translateX(-50%)}}
 
+  /* OUR WORKS */
+  .works{padding:96px 5vw}
+  .works-head{max-width:1180px;margin:0 auto 46px;text-align:center}
+  .works-head .label{display:block;margin-bottom:18px}
+  .works-head h2{font-weight:900;font-size:clamp(32px,6vw,68px);line-height:.98;letter-spacing:-.02em;text-transform:uppercase}
+  .works-head h2 span{color:var(--acid)}
+  .work-card{max-width:1180px;margin:0 auto}
+  .work-shot{display:block;position:relative;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--panel);box-shadow:0 40px 80px -45px rgba(0,0,0,.95);transition:border-color .35s ease,box-shadow .45s ease,transform .45s cubic-bezier(.2,.8,.2,1)}
+  .work-shot img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1),filter .45s ease;filter:saturate(.9) brightness(.9)}
+  .work-shot::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,0) 42%,rgba(11,11,12,.78) 100%);opacity:.9;transition:opacity .45s ease;pointer-events:none}
+  .work-shot:hover,.work-shot:focus-visible{border-color:rgba(200,230,52,.5);box-shadow:0 55px 95px -45px rgba(0,0,0,1),0 0 0 1px rgba(200,230,52,.22);transform:translateY(-6px);outline:none}
+  .work-shot:focus-visible{outline:2px solid var(--acid);outline-offset:6px}
+  .work-shot:hover img,.work-shot:focus-visible img{transform:scale(1.035);filter:saturate(1.02) brightness(1)}
+  .work-shot:hover::after,.work-shot:focus-visible::after{opacity:.55}
+  .shot-cta{position:absolute;right:18px;bottom:18px;z-index:2;display:inline-flex;align-items:center;gap:9px;background:var(--acid);color:#0B0B0C;border-radius:999px;padding:11px 20px;font-size:10px;font-weight:900;letter-spacing:.22em;text-transform:uppercase;transition:transform .35s ease}
+  .work-shot:hover .shot-cta,.work-shot:focus-visible .shot-cta{transform:translateY(-3px)}
+  .shot-cta i{font-style:normal;transition:transform .35s ease}
+  .work-shot:hover .shot-cta i,.work-shot:focus-visible .shot-cta i{transform:translate(2px,-2px)}
+  .work-meta{max-width:1180px;margin:28px auto 0;display:grid;grid-template-columns:1fr auto;gap:10px 40px;align-items:baseline}
+  .work-title{font-weight:900;font-size:clamp(20px,2.6vw,30px);letter-spacing:.01em;text-transform:uppercase;line-height:1.15}
+  .work-tags{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--mut);text-align:right;white-space:nowrap}
+  .work-tags b{color:var(--acid);font-weight:400;margin:0 8px}
+  .work-desc{grid-column:1/-1;max-width:620px;color:var(--mut);font-size:14px;line-height:1.8;letter-spacing:.02em;margin-top:6px}
+  @media(max-width:760px){
+    .works{padding:70px 5vw}
+    .work-meta{grid-template-columns:1fr;gap:10px;margin-top:22px}
+    .work-tags{text-align:left;white-space:normal}
+    .shot-cta{right:12px;bottom:12px;padding:9px 16px;font-size:9px}
+  }
+
   /* CONTACT */
   .contact{padding:90px 5vw 60px;border-top:1px solid var(--line);display:grid;grid-template-columns:1.1fr .9fr;gap:60px}
   .contact .big{font-weight:900;font-size:clamp(30px,4.6vw,52px);line-height:1.05;text-transform:uppercase;letter-spacing:-.01em;margin:18px 0 30px}
@@ -110,6 +140,8 @@
     .grain{animation:none}
     .track{animation:none}
     .hero .scrollcue::before{animation:none}
+    .work-shot,.work-shot img,.shot-cta,.shot-cta i{transition:none}
+    .work-shot:hover,.work-shot:focus-visible,.work-shot:hover .shot-cta,.work-shot:focus-visible .shot-cta{transform:none}
     html{scroll-behavior:auto}
   }
 </style>
@@ -135,6 +167,7 @@
 <header>
   <a class="logo" href="#top">KUR<span class="o"></span></a>
   <nav>
+    <a href="#works">Works</a>
     <a href="#contact">Contact</a>
   </nav>
   <div class="clock"><b id="time">--:--</b></div>
@@ -156,6 +189,27 @@
     <span>Web Design</span><span>Automation</span><span>Editing</span><span>UI / UX</span><span>Frontend</span><span>Branding</span><span>Motion</span><span>E-Commerce</span><span>SEO</span><span>Landing Pages</span>
   </div>
 </div>
+
+<section class="works" id="works" aria-labelledby="works-title">
+  <div class="works-head reveal">
+    <span class="label">Portfolio</span>
+    <h2 id="works-title">Our <span>Works</span></h2>
+  </div>
+
+  <article class="work-card reveal">
+    <a class="work-shot" href="https://kouragefitness.in" target="_blank" rel="noopener noreferrer"
+       aria-label="Visit Kourage Fitness — opens in a new tab">
+      <img src="assets/kourage-fitness-hero.jpg" alt="Kourage Fitness homepage hero section, showing the coaching brand's headline and training imagery"
+           width="2880" height="1800" loading="lazy" decoding="async">
+      <span class="shot-cta">Visit site <i>&#8599;</i></span>
+    </a>
+    <div class="work-meta">
+      <h3 class="work-title">Kourage Fitness</h3>
+      <div class="work-tags">Web Design <b>&middot;</b> Fitness <b>&middot;</b> 2026</div>
+      <p class="work-desc">We built Kourage Fitness to make online coaching feel personal again &mdash; a high-conversion landing page that turns first-time visitors into loyal, paying clients.</p>
+    </div>
+  </article>
+</section>
 
 <section class="contact" id="contact">
   <div class="reveal">
