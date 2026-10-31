@@ -200,6 +200,14 @@
   .bento-card.tall .bento-media img{object-fit:contain;object-position:center}
   .bento-card:hover .bento-media img{transform:scale(1.015)}
   .bento-card.no-img .bento-media img{opacity:0}
+  /* Meta Ads screenshot — CSS-only row crop. Source is 1536x1024 and the
+     "Ad Set 06 – Messaging (Custom)" row ends at y=754px, so a 1536/754 box
+     with a top-anchored cover image keeps rows 01–06 and hides 07 downward. */
+  .bento-card.ads{aspect-ratio:1536/754}
+  .bento-card.ads .bento-media{background:#0A0A0C}
+  .bento-card.ads .bento-media img{object-fit:cover;object-position:top center}
+  .bento-card.ads:hover .bento-media img{transform:none}
+  .bento-card.ads::after{background:linear-gradient(180deg,rgba(8,8,10,.5) 0%,rgba(8,8,10,0) 24%,rgba(8,8,10,0) 88%,rgba(8,8,10,.26) 100%)}
   .bento-ph{position:absolute;inset:0;z-index:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:24px;text-align:center}
   .bento-ph::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 1px,transparent 1px 7px);opacity:.55}
   .bento-ph span{position:relative;font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--acid)}
@@ -467,10 +475,10 @@
   </div>
 
   <div class="bento">
-    <figure class="bento-card wide reveal">
+    <figure class="bento-card wide ads reveal">
       <div class="bento-media">
         <div class="bento-ph" aria-hidden="true"><span>Meta Ads</span><b>Asset placeholder</b></div>
-        <img src="[ADS_DESKTOP_IMG]" alt="Meta Ads Manager dashboard showing campaign spend, reach and return on ad spend" loading="lazy" decoding="async">
+        <img src="assets/meta-ads.jpg" alt="Meta Ads Manager campaign table showing ad sets 01 to 06 with budget, reach, results and amount spent" loading="lazy" decoding="async">
       </div>
       <span class="bento-badge"><i aria-hidden="true"></i>Meta Ads ROI</span>
       <span class="bento-idx" aria-hidden="true">01</span>
