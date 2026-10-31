@@ -43,7 +43,9 @@
   .share-btn:focus-visible{outline:2px solid var(--acid);outline-offset:2px}
   body.ss-lock{overflow:hidden}
 
-  .ss-backdrop{position:fixed;inset:0;z-index:1000;background:rgba(3,5,4,.72);opacity:0;transition:opacity .22s ease;display:flex;align-items:flex-end;justify-content:center}
+  .ss-backdrop{position:fixed;inset:0;z-index:1000;background:rgba(3,5,4,.72);opacity:0;transition:opacity .22s ease;display:flex;align-items:flex-end;justify-content:center;pointer-events:none}
+  .ss-backdrop[hidden]{display:none}
+  .ss-backdrop.open{pointer-events:auto}
   .ss-backdrop.open{opacity:1}
   @media(min-width:640px){.ss-backdrop{align-items:center}}
   .ss-sheet{width:100%;max-width:420px;background:#111312;border:1px solid #242823;border-radius:18px 18px 0 0;padding:20px 18px max(20px,env(safe-area-inset-bottom));transform:translateY(14px);transition:transform .26s cubic-bezier(.22,.61,.36,1);box-shadow:0 -20px 60px rgba(0,0,0,.5)}
