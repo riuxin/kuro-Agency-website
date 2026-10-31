@@ -62,7 +62,20 @@
   .hero{position:relative;min-height:92vh;min-height:92svh;display:grid;place-items:center;overflow:hidden;isolation:isolate;padding:0 5vw;text-align:center;background:#050C0A}
   .hero-bg{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;object-position:center;pointer-events:none;transform:translate3d(0,0,0);backface-visibility:hidden;will-change:transform;filter:brightness(1.1) saturate(1.12) contrast(1.04)}
   .hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(58% 52% at 50% 46%,rgba(3,8,7,.32) 0%,rgba(3,8,7,.14) 58%,rgba(3,8,7,0) 82%),linear-gradient(180deg,rgba(7,9,9,.5) 0%,rgba(7,9,9,.06) 30%,rgba(7,9,9,.12) 68%,rgba(11,11,12,.92) 100%)}
-  .hero-word{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .hero-word{position:relative;z-index:2;margin:0;font-weight:400;font-size:clamp(88px,25vw,360px);line-height:.8;letter-spacing:.14em;text-indent:.14em;color:#F4F7F0;text-transform:lowercase;text-shadow:0 30px 90px rgba(0,0,0,.5),0 0 150px rgba(200,230,52,.12);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.hero-word::before,.hero-word::after{content:'kuro';position:absolute;inset:0;opacity:0;pointer-events:none}
+.hero-word::after{color:#7dffcf;text-shadow:-8px 0 rgba(0,235,255,.8),8px 0 rgba(200,230,52,.7);animation:heroGlitchA 3s steps(1) infinite}
+.hero-word::before{color:#a9ff8a;text-shadow:-18px 0 rgba(0,200,255,.45),18px 0 rgba(200,230,52,.4);animation:heroGlitchB 3s steps(1) infinite}
+@keyframes heroGlitchA{
+  0%,3.9%{opacity:.85;clip-path:polygon(0 14%,100% 14%,100% 26%,0 26%);transform:translate(-6px,0)}
+  4%,49.9%{opacity:0}
+  50%,53.9%{opacity:.8;clip-path:polygon(0 58%,100% 58%,100% 68%,0 68%);transform:translate(7px,0)}
+  54%,100%{opacity:0}}
+@keyframes heroGlitchB{
+  0%,3.9%{opacity:.4;clip-path:polygon(0 34%,100% 34%,100% 44%,0 44%);transform:translate(12px,1px)}
+  4%,49.9%{opacity:0}
+  50%,53.9%{opacity:.38;clip-path:polygon(0 72%,100% 72%,100% 80%,0 80%);transform:translate(-12px,0)}
+  54%,100%{opacity:0}}
   .hero .scrollcue{position:absolute;right:22px;bottom:30px;z-index:3;font-size:9px;letter-spacing:.42em;color:rgba(255,255,255,.62);writing-mode:vertical-rl;display:flex;align-items:center;gap:8px}
   .hero .scrollcue::before{content:'';width:1px;height:34px;background:rgba(255,255,255,.28);animation:drop 2s ease infinite}
   @keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
@@ -304,8 +317,8 @@
 </header>
 
 <section class="hero" id="top" aria-labelledby="hero-title">
-  <video class="hero-bg" autoplay loop muted playsinline preload="auto" poster="assets/hero/kuro-glitch-poster.png" aria-hidden="true" tabindex="-1" disablepictureinpicture>
-    <source src="assets/hero/kuro-glitch-loop.mp4" type="video/mp4">
+  <video class="hero-bg" autoplay loop muted playsinline preload="auto" poster="assets/hero/hero-poster.jpg" aria-hidden="true" tabindex="-1" disablepictureinpicture>
+    <source src="assets/hero/hero-loop.mp4" type="video/mp4">
   </video>
   <div class="hero-veil" aria-hidden="true"></div>
   <h1 class="hero-word" id="hero-title">kuro</h1>
