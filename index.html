@@ -59,18 +59,18 @@
   .clock b{color:#fff;font-weight:500}
 
   /* HERO */
-  .hero{position:relative;min-height:88vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:60px 5vw}
-  .hero .glow{position:absolute;inset:0;background:radial-gradient(50% 45% at 50% 45%,rgba(200,230,52,.07),transparent 70%)}
-  .hero .rail{position:absolute;left:22px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:14px}
-  .hero .rail i{width:9px;height:9px;border:1px solid var(--mut);border-radius:2px;display:block;transition:.2s}
-  .hero .rail i:hover{border-color:var(--acid);background:var(--acid)}
-  .hero .scrollcue{position:absolute;right:22px;bottom:30px;font-size:9px;letter-spacing:.42em;color:var(--mut);writing-mode:vertical-rl;display:flex;align-items:center;gap:8px}
-  .hero .scrollcue::before{content:'';width:1px;height:34px;background:var(--line);animation:drop 2s ease infinite}
+  .hero{position:relative;min-height:92vh;min-height:92svh;display:grid;place-items:center;overflow:hidden;isolation:isolate;padding:0 5vw;text-align:center;background:#050C0A}
+  .hero-bg{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;object-position:center;pointer-events:none;transform:translate3d(0,0,0);backface-visibility:hidden;will-change:transform;filter:brightness(1.1) saturate(1.12) contrast(1.04)}
+  .hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(58% 52% at 50% 46%,rgba(3,8,7,.24) 0%,rgba(3,8,7,.10) 58%,rgba(3,8,7,0) 82%),linear-gradient(180deg,rgba(7,9,9,.42) 0%,rgba(7,9,9,.04) 30%,rgba(7,9,9,.10) 68%,rgba(11,11,12,.92) 100%)}
+  .hero-word{position:relative;z-index:2;margin:0;font-weight:400;font-size:clamp(88px,25vw,360px);line-height:.8;letter-spacing:.14em;text-indent:.14em;color:#F4F7F0;text-transform:lowercase;text-shadow:0 30px 90px rgba(0,0,0,.5),0 0 150px rgba(200,230,52,.12);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  .hero .scrollcue{position:absolute;right:22px;bottom:30px;z-index:3;font-size:9px;letter-spacing:.42em;color:rgba(255,255,255,.62);writing-mode:vertical-rl;display:flex;align-items:center;gap:8px}
+  .hero .scrollcue::before{content:'';width:1px;height:34px;background:rgba(255,255,255,.28);animation:drop 2s ease infinite}
   @keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-  .hero .k{font-size:11px;letter-spacing:.55em;text-transform:uppercase;color:var(--mut)}
-  .hero .big{font-weight:900;font-size:clamp(64px,17vw,220px);letter-spacing:.12em;text-indent:.12em;line-height:1;margin:18px 0;text-shadow:0 0 90px rgba(200,230,52,.14)}
-  .hero .role{font-size:10px;letter-spacing:.5em;text-transform:uppercase;color:var(--mut)}
-  .hero .role b{color:#fff;font-weight:500}
+  @media(max-width:620px){
+    .hero{min-height:84vh;min-height:84svh}
+    .hero-word{font-size:clamp(80px,26vw,150px);letter-spacing:.16em;text-indent:.16em}
+    .hero .scrollcue{right:14px;bottom:20px}
+  }
 
   /* MARQUEE */
   .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:22px 0;background:var(--panel)}
@@ -307,16 +307,24 @@
   <div class="clock"><b id="time">--:--</b></div>
 </header>
 
-<section class="hero" id="top">
-  <div class="glow"></div>
-  <div class="rail"><i></i><i></i><i></i></div>
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <video class="hero-bg" autoplay loop muted playsinline preload="auto" poster="assets/hero/fluid-poster.jpg" aria-hidden="true" tabindex="-1" disablepictureinpicture>
+    <source src="assets/hero/fluid-loop.mp4" type="video/mp4">
+  </video>
+  <div class="hero-veil" aria-hidden="true"></div>
+  <h1 class="hero-word" id="hero-title">kuro</h1>
   <div class="scrollcue">SCROLL</div>
-  <div>
-    <div class="k">WE ARE</div>
-    <h1 class="big">KURO</h1>
-    <div class="role">AN <b>AGENCY TRIO</b> &middot; EST. 2026</div>
-  </div>
 </section>
+<script>
+  (() => {
+    const v = document.querySelector('.hero-bg');
+    if (!v) return;
+    new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) v.play().catch(() => {});
+      else v.pause();
+    }, { threshold: .02 }).observe(v);
+  })();
+</script>
 
 <div class="marquee" aria-hidden="true">
   <div class="track" id="mq">
