@@ -243,47 +243,22 @@
   }
 
   /* CONTACT */
-  .contact{position:relative;isolation:isolate;overflow:hidden;padding:clamp(88px,11vw,140px) 5vw clamp(48px,6vw,74px);border-top:1px solid var(--line);background:radial-gradient(60% 58% at 50% 34%,rgba(200,230,52,.075) 0%,rgba(200,230,52,0) 68%),linear-gradient(180deg,#0A0A0C 0%,#08080A 100%)}
-  .contact::before{content:'';position:absolute;left:50%;top:38%;z-index:0;width:min(920px,92vw);height:min(420px,60vh);transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(200,230,52,.10),transparent 74%);filter:blur(14px);pointer-events:none}
-  .contact-inner{position:relative;z-index:1;max-width:1120px;margin:0 auto;text-align:center}
-  .contact-kicker{display:inline-flex;align-items:center;gap:10px;color:rgba(255,255,255,.58);font-size:9.5px;letter-spacing:.4em;text-transform:uppercase}
-  .contact-kicker i{width:6px;height:6px;border-radius:50%;background:var(--acid);box-shadow:0 0 12px rgba(200,230,52,.9)}
-  .contact-big{margin:22px auto 38px;font-weight:900;font-size:clamp(36px,6.6vw,86px);line-height:.98;letter-spacing:-.035em;text-transform:uppercase;text-wrap:balance}
+  .contact{position:relative;isolation:isolate;overflow:hidden;padding:clamp(120px,16vw,210px) 5vw clamp(120px,15vw,196px);border-top:1px solid var(--line);background:radial-gradient(58% 62% at 50% 44%,rgba(200,230,52,.07) 0%,rgba(200,230,52,0) 70%),linear-gradient(180deg,#0A0A0C 0%,#08080A 100%)}
+  .contact::before{content:'';position:absolute;left:50%;top:46%;z-index:0;width:min(980px,94vw);height:min(460px,64vh);transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(200,230,52,.10),transparent 74%);filter:blur(16px);pointer-events:none}
+  .contact-inner{position:relative;z-index:1;max-width:1280px;margin:0 auto;text-align:center}
+  .contact-big{margin:0 auto clamp(40px,5.4vw,60px);font-weight:900;font-size:clamp(36px,6vw,84px);line-height:.98;letter-spacing:-.04em;text-transform:uppercase;text-wrap:balance}
   .contact-big em{font-style:italic;color:var(--acid);letter-spacing:-.02em}
   .contact-cta{position:relative;display:inline-flex;align-items:center;justify-content:space-between;gap:clamp(24px,4vw,54px);min-width:min(430px,100%);padding:15px 15px 15px 30px;border-radius:999px;background:var(--acid);color:#0B0B0C;text-decoration:none;font-size:clamp(11px,1.15vw,13px);font-weight:900;letter-spacing:.26em;text-transform:uppercase;box-shadow:0 26px 70px -28px rgba(200,230,52,.5),0 0 0 1px rgba(200,230,52,.2);transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s ease,background .3s ease}
   .contact-cta i{display:grid;place-items:center;flex:0 0 auto;width:46px;height:46px;border-radius:50%;background:#0B0B0C;color:var(--acid);font-style:normal;font-size:17px;line-height:1;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
   .contact-cta:hover{transform:translateY(-4px);background:#D6F049;box-shadow:0 36px 90px -30px rgba(200,230,52,.62),0 0 0 1px rgba(200,230,52,.34)}
   .contact-cta:hover i{transform:translate(3px,-3px)}
   .contact-cta:focus-visible{outline:2px solid #fff;outline-offset:5px}
-  .contact-note{margin-top:14px;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.34)}
-  .contact-meta{display:grid;grid-template-columns:1.1fr 1fr 1.2fr;gap:clamp(20px,3vw,48px);margin-top:clamp(52px,7vw,82px);padding-top:26px;border-top:1px solid var(--line);text-align:left}
-  .contact-meta .label{display:block;margin-bottom:9px;font-size:9px;letter-spacing:.32em;color:var(--mut)}
-  .contact-meta p,.contact-meta a{color:#fff;font-size:13px;line-height:1.7;letter-spacing:.04em;text-decoration:none}
-  .contact-meta p{color:rgba(255,255,255,.72)}
-  .contact-meta a{transition:color .2s ease}
-  .contact-meta a:hover{color:var(--acid)}
-  .contact-meta a.contact-mail{display:inline-block;font-size:clamp(13px,1.35vw,15px);letter-spacing:.06em;border-bottom:1px solid rgba(200,230,52,.4);padding-bottom:2px}
-  .contact-socials{display:flex;flex-wrap:wrap;gap:7px 18px}
-  .contact-socials a{position:relative;color:#fff;font-size:13px;letter-spacing:.04em;text-decoration:none}
-  .contact-socials a::after{content:'\2197';font-size:9px;margin-left:5px;color:var(--acid);vertical-align:super}
-  .contact-socials a:hover{color:var(--acid)}
-  @media(max-width:860px){
-    .contact-meta{grid-template-columns:1fr 1fr}
-    .contact-meta > div:last-child{grid-column:1/-1}
-  }
   @media(max-width:620px){
-    .contact{padding:72px 5vw 52px}
-    .contact-big{font-size:clamp(34px,9.6vw,50px);margin:18px auto 30px;line-height:1.02}
+    .contact{padding:92px 6vw 104px}
+    .contact-big{font-size:clamp(32px,8.8vw,46px);line-height:1.04;margin-bottom:36px}
     .contact-cta{width:100%;min-width:0;padding:12px 12px 12px 22px;letter-spacing:.2em;gap:16px}
     .contact-cta i{width:44px;height:44px}
-    .contact-note{font-size:8px;letter-spacing:.24em}
-    .contact-meta{grid-template-columns:1fr;gap:22px;margin-top:44px;padding-top:22px}
-    .contact-meta > div:last-child{grid-column:auto}
   }
-
-  footer.site{padding:26px 5vw 34px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
-  footer.site p{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
-  footer.site p b{color:#fff;font-weight:500}
 
   /* REVEAL */
   .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
@@ -556,38 +531,13 @@
 
 <section class="contact" id="contact" aria-labelledby="contact-title">
   <div class="contact-inner">
-    <span class="label contact-kicker reveal"><i aria-hidden="true"></i>Contact &mdash; open for 2026</span>
     <h2 class="contact-big reveal" id="contact-title">Let's create something<br><em>meaningful</em> together.</h2>
     <a class="contact-cta reveal" href="mailto:hello@kuro.graphics?subject=Let's%20Work%20Together">
       <span>Start a project</span>
       <i aria-hidden="true">&#8599;</i>
     </a>
-    <p class="contact-note reveal">Opens your mail app &middot; no forms, no friction</p>
-    <div class="contact-meta reveal">
-      <div>
-        <span class="label">Studio</span>
-        <p>Mumbai, IN<br>Available worldwide</p>
-      </div>
-      <div>
-        <span class="label">Direct</span>
-        <a class="contact-mail" href="mailto:hello@kuro.graphics">hello@kuro.graphics</a>
-      </div>
-      <div>
-        <span class="label">Socials</span>
-        <p class="contact-socials">
-          <a href="https://www.instagram.com/kuro.graphics/" target="_blank" rel="noopener">Instagram</a>
-          <a href="https://www.behance.net/kurographics" target="_blank" rel="noopener">Behance</a>
-          <a href="https://www.linkedin.com/company/kuro-graphics/" target="_blank" rel="noopener">LinkedIn</a>
-        </p>
-      </div>
-    </div>
   </div>
 </section>
-
-<footer class="site">
-  <p><b>KURO</b> — an agency trio, available worldwide</p>
-  <p>&copy; 2026 &middot; 黒</p>
-</footer>
 
 <div class="edit-modal" id="edit-modal" role="dialog" aria-modal="true" aria-labelledby="edit-modal-title" hidden>
   <div class="edit-modal-stage">
