@@ -674,7 +674,7 @@
 
   // Mumbai (IST) clock
   const time=document.getElementById('time');
-  const tick=()=>time.textContent=new Intl.DateTimeFormat('en-GB',{hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'Asia/Kolkata'}).format(new Date())+' IST';
+  const tick=()=>time.textContent=new Intl.DateTimeFormat('en-IN',{hour:'numeric',minute:'2-digit',hour12:true,timeZone:'Asia/Kolkata'}).format(new Date()).replace(' ',' ').toUpperCase()+' IST';
   tick();setInterval(tick,10000);
 
 
