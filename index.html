@@ -35,6 +35,42 @@
   .flip-word.is-final{color:transparent;background:linear-gradient(100deg,#f6ff9a 0%,#d8f04a 20%,#a9ff8a 45%,#4dffb0 68%,#00ff9d 100%);-webkit-background-clip:text;background-clip:text;text-shadow:none;filter:drop-shadow(0 0 22px rgba(0,255,140,.45))}
   #loader .bar{position:absolute;bottom:0;left:0;height:3px;background:var(--acid);width:0%;animation:loadbar 1.7s ease forwards}
   @keyframes loadbar{to{width:100%}}
+
+  /* ═══ SHARE SHEET ═══ */
+  .hdr-right{display:flex;align-items:center;gap:18px}
+  .share-btn{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#F4F7F0;border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-family:inherit;font-size:12px;font-weight:500;letter-spacing:.04em;cursor:pointer;transition:border-color .18s,color .18s}
+  .share-btn:hover{border-color:var(--acid);color:var(--acid)}
+  .share-btn:focus-visible{outline:2px solid var(--acid);outline-offset:2px}
+  body.ss-lock{overflow:hidden}
+
+  .ss-backdrop{position:fixed;inset:0;z-index:1000;background:rgba(3,5,4,.72);opacity:0;transition:opacity .22s ease;display:flex;align-items:flex-end;justify-content:center}
+  .ss-backdrop.open{opacity:1}
+  @media(min-width:640px){.ss-backdrop{align-items:center}}
+  .ss-sheet{width:100%;max-width:420px;background:#111312;border:1px solid #242823;border-radius:18px 18px 0 0;padding:20px 18px max(20px,env(safe-area-inset-bottom));transform:translateY(14px);transition:transform .26s cubic-bezier(.22,.61,.36,1);box-shadow:0 -20px 60px rgba(0,0,0,.5)}
+  @media(min-width:640px){.ss-sheet{border-radius:18px;transform:translateY(8px) scale(.985)}}
+  .ss-backdrop.open .ss-sheet{transform:none}
+  .ss-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:16px}
+  .ss-head h3{margin:0;font-size:15px;font-weight:600;letter-spacing:-.01em}
+  .ss-head p{margin:4px 0 0;font-size:11.5px;color:var(--mut);word-break:break-all;max-width:300px}
+  .ss-close{background:transparent;border:0;color:var(--mut);font-size:20px;line-height:1;cursor:pointer;padding:2px 6px;border-radius:8px}
+  .ss-close:hover{color:#fff}
+  .ss-qr{display:flex;gap:14px;align-items:center;background:#0B0D0C;border:1px solid #1E2320;border-radius:14px;padding:14px;margin-bottom:14px}
+  .ss-qr img{display:block;width:104px;height:104px;border-radius:8px;background:#fff;padding:6px}
+  .ss-qr .ss-qr-txt{font-size:12px;line-height:1.5;color:#C9CFC7}
+  .ss-qr .ss-qr-txt b{display:block;color:#fff;font-weight:600;margin-bottom:4px}
+  .ss-link{display:flex;gap:8px;margin-bottom:14px}
+  .ss-link input{flex:1;min-width:0;background:#0B0D0C;border:1px solid #1E2320;border-radius:10px;color:#dfe5dd;font-family:inherit;font-size:12px;padding:10px 12px;outline:none}
+  .ss-link input:focus{border-color:#3a423c}
+  .ss-copy{background:var(--acid);color:#0B0B0C;border:0;border-radius:10px;padding:0 16px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;transition:filter .15s}
+  .ss-copy:hover{filter:brightness(1.08)}
+  .ss-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+  .ss-dest{display:flex;flex-direction:column;align-items:center;gap:7px;background:#0B0D0C;border:1px solid #1E2320;border-radius:12px;padding:12px 6px;color:#DDE3DA;text-decoration:none;font-size:10.5px;transition:border-color .15s,transform .12s}
+  .ss-dest:hover{border-color:#46503f;transform:translateY(-1px)}
+  .ss-dest svg{width:20px;height:20px}
+  .ss-foot{display:flex;gap:8px}
+  .ss-foot button,.ss-foot a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;background:#161A17;color:#E7ECE4;border:1px solid #242823;border-radius:999px;height:40px;font-family:inherit;font-size:12px;cursor:pointer;text-decoration:none;transition:border-color .15s}
+  .ss-foot button:hover,.ss-foot a:hover{border-color:#46503f}
+  .ss-foot a[hidden]{display:none}
   #loader.done{transform:translateY(-100%)}
 
   /* BANNER */
@@ -313,7 +349,13 @@
     <a href="#results">Results</a>
     <a href="#contact">Contact</a>
   </nav>
-  <div class="clock"><b id="time">--:--</b></div>
+  <div class="hdr-right">
+    <div class="clock"><b id="time">--:--</b></div>
+    <button class="share-btn" id="shareBtn" type="button" aria-haspopup="dialog" aria-controls="shareSheet">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.8 15.7 6.2M8.3 13.2l7.4 4.6"/></svg>
+      <span>Share</span>
+    </button>
+  </div>
 </header>
 
 <section class="hero" id="top" aria-labelledby="hero-title">
@@ -733,6 +775,116 @@
     img.addEventListener('error', fail);
     img.addEventListener('load', () => card.classList.remove('no-img'));
   });
+
+</script>
+<div class="ss-backdrop" id="shareSheet" hidden>
+  <div class="ss-sheet" role="dialog" aria-modal="true" aria-labelledby="ssTitle">
+    <div class="ss-head">
+      <div>
+        <h3 id="ssTitle">Share this page</h3>
+        <p id="ssUrlText"></p>
+      </div>
+      <button class="ss-close" type="button" aria-label="Close share sheet" id="ssClose">&times;</button>
+    </div>
+    <div class="ss-qr">
+      <img id="ssQr" alt="Scannable QR code for the shared link" width="104" height="104">
+      <div class="ss-qr-txt"><b>Scan to open</b>Point any phone camera at the code — no app needed.</div>
+    </div>
+    <div class="ss-link">
+      <input id="ssUrlInput" type="text" readonly aria-label="Page URL">
+      <button class="ss-copy" id="ssCopy" type="button">Copy</button>
+    </div>
+    <div class="ss-grid" id="ssGrid"></div>
+    <div class="ss-foot">
+      <button id="ssDownload" type="button">Download QR</button>
+      <a id="ssNative" href="#" hidden>More…</a>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+<script>
+  // ═══ ShareSheet (vanilla port of the share-sheet component) ═══
+  (() => {
+    const LIVE_URL = 'https://riuxin.github.io/kuro-Agency-website/';
+    const url = location.protocol.startsWith('http') ? location.href.split('#')[0] : LIVE_URL;
+    const btn = document.getElementById('shareBtn');
+    const sheet = document.getElementById('shareSheet');
+    const closeBtn = document.getElementById('ssClose');
+    const urlText = document.getElementById('ssUrlText');
+    const urlInput = document.getElementById('ssUrlInput');
+    const copyBtn = document.getElementById('ssCopy');
+    const qrImg = document.getElementById('ssQr');
+    const grid = document.getElementById('ssGrid');
+    const dl = document.getElementById('ssDownload');
+    if (!btn || !sheet) return;
+
+    urlText.textContent = url;
+    urlInput.value = url;
+
+    // destinations
+    const enc = encodeURIComponent;
+    const dests = [
+      ['WhatsApp', 'https://wa.me/?text=' + enc('KURO — an agency trio ' + url), '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.2c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .1-1.7-.1-1.7-.6-3.5-1.7-4.9-3.5-.6-.8-1.1-1.7-1.1-2.4 0-.6.3-1.2.7-1.6.2-.2.4-.3.6-.3h.5c.2 0 .4 0 .6.5l.7 1.7c.1.2 0 .4-.1.6l-.4.5c-.1.2-.2.3-.1.5.4.8 1 1.5 1.8 2 .2.1.4.1.5 0l.6-.7c.2-.2.3-.2.5-.1l1.6.8c.2.1.4.2.4.4.1.2.1.7-.1 1z"/></svg>'],
+      ['Telegram', 'https://t.me/share/url?url=' + enc(url) + '&text=' + enc('KURO — an agency trio'), '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.6 20c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.4-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.2 13.1 1.2 11.6c-1.1-.3-1.1-1.1.2-1.6l19.1-7.4c.9-.3 1.6.2 1.4 1.7z"/></svg>'],
+      ['X', 'https://twitter.com/intent/tweet?text=' + enc('KURO — an agency trio') + '&url=' + enc(url), '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 3H22l-7 8 8.2 10h-6.4l-5-6.1L4.9 21H2l7.6-8.7L1.6 3H8l4.5 5.6L18.9 3Zm-1.1 16h1.8L7.3 4.9H5.4L17.8 19Z"/></svg>'],
+      ['Email', 'mailto:?subject=' + enc('KURO — an agency trio') + '&body=' + enc('Have a look: ' + url), '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg>'],
+    ];
+    grid.innerHTML = dests.map(([n, href, icon]) =>
+      `<a class="ss-dest" href="${href}" target="_blank" rel="noopener">${icon}<span>${n}</span></a>`).join('');
+
+    // QR (local, qrcode-generator from CDN; degrades to text if blocked)
+    let qrDataUrl = null;
+    const makeQR = () => {
+      try {
+        const qr = qrcode(0, 'M');
+        qr.addData(url); qr.make();
+        qrDataUrl = qr.createDataURL(10, 2);
+        qrImg.src = qrDataUrl;
+      } catch (e) {
+        qrImg.remove();
+      }
+    };
+    if (window.qrcode) makeQR();
+    else {
+      const sc = document.createElement('script');
+      sc.src = 'https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js';
+      sc.onload = makeQR;
+      document.head.appendChild(sc);
+    }
+
+    // open / close
+    const open = () => {
+      sheet.hidden = false;
+      requestAnimationFrame(() => sheet.classList.add('open'));
+      document.body.classList.add('ss-lock');
+      closeBtn.focus();
+    };
+    const close = () => {
+      sheet.classList.remove('open');
+      document.body.classList.remove('ss-lock');
+      setTimeout(() => { sheet.hidden = true; btn.focus(); }, 220);
+    };
+    btn.addEventListener('click', open);
+    closeBtn.addEventListener('click', close);
+    sheet.addEventListener('click', e => { if (e.target === sheet) close(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !sheet.hidden) close(); });
+
+    // copy
+    copyBtn.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(url); }
+      catch { urlInput.select(); document.execCommand('copy'); }
+      copyBtn.textContent = 'Copied';
+      setTimeout(() => copyBtn.textContent = 'Copy', 1500);
+    });
+
+    // download QR
+    dl.addEventListener('click', () => {
+      if (!qrDataUrl) return;
+      const a = document.createElement('a');
+      a.href = qrDataUrl; a.download = 'kuro-qr.png';
+      document.body.appendChild(a); a.click(); a.remove();
+    });
+  })();
 </script>
 </body>
 </html>
