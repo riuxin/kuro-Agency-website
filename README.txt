@@ -1,6 +1,6 @@
 KURO — an agency trio
 =====================
-Founders: Riu, Kai, Rishabh  (Kuro = "black" in Japanese; K = Kai, R = Riu & Rishabh)
+Kuro = "black" in Japanese.
 
 FILES
   index.html            The site — one self-contained file (inline CSS + JS, no build step).
@@ -22,7 +22,7 @@ FEATURES IN index.html (v4 — editorial dark redesign)
   - Hero: line-mask entrance, SVG grid + pointer-following lens/glow (transform-only), capability marquee
   - Services bento grid (Brand, Engineering, Product, Growth) with pointer-tracking border glow
   - Case studies: Downing, Club Championship, RaffClub — CSS/SVG cover art, zoom on hover
-  - Studio section: founders + 4-step process
+  - Studio section: how we work + 4-step process
   - Brief builder: 4-step project inquiry with live scope estimate, validation, mailto submit
   - FAQ accordion with smooth height interpolation and animated plus/minus
   - Footer: big CTA, London & Lisbon studios, live local time, socials, share sheet with QR
@@ -30,6 +30,7 @@ FEATURES IN index.html (v4 — editorial dark redesign)
 
 PENDING
   - Confirm case-study copy (industry, year, services) for Downing / Club Championship / RaffClub
-  - Add real X / LinkedIn / Dribbble handles (currently platform home pages)
+  - Add real X / LinkedIn / GitHub / Dribbble handles (currently platform home pages)
+  - Swap hello@kuro.graphics for the real studio email (kuro.graphics is not registered)
   - Optional: send briefs to a form backend (Formspree / Vercel function) instead of mailto
   - Domains to buy: kuro.graphics or studiokuro.com (verify availability first)

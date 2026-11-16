@@ -132,5 +132,5 @@ There is no backend yet. To collect briefs server-side, POST `compose()`'s outpu
 
 ## Content placeholders to confirm
 - The case-study copy, industries, years and services for Downing, Club Championship and RaffClub are drafted placeholders. Confirm them with each client.
-- Social links (X, LinkedIn, Dribbble) point to the platform home pages. Add real handles. GitHub points to `github.com/riuxin`.
+- Social links (X, LinkedIn, Dribbble) point to the platform home pages. Add real handles. GitHub also points to the platform home page.
 - Budget tiers are in USD. Change the `BUDGETS` labels if you prefer GBP or EUR.
