@@ -67,6 +67,9 @@ def build():
             raise SystemExit(f"Expected exactly one {marker} in index.html")
     html = html.replace("</head>", ADMIN_BAR_CSS + "<?php wp_head(); ?>\n</head>", 1)
     html = html.replace("</body>", "<?php wp_footer(); ?>\n</body>", 1)
+    # Local media (videos, posters) ship inside the theme; point URLs at the theme folder.
+    theme_uri = "<?php echo esc_url(get_template_directory_uri()); ?>/assets/"
+    html = html.replace('src="assets/', 'src="' + theme_uri).replace('poster="assets/', 'poster="' + theme_uri)
     header = "<?php\n/**\n * KURO — generated from index.html by wordpress/build_theme.py. Do not edit by hand.\n */\nif (!defined('ABSPATH')) { exit; }\n?>\n"
 
     if OUT_DIR.exists():
@@ -77,10 +80,13 @@ def build():
     (OUT_DIR / "index.php").write_text(header + html, encoding="utf-8")
     if SHOT.exists():
         shutil.copy(SHOT, OUT_DIR / "screenshot.png")
+    if (ROOT / "assets").exists():
+        shutil.copytree(ROOT / "assets", OUT_DIR / "assets")
 
     with zipfile.ZipFile(ZIP, "w", zipfile.ZIP_DEFLATED) as z:
-        for f in sorted(OUT_DIR.iterdir()):
-            z.write(f, f"kuro/{f.name}")
+        for f in sorted(OUT_DIR.rglob("*")):
+            if f.is_file():
+                z.write(f, f"kuro/{f.relative_to(OUT_DIR).as_posix()}")
     shutil.rmtree(OUT_DIR)
     print(f"Built {ZIP.relative_to(ROOT)} (version {VERSION}, {ZIP.stat().st_size // 1024} KB)")
 
