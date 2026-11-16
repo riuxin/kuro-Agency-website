@@ -653,10 +653,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
 .clip-info p{font-size:14px;color:var(--text-2);line-height:1.5}
 .clip-info small{font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;color:var(--text-3)}
 .clip-info .case-cta{font-size:14px}
-.reel-note{display:flex;gap:14px;align-items:flex-start;margin-top:clamp(28px,4vw,44px);padding:18px 20px;border-radius:var(--r);border:1px solid var(--line);background:var(--surface);color:var(--text-2);font-size:14.5px;line-height:1.55;max-width:880px}
-.reel-note svg{width:20px;height:20px;flex:none;color:var(--indigo-soft);margin-top:1px}
-.reel-note b{color:var(--text);font-weight:500}
-.reel-note a{color:var(--text);border-bottom:1px solid var(--line-3)}
 
 /* =========================================================
    FOOTER
@@ -1109,6 +1105,19 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
       <article class="clip" data-reveal>
         <div class="clip-media">
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
+          <button class="clip-toggle" type="button" aria-label="Pause cinematic food promo video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
+          <video muted loop playsinline preload="none" poster="assets/motion/food-3d.jpg" aria-label="Cinematic food promo — reference clip by another creator"><source src="assets/motion/food-3d.mp4" type="video/mp4"></video>
+          <div class="clip-cap"><b>Cinematic food promo</b><span>Restaurant · Reels</span></div>
+        </div>
+        <div class="clip-info">
+          <p>Moody, slow-motion food and kitchen promos that make people hungry.</p>
+          <small>Reference film by SevenMagpie</small>
+          <a class="case-cta u-link" href="#contact" data-brief="motion">Brief a similar edit <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11l6-6m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </article>
+      <article class="clip" data-reveal>
+        <div class="clip-media">
+          <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
           <button class="clip-toggle" type="button" aria-label="Pause anime fight edit video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
           <video muted loop playsinline preload="none" poster="assets/motion/anime-120fps.jpg" aria-label="Anime fight edit — reference clip by another creator"><source src="assets/motion/anime-120fps.mp4" type="video/mp4"></video>
           <div class="clip-cap"><b>Anime fight edit</b><span>120fps · Sync to beat</span></div>
@@ -1129,19 +1138,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
         <div class="clip-info">
           <p>Looping animated wallpapers for phones, streams and socials.</p>
           <small>Reference edit · anime: Jujutsu Kaisen (Gege Akutami / MAPPA)</small>
-          <a class="case-cta u-link" href="#contact" data-brief="motion">Brief a similar edit <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11l6-6m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        </div>
-      </article>
-      <article class="clip" data-reveal>
-        <div class="clip-media">
-          <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
-          <button class="clip-toggle" type="button" aria-label="Pause cinematic food promo video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
-          <video muted loop playsinline preload="none" poster="assets/motion/food-3d.jpg" aria-label="Cinematic food promo — reference clip by another creator"><source src="assets/motion/food-3d.mp4" type="video/mp4"></video>
-          <div class="clip-cap"><b>Cinematic food promo</b><span>Restaurant · Reels</span></div>
-        </div>
-        <div class="clip-info">
-          <p>Moody, slow-motion food and kitchen promos that make people hungry.</p>
-          <small>Reference film by SevenMagpie</small>
           <a class="case-cta u-link" href="#contact" data-brief="motion">Brief a similar edit <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11l6-6m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
       </article>
@@ -1173,8 +1169,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
       </article>
     </div>
 
-    <p class="reel-note" data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
-      <span><b>Shown for style direction only.</b> Every clip here belongs to its original creator and isn't presented as KURO's work. Made one of these and want a credit or removal? Email <a href="mailto:hello@kuro.graphics?subject=Reference%20clip%20credit">hello@kuro.graphics</a>.</span></p>
   </div>
 </section>
 
