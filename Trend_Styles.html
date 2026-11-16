@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riu's Design Trend Playbook</title>
+<style>
+  :root{
+    --bg:#F5F2EF; --ink:#111114; --violet:#5C2EE0; --lime:#C8E634; --lav:#D9D1F0; --muted:#6E6A66;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:'Archivo','Helvetica Neue',Arial,sans-serif;padding:30px 22px 44px;max-width:1100px;overflow-x:hidden}
+  .kicker{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  h1{font-size:clamp(34px,6vw,56px);font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:-1.5px;line-height:.95;margin-bottom:8px}
+  h1 .alt{color:var(--violet);font-style:normal}
+  .hl{background:var(--lav);padding:0 10px}
+  .sub{color:var(--muted);font-size:14px;max-width:620px;line-height:1.6;margin-bottom:34px}
+  .marks{display:flex;gap:10px;align-items:center;margin-bottom:34px;flex-wrap:wrap}
+  .chip{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+  .chip i{width:22px;height:22px;border-radius:7px;display:inline-block;border:1px solid rgba(0,0,0,.12)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px}
+
+  .card{border-radius:20px;overflow:hidden;border:1px solid rgba(0,0,0,.08)}
+  .demo{padding:26px 22px;min-height:210px;display:flex;flex-direction:column;justify-content:center;position:relative}
+  .meta{padding:14px 18px;background:#fff;border-top:1px solid rgba(0,0,0,.08)}
+  .meta b{font-size:14px}
+  .meta p{font-size:12px;color:var(--muted);line-height:1.55;margin-top:4px}
+  .meta .use{display:inline-block;margin-top:8px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--violet)}
+
+  /* 1 TYPOGRAPHY-LED */
+  .d-type{background:#111114;color:#fff}
+  .d-type .big{font-weight:900;text-transform:uppercase;letter-spacing:-2px;line-height:.88;font-size:44px}
+  .d-type .big .cut{display:block;font-size:100px;color:transparent;-webkit-text-stroke:2px #EE6E4D;line-height:.8;margin:-8px 0}
+  .d-type .mark{background:#C8E634;color:#111;padding:0 8px}
+  .d-type .tiny{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#9a9aa2;margin-top:12px}
+
+  /* 2 BRUTALISM */
+  .d-brut{background:#fff;color:#000;border-bottom:2px solid #000}
+  .d-brut .box{border:2px solid #000;box-shadow:8px 8px 0 #000;background:#fff;padding:14px}
+  .d-brut .brk{font-weight:900;text-transform:uppercase;font-size:38px;letter-spacing:-1px;line-height:.85}
+  .d-brut .brk span{color:transparent;-webkit-text-stroke:2px #000}
+  .d-brut .row{display:flex;justify-content:space-between;font-family:'Courier New',monospace;font-size:11px;margin-top:10px}
+  .d-brut .acid{position:absolute;top:12px;right:12px;background:#C6FF00;border:2px solid #000;padding:3px 10px;font-weight:800;font-size:11px;transform:rotate(-4deg)}
+
+  /* 3 EXPERIMENTAL */
+  .d-acid{background:radial-gradient(120% 120% at 20% 0%,#3A0CA3 0%,#7b2ff7 40%,#C8E634 120%);color:#fff}
+  .d-acid .title{font-weight:900;text-transform:uppercase;font-size:40px;letter-spacing:-1.5px;line-height:.9;
+    background:linear-gradient(120deg,#d9f24b,#ffffff 45%,#9be5e0 70%,#f3a4f5);-webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:2px 0 rgba(255,0,80,.35),-2px 0 rgba(0,220,255,.35)}
+  .d-acid .sub{color:#eaf7c0;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-top:10px}
+  .d-acid .star{position:absolute;right:14px;top:14px;width:34px;height:34px;color:#fff;opacity:.9}
+
+  /* 4 BOTANICAL */
+  .d-bot{background:#F6F1E5;color:#22321F}
+  .d-bot .serif{font-family:Georgia,'Times New Roman',serif;font-size:36px;line-height:1.02;font-weight:700}
+  .d-bot .mix{font-size:40px;letter-spacing:1px}
+  .d-bot .mono{font-family:'Courier New',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#5c6b52;margin-top:12px}
+  .d-bot .blob{position:absolute;right:-30px;bottom:-40px;width:130px;height:130px;background:#3F6B3B;border-radius:62% 38% 55% 45%/48% 60% 40% 52%}
+  .d-bot .blob::after{content:'';position:absolute;inset:26px;background:#C8E634;border-radius:50% 50% 40% 60%/55% 45% 55% 45%}
+
+  /* 5 MAXIMALISM */
+  .d-max{background:#111114;color:#fff}
+  .d-max .word{font-weight:900;text-transform:uppercase;font-size:46px;letter-spacing:-2px;line-height:.9;position:relative;z-index:2}
+  .d-max .word em{font-style:normal;color:#FF3EA5}
+  .d-max .cutout{position:absolute;z-index:1;top:18px;left:16px;width:64px;height:84px;background:#C8E634;border-radius:32px 32px 8px 8px;transform:rotate(-8deg)}
+  .d-max .sticker{position:absolute;z-index:3;background:#fff;color:#111;font-weight:800;font-size:10px;padding:3px 9px;transform:rotate(6deg);right:14px;bottom:38px;border:2px solid #000}
+  .d-max .tape{position:absolute;z-index:3;top:0;right:36px;width:70px;height:18px;background:rgba(255,255,255,.35);transform:rotate(-14deg)}
+  .d-max .scrib{position:absolute;z-index:3;left:14px;bottom:14px;font-family:'Comic Sans MS',cursive;font-size:13px;color:#C8E634;transform:rotate(-3deg)}
+
+  /* 6 DARK MONO PORTFOLIO */
+  .d-mono{background:radial-gradient(90% 110% at 50% 40%,#2A2A2E 0%,#1B1B1E 75%);color:#fff}
+  .d-mono .kick{font-size:9px;letter-spacing:.45em;text-transform:uppercase;color:#8a8a8e;text-align:center}
+  .d-mono .name{font-weight:800;font-size:54px;letter-spacing:.12em;text-transform:uppercase;text-align:center;margin:8px 0;line-height:1;text-shadow:0 0 34px rgba(255,255,255,.14)}
+  .d-mono .role{font-size:8px;letter-spacing:.4em;text-transform:uppercase;color:#8a8a8e;text-align:center}
+  .d-mono .rail{position:absolute;left:12px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px}
+  .d-mono .rail i{width:9px;height:9px;border:1px solid #8a8a8e;border-radius:2px;display:block}
+  .d-mono .scroll{position:absolute;right:12px;bottom:14px;font-size:8px;letter-spacing:.4em;color:#8a8a8e;writing-mode:vertical-rl;display:flex;align-items:center;gap:7px}
+  .d-mono .scroll::before{content:'';width:1px;height:24px;background:#4a4a4e}
+
+  footer{margin-top:36px;border-top:1px solid rgba(0,0,0,.12);padding-top:18px}
+  footer p{color:var(--muted);font-size:12.5px;line-height:1.7;max-width:740px}
+  footer b{color:var(--ink)}
+  .pill{display:inline-block;border:1.5px solid var(--violet);color:var(--violet);border-radius:999px;padding:7px 18px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-top:14px;font-weight:600}
+</style>
+</head>
+<body>
+  <div class="kicker">Style Reference &middot; Batch 2 &middot; ZARZ BTGR trend series</div>
+  <h1>Design <span class="alt">Trend</span> <span class="hl">Playbook</span></h1>
+  <p class="sub">Six style systems learned from your references &mdash; each with its live demo below, plus the container style that frames them all.</p>
+  <div class="marks">
+    <span class="chip"><i style="background:#F5F2EF"></i>Bone 80%</span>
+    <span class="chip"><i style="background:#5C2EE0"></i>Violet 15%</span>
+    <span class="chip"><i style="background:#C8E634"></i>Acid lime 5%</span>
+    <span class="chip"><i style="background:#111114"></i>Ink</span>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="demo d-type">
+        <div class="big">MAKE <span class="mark">TYPE</span> <span class="cut">LOUD</span> THE VISUAL</div>
+        <div class="tiny">Oversized &middot; cropped &middot; highlight &middot; kinetic</div>
+      </div>
+      <div class="meta"><b>Typography-led</b><p>Letters as architecture: huge cropped caps, outline+solid collision, marker highlights, script-vs-caps tension. Fast, sharp, image-free.</p><span class="use">Portfolio &middot; fashion &middot; editorial</span></div>
+    </div>
+
+    <div class="card" style="border-radius:0">
+      <div class="demo d-brut">
+        <span class="acid">NO RULES!</span>
+        <div class="box">
+          <div class="brk">RAW<span> &amp; </span>HON<br>EST</div>
+          <div class="row"><span>EST. 2026</span><span>||||||||||||||</span><span>[X]</span></div>
+        </div>
+      </div>
+      <div class="meta"><b>Brutalism</b><p>border-radius:0. Hard 2px black borders, 8px-offset shadows, system fonts at absurd sizes, one acid accent, instant hover inversions.</p><span class="use">Studios &middot; events &middot; bold brands</span></div>
+    </div>
+
+    <div class="card">
+      <div class="demo d-acid">
+        <svg class="star" viewBox="0 0 40 40"><path d="M20 0l4 13 13 4-13 4-4 13-4-13-13-4 13-4z" fill="#fff"/></svg>
+        <div class="title">ACID<br>GRAPHICS</div>
+        <div class="sub">chrome &middot; grunge &middot; glitch &middot; collage</div>
+      </div>
+      <div class="meta"><b>Experimental</b><p>Toxic lime + violet + black. Liquid-chrome 3D, RGB-split glitch, melted variable fonts, xerox grain. Chaos on hover, calm by default.</p><span class="use">Music &middot; gaming &middot; youth brands</span></div>
+    </div>
+
+    <div class="card">
+      <div class="demo d-bot">
+        <div class="serif"><span class="mix">THe</span> GARdenER<br>COLLECTION</div>
+        <div class="mono">flora plate no. 04 &middot; est. 1905</div>
+        <div class="blob"></div>
+      </div>
+      <div class="meta"><b>Botanical</b><p>Paper cream + greens. Quirky mixed-case serif, duotone florals, vintage specimen plates, Bauhaus glyph grids, line-draw blooms.</p><span class="use">Cafes &middot; wellness &middot; luxury dark mode</span></div>
+    </div>
+
+    <div class="card">
+      <div class="demo d-max">
+        <div class="cutout"></div><div class="tape"></div>
+        <div class="word">MORE<br><em>IS</em> MORE</div>
+        <div class="sticker">TOO LOUD!!</div>
+        <div class="scrib">~ it's a lot ~</div>
+      </div>
+      <div class="meta"><b>Maximalism / anti-design</b><p>Clashing committed palette, 2&ndash;4 fonts, layered cutouts/stickers/tape, scribbles and grain &mdash; all orbiting ONE focal anchor.</p><span class="use">Streetwear &middot; festivals &middot; Gen-Z brands</span></div>
+    </div>
+
+    <div class="card" style="background:#141416">
+      <div class="demo d-mono">
+        <div class="rail"><i></i><i></i><i></i></div>
+        <div class="scroll">SCROLL</div>
+        <div class="kick">I AM</div>
+        <div class="name">TURA</div>
+        <div class="role">A Junior &middot; Web Designer</div>
+      </div>
+      <div class="meta" style="background:#1c1c1f;border-top:1px solid #2a2a2e"><b style="color:#fff">Dark monochrome portfolio</b><p style="color:#9a9aa0">One typeface, white-on-charcoal only. Grain + vignette, stacked 2&times;2 logo, corner micro-nav, depth-of-field carousel, underline-only form, rotated SCROLL cue, numbered sections.</p><span class="use" style="color:#C8E634">Portfolios &middot; agencies &middot; case studies</span></div>
+    </div>
+
+    <div class="card" style="background:#fff">
+      <div class="demo" style="justify-content:flex-start;gap:12px;padding:24px 22px">
+        <div style="font-weight:900;font-style:italic;text-transform:uppercase;font-size:22px;letter-spacing:-1px">The frame that holds them</div>
+        <div style="font-size:12.5px;color:var(--muted);line-height:1.6">Bone-white canvas &rarr; violet condensed-italic titles &rarr; lavender highlight bars &rarr; chartreuse starburst colliding with the headline &rarr; thin line-art bleeding off edges &rarr; content in a soft white card &rarr; pill outline CTA.</div>
+        <div style="display:flex;gap:6px">
+          <span style="width:40px;height:40px;background:var(--violet);border-radius:10px"></span>
+          <span style="width:40px;height:40px;background:var(--lav);border-radius:10px"></span>
+          <span style="width:40px;height:40px;background:var(--lime);border-radius:50% 50% 40% 60%/55% 45% 55% 45%"></span>
+          <span style="width:40px;height:40px;border:2px solid #111;border-radius:0"></span>
+        </div>
+      </div>
+      <div class="meta"><b>Container style</b><p>The ZARZ BTGR wrapper: 80% bone / 15% violet / 5% acid lime. Works as a site shell around any of the five demo styles.</p><span class="use">Universal shell</span></div>
+    </div>
+  </div>
+
+  <footer>
+    <p><b>Saved in skill riu-web-design-style v1.2</b> alongside the batch-1 palettes. Say which style + what the site is for, and I'll build it in that exact system. Mixing allowed: e.g. botanical content inside the ZARZ container, brutalist type on a bone-white shell, or TURA mono as the base with one accent borrowed from any batch-1 palette.</p>
+    <span class="pill">Save For Later!!</span>
+  </footer>
+</body>
+</html>

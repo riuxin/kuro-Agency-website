@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riu's Web Design Style Reference</title>
+<style>
+  :root{
+    --bg:#0A0A0C;
+    --card:#141418;
+    --text:#F2F2F4;
+    --muted:#8A8A94;
+    --accent:#00D4FF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Poppins','Segoe UI',system-ui,sans-serif;
+    padding:28px 24px 40px;
+    max-width:1100px;
+  }
+  .kicker{
+    font-size:11px;letter-spacing:3px;text-transform:uppercase;
+    color:var(--muted);margin-bottom:10px;
+  }
+  h1{
+    font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-1px;
+    margin-bottom:6px;
+  }
+  h1 .grad{
+    background:linear-gradient(90deg,#00D4FF,#3A0CA3);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .sub{color:var(--muted);font-size:14px;margin-bottom:30px;max-width:640px;line-height:1.6}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+  .pal{
+    background:var(--card);border:1px solid #232329;border-radius:20px;
+    overflow:hidden;transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .pal:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(0,212,255,.08)}
+  .swatches{display:grid;grid-template-columns:1fr 1fr;height:130px}
+  .sw{position:relative;display:flex;align-items:flex-end;padding:12px}
+  .sw .hex{font-size:11px;letter-spacing:.5px;font-weight:600;opacity:.92}
+  .dark .hex{color:#fff}
+  .light .hex{color:#111}
+  .name{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:14px 16px;border-top:1px solid #232329;
+  }
+  .name b{font-size:14px;font-weight:600}
+  .tag{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+  .bridge{height:6px;display:block}
+  header,.grid,footer{width:100%}
+  footer{margin-top:34px;border-top:1px solid #232329;padding-top:18px}
+  footer p{color:var(--muted);font-size:12px;line-height:1.7;max-width:720px}
+  footer b{color:var(--text)}
+  .pill{
+    display:inline-block;border:1px solid var(--accent);color:var(--accent);
+    border-radius:999px;padding:6px 16px;font-size:11px;letter-spacing:1.5px;
+    text-transform:uppercase;margin-top:14px;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="kicker">Style Reference &middot; learned from your 22 images</div>
+    <h1>Riu's <span class="grad">Web Design</span> Palettes</h1>
+    <p class="sub">Nine proven duotone palettes extracted from the reference graphics. Dark base + one saturated accent + white type &mdash; the pattern every reference followed.</p>
+  </header>
+
+  <div class="grid">
+    <div class="pal">
+      <div class="swatches">
+        <div class="sw dark" style="background:#020024"><span class="hex">#020024</span></div>
+        <div class="sw dark" style="background:#00D4FF"><span class="hex" style="color:#020024">#00D4FF</span></div>
+      </div>
+      <span class="bridge" style="background:linear-gradient(90deg,#020024,#00D4FF)"></span>
+      <div class="name"><b>Neon Dusk</b><span class="tag">Neon tech</span></div>
+    </div>
+
+    <div class="pal">
+      <div class="swatches">
+        <div class="sw dark" style="background:#050505"><span class="hex">#050505</span></div>
+        <div class="sw dark" style="background:#3A0CA3"><span class="hex">#3A0CA3</span></div>
+      </div>
+      <span class="bridge" style="background:linear-gradient(90deg,#050505,#3A0CA3)"></span>
+      <div class="name"><b>Obsidian Glow</b><span class="tag">Tech-noir</span></div>
+    </div>
+
+    <div class="pal">
+      <div class="swatches">
+        <div class="sw dark" style="background:#0A1A2F"><span class="hex">#0A1A2F</span></div>
+        <div class="sw dark" style="background:#1F1F1F"><span class="hex">#1F1F1F</span></div>
+      </div>
+      <span class="bridge" style="background:linear-gradient(90deg,#0A1A2F,#1F1F1F)"></span>
+      <div class="name"><b>Dark &amp; Elegant</b><span class="tag">Luxury</span></div>
+    </div>
+
+    <div class="pal">
+      <div class="swatches">
+        <div class="sw dark" style="background:#1C1C1C"><span class="hex">#1C1C1C</span></div>
+        <div class="sw dark" style="background:#6A0DAD"><span class="hex">#6A0DAD</span></div>
+      </div>
+      <span class="bridge" style="background:linear-gradient(90deg,#1C1C1C,#6A0DAD)"></span>
+      <div class="name"><b>Royal Smoke</b><span class="tag">Creative</span></div>
+    </div>
+
+    <div class="pal">
+      <div class="swatches">
+        <div class="sw dark" style="background:#2C666E"><span class="hex">#2C666E</span></div>
+        <div class="sw light" style="background:#F0EDEE"><span class="hex">#F0EDEE</span></div>
+      </div>
+      <span class="bridge" style="background:linear-gradient(90deg,#2C666E,#F0EDEE)"></span>
+      <div class="name"><b>Teal Ink</b><span class="tag">Calm pro</span></div>
+    </div>
+
+    <div class="pal">
+      <div class="swatches">
+        <div class="sw dark" style="background:#20201F"><span class="hex">#20201F</span></div>
+        <div class="sw dark" style="background:#EE6E4D"><span class="hex" style="color:#20201F">#EE6E4D</span></div>
+      </div>
+      <span class="bridge" style="background:linear-gradient(90deg,#20201F,#EE6E4D)"></span>
+      <div class="name"><b>Ember</b><span class="tag">Warm bold</span></div>
+    </div>
+
+    <div class="pal">
+      <div class="swatches">
+        <div class="sw dark" style="background:#310A31"><span class="hex">#310A31</span></div>
+        <div class="sw light" style="background:#F4ECD6"><span class="hex">#F4ECD6</span></div>
+      </div>
+      <span class="bridge" style="background:linear-gradient(90deg,#310A31,#F4ECD6)"></span>
+      <div class="name"><b>Plum Cream</b><span class="tag">Boutique</span></div>
+    </div>
+
+    <div class="pal">
+      <div class="swatches">
+        <div class="sw dark" style="background:#61210F"><span class="hex">#61210F</span></div>
+        <div class="sw light" style="background:#FDF0D5"><span class="hex">#FDF0D5</span></div>
+      </div>
+      <span class="bridge" style="background:linear-gradient(90deg,#61210F,#FDF0D5)"></span>
+      <div class="name"><b>Cocoa</b><span class="tag">Cozy</span></div>
+    </div>
+
+    <div class="pal">
+      <div class="swatches">
+        <div class="sw dark" style="background:#231942"><span class="hex">#231942</span></div>
+        <div class="sw light" style="background:#E0B1CB"><span class="hex">#E0B1CB</span></div>
+      </div>
+      <span class="bridge" style="background:linear-gradient(90deg,#231942,#E0B1CB)"></span>
+      <div class="name"><b>Grape Blush</b><span class="tag">Soft modern</span></div>
+    </div>
+  </div>
+
+  <footer>
+    <p><b>Also saved:</b> light editorial style (bg #F4F4F6, headings #1A1A2E extra-bold Poppins, body #6B7280, accent #2563EB), layout patterns (rounded 16&ndash;32px cards, pill ghost buttons, gradient bridges, 2-column numbered lists, rotated vertical labels), and the full free-resource list (fonts, icons, photos, mockups, inspiration) &mdash; all in the <b>riu-web-design-style</b> skill for every future build.</p>
+    <span class="pill">Say the word + pick a palette &rarr; I build the site</span>
+  </footer>
+</body>
+</html>
