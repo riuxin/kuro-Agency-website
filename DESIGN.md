@@ -30,7 +30,7 @@ The accent is used sparingly: dots, focus rings, italic serif words and meters. 
 | Token | Value | Usage |
 |---|---|---|
 | `--font-sans` | Geist 300–800 | Everything by default |
-| `--font-serif` | Instrument Serif *italic* | Reserved for the closing CTA only (`.h-em`). Section headings are plain white sans |
+| `--font-serif` | Instrument Serif *italic* | One emphasis word per headline (`.h-em`), with a gradient fill |
 | `--font-mono` | Geist Mono 400/500 | Eyebrows, indices, metadata, logo sub-tag |
 | `--fs-display` | `clamp(2.5rem, 1.05rem + 7.2vw, 8.25rem)`, capped at `9vw` | Hero H1 (letter-spacing −0.055em) |
 | `--fs-h2` | `clamp(2.125rem, 1.15rem + 3.7vw, 4.75rem)` | Section titles (−0.045em) |
@@ -77,9 +77,8 @@ Transitions name their properties explicitly and do not use `transition: all`, s
 | Step | Input | Validation message |
 |---|---|---|
 | 1 Project | Checkboxes, multi-select (5 types: website, gaming venue, AI automation, web app, motion) | "Pick at least one option to continue." |
-| 2 Budget | Radios (4 tiers) | "Choose a range to continue — it doesn't need to be exact." |
-| 3 Timeline | Radios (4) | "Choose a timeline to continue." |
-| 4 Details | Name\*, Email\*, Company, Notes | "Enter your name so we know who to reply to." / "Enter a valid email, like name@company.com." |
+| 2 Timeline | Radios (4) | "Choose a timeline to continue." |
+| 3 Details | Name\*, Email\*, Company, Notes | "Enter your name so we know who to reply to." / "Enter a valid email, like name@company.com." |
 
 **Live summary.** The summary updates on every change and briefly flashes the value that changed:
 - **Scope level:** Focused / Considered / Comprehensive / Flagship, from summed type weights

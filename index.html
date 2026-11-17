@@ -128,6 +128,21 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
 .js [data-reveal].is-in{opacity:1;transform:none}
 
 /* =========================================================
+   PRELOADER (~1.1s loading line, then the curtain lifts)
+   ========================================================= */
+.preloader{display:none}
+.js .preloader{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:#09090b;transition:transform .6s cubic-bezier(.16,1,.3,1);will-change:transform}
+.preloader.is-done{transform:translate3d(0,-100%,0);pointer-events:none}
+.pl-center{display:grid;justify-items:center;gap:22px;animation:plIn .5s var(--ease) both}
+@keyframes plIn{from{opacity:0;transform:translate3d(0,10px,0)}}
+.pl-brand{display:flex;align-items:center;gap:14px}
+.pl-brand .brand-word{font-size:clamp(30px,6vw,48px);gap:5px}
+.pl-brand .brand-word i{width:9px;height:9px;box-shadow:0 0 18px 2px rgba(129,140,248,.6)}
+.pl-brand .brand-tag{height:28px;line-height:26px;padding:0 10px;font-size:12px}
+.pl-line{position:relative;width:min(280px,60vw);height:2px;border-radius:2px;background:var(--line-2);overflow:hidden}
+.pl-line i{position:absolute;inset:0;transform-origin:left;transform:scaleX(0);background:linear-gradient(90deg,var(--indigo-hi),var(--violet-hi));box-shadow:0 0 12px rgba(129,140,248,.8)}
+
+/* =========================================================
    HEADER
    ========================================================= */
 .site-header{position:fixed;inset:0 0 auto;z-index:50;height:var(--header-h);transition:transform .55s var(--ease)}
@@ -189,22 +204,35 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
 /* =========================================================
    HERO
    ========================================================= */
-.hero{position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding-top:calc(var(--header-h) + 32px);background:var(--bg);border-bottom:1px solid var(--line)}
-@media (min-width:768px){.hero{min-height:min(100svh,920px);padding-top:calc(var(--header-h) + 72px)}}
-.hero-inner{position:relative;padding-bottom:28px}
-@media (min-width:768px){.hero-inner{padding-bottom:clamp(40px,7vh,80px)}}
-.hero-eyebrow{display:flex;align-items:center;gap:10px;padding-bottom:16px;border-bottom:1px solid var(--line);font-family:var(--font-mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3)}
-.hero-eyebrow b{color:var(--text);font-weight:500}
-.hero-title{margin-top:22px;font-size:min(clamp(2.1rem,1rem + 5.4vw,6.6rem),8.2vw);font-weight:650;line-height:.98;letter-spacing:-.05em}
-.hero-title .ln{display:block;overflow:hidden;padding:0 .08em .1em 0;margin-bottom:-.1em}
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:calc(var(--header-h) + clamp(56px,10vh,120px));overflow:hidden;isolation:isolate}
+.hero-bg{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.hero-aurora{position:absolute;inset:-20% -10% auto;height:90%;
+  background:radial-gradient(42% 46% at 72% 30%,rgba(99,102,241,.30),transparent 70%),radial-gradient(36% 40% at 30% 18%,rgba(139,92,246,.20),transparent 70%),radial-gradient(30% 30% at 55% 60%,rgba(56,189,248,.06),transparent 70%);
+  animation:drift 22s var(--ease-io) infinite alternate}
+@keyframes drift{from{transform:translate3d(-3%,0,0) scale(1)}to{transform:translate3d(3%,4%,0) scale(1.08)}}
+.hero-grid,.hero-lens-grid{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72'%3E%3Cpath d='M72 .5H.5V72' fill='none' stroke='%23fff' stroke-opacity='.07'/%3E%3C/svg%3E");background-position:0 0}
+.hero-grid{position:absolute;inset:0;-webkit-mask-image:radial-gradient(ellipse 75% 70% at 50% 35%,#000 20%,transparent 78%);mask-image:radial-gradient(ellipse 75% 70% at 50% 35%,#000 20%,transparent 78%)}
+.hero-lens{position:absolute;left:0;top:0;width:440px;height:440px;margin:-220px 0 0 -220px;border-radius:50%;overflow:hidden;opacity:0;transition:opacity .8s var(--ease);will-change:transform;
+  -webkit-mask-image:radial-gradient(circle,#000 0%,rgba(0,0,0,.6) 35%,transparent 70%);mask-image:radial-gradient(circle,#000 0%,rgba(0,0,0,.6) 35%,transparent 70%)}
+.hero-lens-grid{position:absolute;left:0;top:0;width:100vw;height:100vh;will-change:transform;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72'%3E%3Cpath d='M72 .5H.5V72' fill='none' stroke='%23a5b4fc' stroke-opacity='.55'/%3E%3Ccircle cx='.5' cy='.5' r='1.5' fill='%23c7d2fe'/%3E%3C/svg%3E")}
+.hero-glow{position:absolute;left:0;top:0;width:760px;height:760px;margin:-380px 0 0 -380px;border-radius:50%;opacity:0;transition:opacity 1s var(--ease);will-change:transform;
+  background:radial-gradient(circle,rgba(99,102,241,.22) 0%,rgba(139,92,246,.08) 35%,transparent 65%)}
+.hero.is-pointer .hero-lens,.hero.is-pointer .hero-glow{opacity:1}
+.hero-fade{position:absolute;inset:auto 0 0;height:40%;background:linear-gradient(to bottom,transparent,var(--bg))}
+
+.hero-inner{position:relative;padding-bottom:clamp(48px,8vh,96px)}
+.hero-badge{display:inline-flex;align-items:center;gap:12px;padding:7px 14px 7px 12px;border:1px solid var(--line-2);border-radius:999px;background:rgba(18,18,20,.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:13.5px;color:var(--text-2)}
+.hero-badge b{color:var(--text);font-weight:500}
+@media (max-width:479px){.hero-badge .badge-more{display:none}}
+.hero-title{margin-top:28px;font-size:min(var(--fs-display),9vw);font-weight:600;line-height:.96;letter-spacing:-.055em}
+.hero-title .ln{display:block;overflow:hidden;padding:0 .12em .1em 0;margin-bottom:-.1em}
 .hero-title .ln-i{display:inline-block}
-.hero-foot{display:grid;gap:18px;margin-top:18px}
-@media (min-width:960px){.hero-foot{grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:48px;margin-top:32px}}
-.hero-lead{max-width:44ch;color:var(--text-2);font-size:var(--fs-lead);line-height:1.5;text-wrap:pretty}
-.hero-ctas{display:flex;flex-wrap:nowrap;gap:10px}
-.hero-ctas .btn{height:46px;padding:0 18px;font-size:15px}
-@media (min-width:768px){.hero-ctas .btn{height:54px;padding:0 26px;font-size:16px}}
-.proof{display:flex;align-items:center;gap:10px;margin-top:14px;overflow-x:auto;white-space:nowrap;scrollbar-width:none;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.06em;color:var(--text-3);
+.hero-foot{display:grid;gap:32px;margin-top:clamp(28px,4vw,48px)}
+.hero-lead{max-width:52ch;color:var(--text-2);font-size:var(--fs-lead);line-height:1.55;text-wrap:pretty}
+.hero-lead strong{color:var(--text);font-weight:500}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px}
+.proof{display:flex;align-items:center;gap:10px;margin-top:22px;overflow-x:auto;white-space:nowrap;scrollbar-width:none;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.06em;color:var(--text-3);
   -webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent)}
 .proof::-webkit-scrollbar{display:none}
 @media (min-width:768px){.proof{margin-top:28px;-webkit-mask-image:none;mask-image:none}}
@@ -213,7 +241,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
 .proof a{display:inline-flex;align-items:center;min-height:40px;color:var(--text);transition:color var(--dur) var(--ease)}
 .proof a:hover{color:var(--indigo-soft)}
 .proof .sep{color:var(--text-3)}
-@media (max-width:767px){.hero .hero-meta{display:none}}
+@media (min-width:960px){.hero-foot{grid-template-columns:1fr auto;align-items:end;gap:48px}}
 .hero-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 24px;margin-top:clamp(40px,6vw,72px);padding-top:22px;border-top:1px solid var(--line)}
 .hero-meta div{display:grid;gap:4px}
 .hero-meta dt{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
@@ -247,20 +275,18 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
 /* =========================================================
    SERVICES — BENTO
    ========================================================= */
-.svc-list{display:grid;gap:12px;margin-top:clamp(28px,4vw,48px)}
-.svc.card{border-radius:18px}
-.svc-body{position:relative;display:grid;gap:10px;padding:18px 20px}
-.svc-top{display:flex;align-items:center;gap:12px;min-width:0}
-.svc-n{flex:none;padding:3px 8px;border:1px solid var(--line-2);border-radius:6px;font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;color:var(--indigo-soft)}
-.svc-title{font-size:1.15rem;font-weight:650;letter-spacing:-.02em;line-height:1.2}
-.svc-icon{flex:none;margin-left:auto;width:32px;height:32px;border-radius:9px;border:1px solid var(--line-2);display:grid;place-items:center;color:var(--indigo-soft)}
-.svc-icon svg{width:16px;height:16px}
-.svc-hook{font-size:14.5px;line-height:1.45;color:var(--text-2)}
-.svc-pills{display:flex;flex-wrap:wrap;gap:6px}
-.svc-pills li{padding:5px 10px;border-radius:999px;border:1px solid var(--line-2);background:rgba(255,255,255,.02);font-size:12.5px;color:var(--text);white-space:nowrap}
+.bento{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;margin-top:clamp(48px,6vw,80px)}
+@media (min-width:768px){
+  .bento{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .b-web{grid-column:1/3}
+  .b-ai{grid-column:3}
+  .b-brand{grid-column:1/-1}
+}
 @media (min-width:960px){
-  .svc-body{grid-template-columns:minmax(230px,.8fr) minmax(0,.9fr) minmax(0,1.7fr);align-items:center;gap:28px;padding:22px 28px}
-  .svc-pills{justify-content:flex-end}
+  .b-brand .card-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);grid-template-rows:auto 1fr;column-gap:clamp(28px,4vw,56px);align-items:start}
+  .b-brand .card-top{grid-column:1;grid-row:1}
+  .b-brand .card-copy{grid-column:1;grid-row:2;align-self:end}
+  .b-brand .v-motion{grid-column:2;grid-row:1/3}
 }
 .card{position:relative;border-radius:var(--r-lg);border:1px solid var(--line);isolation:isolate;
   background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,0) 38%),var(--surface);
@@ -290,7 +316,13 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
 .chips li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--indigo-hi)}
 .card-visual{position:relative;border-radius:var(--r);border:1px solid var(--line);background:var(--bg);overflow:hidden;min-height:190px}
 
-/* Browser frame (work) */
+/* Bullets */
+.bullets{display:grid;gap:12px}
+.bullets li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:12px;align-items:start;font-size:15px;line-height:1.5;color:var(--text-2)}
+.bullets li::before{content:'';width:20px;height:20px;margin-top:1px;border-radius:50%;border:1px solid rgba(165,180,252,.35);
+  background:rgba(99,102,241,.14) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2l2.3 2.3 4.7-5' fill='none' stroke='%23c7d2fe' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/11px no-repeat}
+
+/* Browser frame (bento + work) */
 .browser{position:relative;border-radius:var(--r);border:1px solid var(--line-2);background:#0e0e11;overflow:hidden;isolation:isolate;transform:translateZ(0)}
 .browser-bar{display:flex;align-items:center;gap:6px;height:34px;padding:0 12px;border-bottom:1px solid var(--line);background:#141417}
 .browser-bar i{width:9px;height:9px;border-radius:50%;background:var(--surface-3);flex:none}
@@ -298,7 +330,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
 .browser-url svg{width:10px;height:10px;flex:none;color:#6ee7b7}
 .browser-view{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--surface)}
 .browser-view img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform 1.2s var(--ease)}
-.proj:hover .browser-view img{transform:scale(1.04)}
+.card:hover .browser-view img,.proj:hover .browser-view img{transform:scale(1.04)}
 
 /* Status pills */
 .pill{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;border:1px solid var(--line-2);background:rgba(9,9,11,.66);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-2);white-space:nowrap}
@@ -306,6 +338,72 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
 .status-live{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(6,40,30,.72);border:1px solid rgba(52,211,153,.42);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#6ee7b7;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;box-shadow:0 0 26px -6px rgba(52,211,153,.55)}
 .status-live i{position:relative;width:7px;height:7px;border-radius:50%;background:#34d399;flex:none}
 .status-live i::after{content:'';position:absolute;inset:0;border-radius:50%;background:#34d399;animation:pulse 2.2s var(--ease) infinite}
+
+/* 01 visual: browser preview */
+.v-web .browser-view{aspect-ratio:16/8.4}
+.v-web .status-live{position:absolute;right:12px;top:12px;z-index:2}
+.perf{position:absolute;left:12px;bottom:12px;z-index:2;display:flex;align-items:center;gap:10px;padding:6px 14px 6px 6px;border-radius:999px;background:rgba(9,9,11,.8);border:1px solid var(--line-2);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.perf svg{width:36px;height:36px;flex:none}
+@media (max-width:600px){.perf{transform:scale(.78);transform-origin:left bottom}.v-web .status-live{transform:scale(.82);transform-origin:right top}}
+.perf span{display:grid;line-height:1.2}
+.perf b{font-size:14px;font-weight:600}
+.perf small{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3)}
+
+/* 02 visual: pipeline */
+.v-flow{flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 16px;border-radius:var(--r);border:1px solid var(--line);background:radial-gradient(90% 60% at 50% 0%,rgba(99,102,241,.16),transparent 70%),var(--bg)}
+.flow-node{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;align-items:center;padding:12px;border-radius:14px;border:1px solid var(--line-2);background:var(--surface)}
+.flow-node .ic{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;border:1px solid var(--line-2);color:var(--indigo-soft);background:rgba(99,102,241,.08)}
+.flow-node .ic svg{width:18px;height:18px}
+.flow-node b{display:block;font-size:14px;font-weight:600;line-height:1.3}
+.flow-node small{display:block;margin-top:2px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.04em;color:var(--text-3)}
+.flow-node.hl{border-color:rgba(165,180,252,.5);background:linear-gradient(135deg,rgba(99,102,241,.2),rgba(139,92,246,.06)),var(--surface)}
+.flow-node.ok .ic{color:#6ee7b7;border-color:rgba(52,211,153,.4);background:rgba(16,185,129,.1)}
+.flow-link{position:relative;width:2px;height:30px;margin-left:31px;background:var(--line-3);overflow:hidden}
+.flow-link::after{content:'';position:absolute;left:0;top:0;width:2px;height:12px;border-radius:2px;background:var(--indigo-soft);box-shadow:0 0 8px var(--indigo-hi);animation:flow 1.8s var(--ease-io) infinite}
+.flow-link.l2::after{animation-delay:.9s}
+@keyframes flow{from{transform:translate3d(0,-14px,0)}to{transform:translate3d(0,32px,0)}}
+
+/* 03 visual: kinetic type + tokens */
+.v-motion{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);border-radius:var(--r);border:1px solid var(--line);overflow:hidden;min-height:220px}
+@media (max-width:600px){.v-motion{grid-template-columns:minmax(0,1fr)}}
+.km-stage{position:relative;display:flex;flex-direction:column;justify-content:center;padding:24px 24px 40px;background:#fafafa;color:#09090b;overflow:hidden}
+.km-line{display:block;overflow:hidden;font-weight:700;font-size:clamp(2rem,1.2rem + 2.4vw,3.25rem);letter-spacing:-.055em;line-height:1}
+.km-line span{display:inline-block;animation:kin 5s var(--ease) infinite}
+.km-line:nth-child(2) span{animation-delay:.14s}
+.km-line em{font-family:var(--font-serif);font-style:italic;font-weight:400;letter-spacing:-.01em;color:#4f46e5}
+@keyframes kin{0%,6%{transform:translate3d(0,110%,0)}16%,84%{transform:none}94%,100%{transform:translate3d(0,-110%,0)}}
+.km-time{position:absolute;left:24px;right:24px;bottom:18px;height:3px;border-radius:3px;background:rgba(9,9,11,.12);overflow:hidden}
+.km-time i{position:absolute;inset:0;background:#09090b;transform-origin:left;animation:playhead 5s linear infinite}
+@keyframes playhead{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.km-tokens{display:grid;align-content:center;gap:12px;padding:20px;background:var(--bg);font-family:var(--font-mono);font-size:11.5px;color:var(--text-3)}
+.km-tokens .swatches{display:flex;gap:8px}
+.km-tokens .swatches span{width:26px;height:26px;border-radius:50%;border:1px solid var(--line-2)}
+.km-tokens div.tk{display:flex;justify-content:space-between;gap:12px;padding-bottom:7px;border-bottom:1px dashed var(--line-2)}
+.km-tokens b{font-weight:400;color:var(--text-2)}
+
+/* Compact service cards on phones (same look, tighter rhythm) */
+@media (max-width:767px){
+  .bento{gap:14px}
+  .bento .card-body{padding:18px 20px;gap:14px}
+  .bento .card-title{font-size:1.25rem}
+  .bento .card-title .card-idx{margin-bottom:4px}
+  .bento .card-icon{width:34px;height:34px;border-radius:10px}
+  .v-web .browser-bar{height:26px}
+  .v-web .browser-view{aspect-ratio:16/7}
+  .v-flow{padding:12px}
+  .flow-node{grid-template-columns:32px minmax(0,1fr);gap:10px;padding:8px 10px;border-radius:12px}
+  .flow-node .ic{width:32px;height:32px;border-radius:9px}
+  .flow-node b{font-size:13px}
+  .flow-link{height:12px;margin-left:25px}
+  .v-motion{min-height:0}
+  .km-tokens{display:none}
+  .km-stage{padding:16px 18px 30px}
+  .km-line{font-size:2rem}
+  .km-time{left:18px;right:18px;bottom:14px}
+  .bento .card-text{font-size:14.5px}
+  .bento .chips{gap:6px}
+  .bento .chips li{padding:5px 10px;font-size:12px}
+}
 
 /* =========================================================
    WORK — websites we've shipped
@@ -396,14 +494,14 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
 .brief{display:grid;gap:20px;margin-top:clamp(48px,6vw,80px)}
 @media (min-width:1024px){.brief{grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);align-items:start}}
 .brief-main{border-radius:var(--r-xl);border:1px solid var(--line);background:var(--surface);padding:clamp(22px,3.2vw,44px);min-width:0}
-.brief-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;font-size:13px;color:var(--text-3)}
+.brief-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;font-size:13px;color:var(--text-3)}
 .brief-steps li{display:flex;align-items:center;gap:8px;min-width:0;transition:color var(--dur) var(--ease)}
 .brief-steps .n{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line-2);font-family:var(--font-mono);font-size:11px;transition:background-color var(--dur) var(--ease),border-color var(--dur) var(--ease),color var(--dur) var(--ease)}
 .brief-steps .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .brief-steps li.is-current{color:var(--text)}
 .brief-steps li.is-current .n{border-color:var(--indigo-hi);color:var(--text);background:rgba(99,102,241,.18)}
 .brief-steps li.is-done .n{background:var(--text);border-color:var(--text);color:var(--bg)}
-@media (max-width:520px){.brief-steps .t{display:none}.brief-steps li.is-current .t{display:block}.brief-steps{grid-template-columns:auto auto auto 1fr}}
+@media (max-width:520px){.brief-steps .t{display:none}.brief-steps li.is-current .t{display:block}.brief-steps{grid-template-columns:auto auto 1fr}}
 .brief-bar{margin-top:18px;height:2px;border-radius:2px;background:var(--line);overflow:hidden}
 .brief-bar span{display:block;height:100%;background:linear-gradient(90deg,var(--indigo),var(--violet-hi));transform-origin:left;transform:scaleX(.25);transition:transform .7s var(--ease)}
 .brief-form{margin-top:clamp(28px,3.5vw,44px)}
@@ -649,10 +747,17 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0ms!important}
   .js [data-reveal],.js [data-hero],.js .hero-title .ln-i{opacity:1;transform:none}
   .marquee-track{animation:none}
+  .hero-lens,.hero-glow{display:none}
 }
 </style>
 </head>
 <body>
+<div class="preloader" id="preloader" aria-hidden="true">
+  <div class="pl-center">
+    <div class="pl-brand"><span class="brand-word">KURO<i></i></span><span class="brand-tag"><span>黒 / Studio</span></span></div>
+    <span class="pl-line"><i id="plLine"></i></span>
+  </div>
+</div>
 <a class="skip" href="#main">Skip to content</a>
 
 <!-- ===================== HEADER ===================== -->
@@ -703,28 +808,39 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
 
 <!-- ===================== HERO ===================== -->
 <section class="hero" id="top" aria-labelledby="heroTitle">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-aurora"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-glow" id="heroGlow"></div>
+    <div class="hero-lens" id="heroLens"><div class="hero-lens-grid" id="heroLensGrid"></div></div>
+    <div class="hero-fade"></div>
+  </div>
+
   <div class="wrap hero-inner">
-    <p class="hero-eyebrow" data-hero style="--d:0ms"><b>KURO Studio</b> // Mumbai · Worldwide</p>
+    <p class="hero-badge" data-hero style="--d:0ms"><span class="pulse" aria-hidden="true"></span><span><b>KURO Studio</b> // Mumbai · Worldwide</span></p>
 
     <h1 class="hero-title" id="heroTitle">
       <span class="ln"><span class="ln-i" style="--i:0">Websites, AI systems,</span></span>
       <span class="ln"><span class="ln-i" style="--i:1">and motion that</span></span>
-      <span class="ln"><span class="ln-i" style="--i:2">bring you customers.</span></span>
+      <span class="ln"><span class="ln-i" style="--i:2">bring you <em class="h-em">customers.</em></span></span>
     </h1>
 
     <div class="hero-foot">
-      <p class="hero-lead" data-hero style="--d:380ms">We build fast web platforms and 24/7 WhatsApp AI workflows that turn visitors into bookings.</p>
-      <div class="hero-ctas" data-hero style="--d:460ms">
-        <a class="btn btn-primary" href="#contact">Start a project <svg class="arr" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L8.5 3.5M13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a class="btn btn-ghost" href="#work">See our work</a>
+      <p class="hero-lead" data-hero style="--d:420ms">We build fast web platforms and 24/7 WhatsApp AI workflows that turn visitors into bookings.</p>
+      <div class="hero-ctas" data-hero style="--d:520ms">
+        <a class="btn btn-primary btn-lg" href="#contact">Start a project
+          <svg class="arr" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L8.5 3.5M13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="btn btn-ghost btn-lg" href="#work">See our work</a>
       </div>
     </div>
-    <p class="proof" data-hero style="--d:540ms"><span class="proof-k"><i aria-hidden="true"></i>Live shipped:</span>
+
+    <p class="proof" data-hero style="--d:600ms"><span class="proof-k"><i aria-hidden="true"></i>Live shipped:</span>
       <a href="https://www.kouragefitness.in/" target="_blank" rel="noopener noreferrer">kouragefitness.in ↗</a><span class="sep" aria-hidden="true">·</span>
       <a href="templates/gaming/" target="_blank" rel="noopener noreferrer">NEXUS Arena ↗</a><span class="sep" aria-hidden="true">·</span>
       <a href="templates/restaurant/" target="_blank" rel="noopener noreferrer">Ember &amp; Oak ↗</a></p>
 
-    <dl class="hero-meta" data-hero style="--d:640ms">
+    <dl class="hero-meta" data-hero style="--d:680ms">
       <div><dt>Based in</dt><dd>Mumbai · Remote Worldwide</dd></div>
       <div><dt>What we do</dt><dd>Websites · AI Automation · Motion</dd></div>
       <div><dt>Founded</dt><dd>2026, by three friends</dd></div>
@@ -745,35 +861,86 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
   <div class="wrap">
     <header class="section-head">
       <p class="eyebrow" data-reveal><span class="idx">01</span><span class="rule"></span>What we do</p>
-      <h2 class="section-title" id="servicesTitle" data-reveal>What we do.</h2>
+      <h2 class="section-title" id="servicesTitle" data-reveal>What we <em class="h-em">do</em>.</h2>
     </header>
 
-    <div class="svc-list" data-stagger>
-      <article class="card svc" data-spotlight data-reveal>
+    <div class="bento" data-stagger>
+      <!-- 01 / Web -->
+      <article class="card b-web" data-spotlight data-reveal>
         <div class="card-ring" aria-hidden="true"><i></i></div>
         <div class="card-spot" aria-hidden="true"><i></i></div>
-        <div class="svc-body">
-          <div class="svc-top"><span class="svc-n">01</span><h3 class="svc-title">Web Engineering</h3><span class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2.5"/><path d="M3 8.5h18M8 21h8"/></svg></span></div>
-          <p class="svc-hook">Fast custom websites built to convert local and global traffic.</p>
-          <ul class="svc-pills" aria-label="Web Engineering key points"><li>Next.js &amp; Vite Builds</li><li>Custom Domain &amp; SEO</li><li>Mobile-First UI</li><li>WhatsApp Lead Hooks</li></ul>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title"><span class="card-idx">01 /</span>Web Engineering</h3>
+            <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2.5"/><path d="M3 8.5h18M8 21h8"/></svg></span>
+          </div>
+          <div class="v-web" aria-hidden="true">
+            <div class="browser">
+              <div class="browser-bar"><i></i><i></i><i></i><span class="browser-url"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><rect x="2.5" y="5.5" width="7" height="5" rx="1.2" fill="currentColor"/><path d="M4 5.5V4a2 2 0 0 1 4 0v1.5" stroke="currentColor" stroke-width="1.2"/></svg>kouragefitness.in</span></div>
+              <div class="browser-view">
+                <img src="assets/work/kourage-fitness.webp" alt="" width="1600" height="1000" loading="lazy" decoding="async">
+                <span class="status-live"><i></i>Live domain</span>
+                <span class="perf"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="rgba(52,211,153,.2)" stroke-width="3"/><circle cx="18" cy="18" r="15" fill="none" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-dasharray="93.3 94.3" transform="rotate(-90 18 18)"/><text x="18" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#6ee7b7" font-family="Geist, sans-serif">99</text></svg><span><b>99</b><small>Performance</small></span></span>
+              </div>
+            </div>
+          </div>
+          <div class="card-copy">
+            <p class="card-text">Fast custom websites built to convert local and global traffic.</p>
+            <ul class="chips"><li>Next.js &amp; Vite Builds</li><li>Custom Domain &amp; SEO</li><li>Mobile-First UI</li><li>WhatsApp Lead Hooks</li></ul>
+          </div>
         </div>
       </article>
-      <article class="card svc" data-spotlight data-reveal>
+
+      <!-- 02 / AI -->
+      <article class="card b-ai" data-spotlight data-reveal>
         <div class="card-ring" aria-hidden="true"><i></i></div>
         <div class="card-spot" aria-hidden="true"><i></i></div>
-        <div class="svc-body">
-          <div class="svc-top"><span class="svc-n">02</span><h3 class="svc-title">AI Business Automation</h3><span class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M12.5 8.5l-2.5 3.5h4l-2.5 3.5"/></svg></span></div>
-          <p class="svc-hook">24/7 automated systems that capture leads and book appointments.</p>
-          <ul class="svc-pills" aria-label="AI Business Automation key points"><li>Instant WhatsApp AI</li><li>Instagram DM Bots</li><li>Auto Slot Booking</li><li>CRM &amp; Sheet Sync</li></ul>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title"><span class="card-idx">02 /</span>AI Business Automation</h3>
+            <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><rect x="7" y="7" width="10" height="10" rx="2.5"/><path d="M10 12h4"/></svg></span>
+          </div>
+          <div class="v-flow" aria-hidden="true">
+            <div class="flow-node"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></span><span><b>Website / IG Inquiry</b><small>New lead · 11:42 PM</small></span></div>
+            <div class="flow-link"></div>
+            <div class="flow-node hl"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg></span><span><b>Instant AI WhatsApp Reply</b><small>Answered in 3 sec · 24/7</small></span></div>
+            <div class="flow-link l2"></div>
+            <div class="flow-node ok"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>Booked Client / CRM Sync</b><small>Added to pipeline</small></span></div>
+          </div>
+          <div class="card-copy">
+            <p class="card-text">24/7 automated systems that capture leads and book appointments.</p>
+            <ul class="chips"><li>Instant WhatsApp AI</li><li>Instagram DM Bots</li><li>Auto Slot Booking</li><li>CRM &amp; Sheet Sync</li></ul>
+          </div>
         </div>
       </article>
-      <article class="card svc" data-spotlight data-reveal>
+
+      <!-- 03 / Brand & Motion -->
+      <article class="card b-brand" data-spotlight data-reveal>
         <div class="card-ring" aria-hidden="true"><i></i></div>
         <div class="card-spot" aria-hidden="true"><i></i></div>
-        <div class="svc-body">
-          <div class="svc-top"><span class="svc-n">03</span><h3 class="svc-title">Motion &amp; Brand Identity</h3><span class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="14" height="14" rx="2.5"/><path d="M17 10l4-2.5v9L17 14"/></svg></span></div>
-          <p class="svc-hook">Sharp visual systems and edits that hold attention.</p>
-          <ul class="svc-pills" aria-label="Motion &amp; Brand Identity key points"><li>High-Retention Reels</li><li>Launch Promo Edits</li><li>Brand Visual Systems</li><li>UI Motion Design</li></ul>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title"><span class="card-idx">03 /</span>Motion &amp; Brand Identity</h3>
+            <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="14" height="14" rx="2.5"/><path d="M17 10l4-2.5v9L17 14"/></svg></span>
+          </div>
+          <div class="v-motion" aria-hidden="true">
+            <div class="km-stage">
+              <span class="km-line"><span>Make it</span></span>
+              <span class="km-line"><span><em>move.</em></span></span>
+              <span class="km-time"><i></i></span>
+            </div>
+            <div class="km-tokens">
+              <div class="swatches"><span style="background:#09090b"></span><span style="background:#fafafa"></span><span style="background:#6366f1"></span><span style="background:#8b5cf6"></span></div>
+              <div class="tk"><span>--ink</span><b>#09090B</b></div>
+              <div class="tk"><span>--accent</span><b>#818CF8</b></div>
+              <div class="tk"><span>--display</span><b>Geist 700</b></div>
+              <div class="tk"><span>--ease</span><b>.16, 1, .3, 1</b></div>
+            </div>
+          </div>
+          <div class="card-copy">
+            <p class="card-text">Sharp visual systems and edits that hold attention.</p>
+            <ul class="chips"><li>High-Retention Reels</li><li>Launch Promo Edits</li><li>Brand Visual Systems</li><li>UI Motion Design</li></ul>
+          </div>
         </div>
       </article>
     </div>
@@ -785,7 +952,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
   <div class="wrap">
     <header class="section-head">
       <p class="eyebrow" data-reveal><span class="idx">02</span><span class="rule"></span>Selected work</p>
-      <h2 class="section-title" id="workTitle" data-reveal>Websites we've shipped.</h2>
+      <h2 class="section-title" id="workTitle" data-reveal>Websites we've <em class="h-em">shipped</em>.</h2>
       <p class="section-lead" data-reveal style="--d:100ms">Real production builds engineered, deployed, and launched end-to-end.</p>
     </header>
 
@@ -814,7 +981,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
     </article>
 
     <div class="tpl-head" data-reveal>
-      <h3>Launch-ready templates</h3>
+      <h3>Launch-ready <em class="h-em">templates</em></h3>
       <p>Original landing pages we brand, customise and launch for your business. Open the live demos.</p>
     </div>
     <div class="work-grid">
@@ -872,7 +1039,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
   <div class="wrap">
     <header class="section-head">
       <p class="eyebrow" data-reveal><span class="idx">03</span><span class="rule"></span>AI automation</p>
-      <h2 class="section-title" id="autoTitle" data-reveal>AI automation that boosts your business.</h2>
+      <h2 class="section-title" id="autoTitle" data-reveal>AI automation that <em class="h-em">boosts</em> your business.</h2>
       <p class="section-lead" data-reveal style="--d:100ms">We plug custom AI workflows into your website, WhatsApp, and Instagram so you never miss a lead or waste hours on manual follow-ups.</p>
     </header>
 
@@ -941,11 +1108,53 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
   <div class="wrap">
     <header class="section-head">
       <p class="eyebrow" data-reveal><span class="idx">04</span><span class="rule"></span>Motion &amp; edits</p>
-      <h2 class="section-title" id="motionTitle" data-reveal>Edits in this style, made for you.</h2>
+      <h2 class="section-title" id="motionTitle" data-reveal>Edits in this <em class="h-em">style</em>, made for you.</h2>
       <p class="section-lead" data-reveal style="--d:100ms">A reference reel of styles we love and can produce: chef &amp; food promos, TV and film edits, podcast captions, anime edits and motion reels. These clips are by other creators; your project gets original work, built from scratch.</p>
     </header>
 
     <div class="reel" data-stagger>
+      <article class="clip" data-reveal>
+        <div class="clip-media">
+          <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
+          <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
+          <button class="clip-toggle" type="button" aria-label="Pause motion graphics reel video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
+          <video muted loop playsinline preload="none" poster="assets/motion/motion-reel.jpg" aria-label="Motion graphics reel — reference clip by another creator"><source src="assets/motion/motion-reel.mp4" type="video/mp4"></video>
+          <div class="clip-cap"><b>Motion graphics reel</b><span>UI · Promo · Titles</span></div>
+        </div>
+        <div class="clip-info">
+          <p>Dark, techy motion design for launches, ads and brand reels.</p>
+          <small>Reference reel · original creator via Pinterest</small>
+          <a class="case-cta u-link" href="#contact" data-brief="motion">Brief a similar edit <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11l6-6m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </article>
+      <article class="clip" data-reveal>
+        <div class="clip-media">
+          <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
+          <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
+          <button class="clip-toggle" type="button" aria-label="Pause kinetic typography video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
+          <video muted loop playsinline preload="none" poster="assets/motion/kinetic-type.jpg" aria-label="Kinetic typography — reference clip by another creator"><source src="assets/motion/kinetic-type.mp4" type="video/mp4"></video>
+          <div class="clip-cap"><b>Kinetic typography</b><span>Explainer · Short-form</span></div>
+        </div>
+        <div class="clip-info">
+          <p>Animated type that turns a script into a punchy explainer.</p>
+          <small>Reference reel · original creator via Pinterest</small>
+          <a class="case-cta u-link" href="#contact" data-brief="motion">Brief a similar edit <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11l6-6m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </article>
+      <article class="clip" data-reveal>
+        <div class="clip-media">
+          <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
+          <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
+          <button class="clip-toggle" type="button" aria-label="Pause podcast clip · kinetic subs video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
+          <video muted loop playsinline preload="none" poster="assets/motion/podcast-subs.jpg" aria-label="Podcast clip · kinetic subs — reference clip by another creator"><source src="assets/motion/podcast-subs.mp4" type="video/mp4"></video>
+          <div class="clip-cap"><b>Podcast clip · kinetic subs</b><span>Talking head · Captions</span></div>
+        </div>
+        <div class="clip-info">
+          <p>Viral-style podcast clips with animated captions that keep people watching with the sound off.</p>
+          <small>Reference edit · original creator via Pinterest</small>
+          <a class="case-cta u-link" href="#contact" data-brief="motion">Brief a similar edit <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11l6-6m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </article>
       <article class="clip" data-reveal>
         <div class="clip-media">
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
@@ -957,21 +1166,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
         <div class="clip-info">
           <p>Moody, slow-motion food and kitchen promos that make people hungry.</p>
           <small>Reference film by SevenMagpie</small>
-          <a class="case-cta u-link" href="#contact" data-brief="motion">Brief a similar edit <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11l6-6m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        </div>
-      </article>
-      <article class="clip" data-reveal>
-        <div class="clip-media fit">
-          <img class="clip-bg" src="assets/motion/yes-chef.jpg" alt="" loading="lazy" decoding="async">
-          <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
-          <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
-          <button class="clip-toggle" type="button" aria-label="Pause “yes, chef” character edit video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
-          <video muted loop playsinline preload="none" poster="assets/motion/yes-chef.jpg" aria-label="“Yes, Chef” character edit — reference clip by another creator"><source src="assets/motion/yes-chef.mp4" type="video/mp4"></video>
-          <div class="clip-cap"><b>“Yes, Chef” character edit</b><span>TV edit · Subtitled</span></div>
-        </div>
-        <div class="clip-info">
-          <p>Story-driven edits that cut interview audio, captions and scenes into one emotional beat.</p>
-          <small>Reference edit · show: The Bear (FX)</small>
           <a class="case-cta u-link" href="#contact" data-brief="motion">Brief a similar edit <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11l6-6m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
       </article>
@@ -991,16 +1185,17 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
         </div>
       </article>
       <article class="clip" data-reveal>
-        <div class="clip-media">
+        <div class="clip-media fit">
+          <img class="clip-bg" src="assets/motion/yes-chef.jpg" alt="" loading="lazy" decoding="async">
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
           <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
-          <button class="clip-toggle" type="button" aria-label="Pause podcast clip · kinetic subs video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
-          <video muted loop playsinline preload="none" poster="assets/motion/podcast-subs.jpg" aria-label="Podcast clip · kinetic subs — reference clip by another creator"><source src="assets/motion/podcast-subs.mp4" type="video/mp4"></video>
-          <div class="clip-cap"><b>Podcast clip · kinetic subs</b><span>Talking head · Captions</span></div>
+          <button class="clip-toggle" type="button" aria-label="Pause “yes, chef” character edit video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
+          <video muted loop playsinline preload="none" poster="assets/motion/yes-chef.jpg" aria-label="“Yes, Chef” character edit — reference clip by another creator"><source src="assets/motion/yes-chef.mp4" type="video/mp4"></video>
+          <div class="clip-cap"><b>“Yes, Chef” character edit</b><span>TV edit · Subtitled</span></div>
         </div>
         <div class="clip-info">
-          <p>Viral-style podcast clips with animated captions that keep people watching with the sound off.</p>
-          <small>Reference edit · original creator via Pinterest</small>
+          <p>Story-driven edits that cut interview audio, captions and scenes into one emotional beat.</p>
+          <small>Reference edit · show: The Bear (FX)</small>
           <a class="case-cta u-link" href="#contact" data-brief="motion">Brief a similar edit <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11l6-6m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
       </article>
@@ -1032,34 +1227,12 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
           <a class="case-cta u-link" href="#contact" data-brief="motion">Brief a similar edit <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11l6-6m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
       </article>
-      <article class="clip" data-reveal>
-        <div class="clip-media">
-          <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
-          <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
-          <button class="clip-toggle" type="button" aria-label="Pause kinetic typography video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
-          <video muted loop playsinline preload="none" poster="assets/motion/kinetic-type.jpg" aria-label="Kinetic typography — reference clip by another creator"><source src="assets/motion/kinetic-type.mp4" type="video/mp4"></video>
-          <div class="clip-cap"><b>Kinetic typography</b><span>Explainer · Short-form</span></div>
-        </div>
-        <div class="clip-info">
-          <p>Animated type that turns a script into a punchy explainer.</p>
-          <small>Reference reel · original creator via Pinterest</small>
-          <a class="case-cta u-link" href="#contact" data-brief="motion">Brief a similar edit <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11l6-6m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        </div>
-      </article>
-      <article class="clip" data-reveal>
-        <div class="clip-media">
-          <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
-          <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
-          <button class="clip-toggle" type="button" aria-label="Pause motion graphics reel video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
-          <video muted loop playsinline preload="none" poster="assets/motion/motion-reel.jpg" aria-label="Motion graphics reel — reference clip by another creator"><source src="assets/motion/motion-reel.mp4" type="video/mp4"></video>
-          <div class="clip-cap"><b>Motion graphics reel</b><span>UI · Promo · Titles</span></div>
-        </div>
-        <div class="clip-info">
-          <p>Dark, techy motion design for launches, ads and brand reels.</p>
-          <small>Reference reel · original creator via Pinterest</small>
-          <a class="case-cta u-link" href="#contact" data-brief="motion">Brief a similar edit <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11l6-6m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        </div>
-      </article>
+    </div>
+
+    <div class="reel-timeline" aria-hidden="true">
+      <span class="tl-label">Timeline</span>
+      <span class="tl-track" id="tlTrack"><span class="tl-clips"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><i class="tl-fill" id="tlFill"></i><i class="tl-head" id="tlHead"></i></span>
+      <span class="tl-time" id="tlTime">00:00:00</span>
     </div>
 
   </div>
@@ -1070,17 +1243,16 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
   <div class="wrap">
     <header class="section-head">
       <p class="eyebrow" data-reveal><span class="idx">05</span><span class="rule"></span>Start a project</p>
-      <h2 class="section-title" id="contactTitle" data-reveal>Tell us what you're building.</h2>
-      <p class="section-lead" data-reveal style="--d:100ms">Four quick steps. You'll see an indicative scope as you go, and we'll reply with clear next steps.</p>
+      <h2 class="section-title" id="contactTitle" data-reveal>Tell us what you're <em class="h-em">building.</em></h2>
+      <p class="section-lead" data-reveal style="--d:100ms">Three quick steps. You'll see an indicative scope as you go, and we'll reply with clear next steps.</p>
     </header>
 
     <div class="brief" id="brief" data-reveal>
       <div class="brief-main">
         <ol class="brief-steps" id="briefSteps" aria-label="Brief progress">
           <li class="is-current" aria-current="step"><span class="n">1</span><span class="t">Project</span></li>
-          <li><span class="n">2</span><span class="t">Budget</span></li>
-          <li><span class="n">3</span><span class="t">Timeline</span></li>
-          <li><span class="n">4</span><span class="t">Details</span></li>
+          <li><span class="n">2</span><span class="t">Timeline</span></li>
+          <li><span class="n">3</span><span class="t">Details</span></li>
         </ol>
         <div class="brief-bar" aria-hidden="true"><span id="briefBar"></span></div>
 
@@ -1101,32 +1273,20 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
           </fieldset>
 
           <fieldset class="brief-step" data-step="2" aria-describedby="hint2">
-            <legend class="brief-q" tabindex="-1">What's your budget?</legend>
-            <p class="brief-hint" id="hint2">A rough range is fine. It helps us shape the right team and phasing.</p>
-            <div class="opt-grid">
-              <label class="opt"><input type="radio" name="budget" value="0"><span class="opt-card plain"><span class="opt-title">Under $10k</span><span class="opt-desc">A focused sprint or single deliverable</span><span class="opt-check" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></label>
-              <label class="opt"><input type="radio" name="budget" value="1"><span class="opt-card plain"><span class="opt-title">$10k – $25k</span><span class="opt-desc">A website, brand identity or MVP</span><span class="opt-check" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></label>
-              <label class="opt"><input type="radio" name="budget" value="2"><span class="opt-card plain"><span class="opt-title">$25k – $50k</span><span class="opt-desc">A multi-part product or platform</span><span class="opt-check" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></label>
-              <label class="opt"><input type="radio" name="budget" value="3"><span class="opt-card plain"><span class="opt-title">$50k+</span><span class="opt-desc">A flagship build or ongoing partnership</span><span class="opt-check" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></label>
-            </div>
-            <p class="field-error" id="err2" role="alert" hidden>Choose a range to continue. It doesn't need to be exact.</p>
-          </fieldset>
-
-          <fieldset class="brief-step" data-step="3" aria-describedby="hint3">
             <legend class="brief-q" tabindex="-1">When do you need it?</legend>
-            <p class="brief-hint" id="hint3">We'll plan backwards from your date.</p>
+            <p class="brief-hint" id="hint2">We'll plan backwards from your date.</p>
             <div class="opt-grid">
               <label class="opt"><input type="radio" name="timeline" value="asap"><span class="opt-card plain"><span class="opt-title">As soon as possible</span><span class="opt-desc">Under 4 weeks</span><span class="opt-check" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></label>
               <label class="opt"><input type="radio" name="timeline" value="short"><span class="opt-card plain"><span class="opt-title">1 – 3 months</span><span class="opt-desc">The most common timeline</span><span class="opt-check" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></label>
               <label class="opt"><input type="radio" name="timeline" value="long"><span class="opt-card plain"><span class="opt-title">3 – 6 months</span><span class="opt-desc">Room to explore and phase</span><span class="opt-check" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></label>
               <label class="opt"><input type="radio" name="timeline" value="flex"><span class="opt-card plain"><span class="opt-title">Flexible</span><span class="opt-desc">No fixed deadline yet</span><span class="opt-check" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></label>
             </div>
-            <p class="field-error" id="err3" role="alert" hidden>Choose a timeline to continue.</p>
+            <p class="field-error" id="err2" role="alert" hidden>Choose a timeline to continue.</p>
           </fieldset>
 
-          <fieldset class="brief-step" data-step="4" aria-describedby="hint4">
+          <fieldset class="brief-step" data-step="3" aria-describedby="hint3">
             <legend class="brief-q" tabindex="-1">Where should we send the plan?</legend>
-            <p class="brief-hint" id="hint4">We'll reply with next steps and a time to talk.</p>
+            <p class="brief-hint" id="hint3">We'll reply with next steps and a time to talk.</p>
             <div class="fields">
               <div class="field"><label for="fName">Your name</label><input id="fName" name="name" type="text" autocomplete="name" placeholder="Alex Morgan" aria-describedby="errName"><p class="field-error" id="errName" hidden>Enter your name so we know who to reply to.</p></div>
               <div class="field"><label for="fEmail">Work email</label><input id="fEmail" name="email" type="email" autocomplete="email" inputmode="email" placeholder="alex@company.com" aria-describedby="errEmail"><p class="field-error" id="errEmail" hidden>Enter a valid email, like name@company.com.</p></div>
@@ -1138,7 +1298,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
           <div class="brief-nav">
             <button class="btn btn-ghost" type="button" id="briefBack" hidden>
               <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3m0 0l4.5-4.5M3 8l4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Back</button>
-            <span class="brief-count" id="briefCount">Step 1 of 4</span>
+            <span class="brief-count" id="briefCount">Step 1 of 3</span>
             <button class="btn btn-primary" type="submit" id="briefNext"><span id="briefNextLabel">Continue</span>
               <svg class="arr" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L8.5 3.5M13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           </div>
@@ -1160,7 +1320,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
         <p class="eyebrow" id="sumTitle"><span class="pulse" aria-hidden="true"></span>Your brief</p>
         <dl class="sum-list">
           <div><dt>Project</dt><dd id="sumType" class="is-empty">Not chosen yet</dd></div>
-          <div><dt>Budget</dt><dd id="sumBudget" class="is-empty">Not chosen yet</dd></div>
           <div><dt>Timeline</dt><dd id="sumTime" class="is-empty">Not chosen yet</dd></div>
         </dl>
         <div class="scope" aria-live="polite">
@@ -1176,12 +1335,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
         <p class="sum-foot">Indicative only. You'll get a fixed quote after a short discovery call.</p>
       </div>
     </div>
-
-    <div class="reel-timeline" aria-hidden="true">
-      <span class="tl-label">Timeline</span>
-      <span class="tl-track" id="tlTrack"><span class="tl-clips"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><i class="tl-fill" id="tlFill"></i><i class="tl-head" id="tlHead"></i></span>
-      <span class="tl-time" id="tlTime">00:00:00</span>
-    </div>
   </div>
 </section>
 
@@ -1190,7 +1343,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
   <div class="wrap faq-grid">
     <div class="faq-aside">
       <p class="eyebrow" data-reveal><span class="idx">06</span><span class="rule"></span>FAQ</p>
-      <h2 class="section-title" id="faqTitle" data-reveal>Questions, answered.</h2>
+      <h2 class="section-title" id="faqTitle" data-reveal>Questions, <em class="h-em">answered.</em></h2>
       <p data-reveal style="--d:100ms">Can't find what you're looking for? WhatsApp us on <a class="u-link" href="https://wa.me/918700268026" target="_blank" rel="noopener noreferrer" style="color:var(--text)">+91 870 026 8026</a> or email <a class="u-link" href="mailto:team.kuroagency@hotmail.com" style="color:var(--text)">team.kuroagency@hotmail.com</a> and a founder will reply.</p>
     </div>
     <div class="faq-list" data-reveal style="--d:120ms">
@@ -1298,11 +1451,34 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-  /* ---------- Hero entrance ---------- */
+  /* ---------- Preloader: loading line fills in 1.1s, then the curtain lifts ---------- */
+  const pre = $('#preloader');
+  const preloaded = new Promise(resolve => {
+    if (!pre) return resolve();
+    const line = $('#plLine'), DUR = 1100, t0 = performance.now();
+    const ease = t => 1 - Math.pow(1 - t, 2.2);
+    let finished = false;
+    const finish = () => {
+      if (finished) return; finished = true;
+      line.style.transform = 'scaleX(1)';
+      pre.classList.add('is-done'); resolve();
+      const remove = () => { if (pre.isConnected) pre.remove(); };
+      pre.addEventListener('transitionend', remove, { once: true });
+      setTimeout(remove, 900);
+    };
+    const step = now => {
+      const t = Math.min(1, (now - t0) / DUR), e = ease(t);
+      line.style.transform = `scaleX(${e.toFixed(4)})`;
+      if (t < 1) requestAnimationFrame(step); else finish();
+    };
+    requestAnimationFrame(step);
+    setTimeout(finish, 2500);          // never leave the curtain down (e.g. background tabs)
+  });
+
+  /* ---------- Hero entrance (starts as the curtain lifts) ---------- */
   const ready = () => requestAnimationFrame(() => document.documentElement.classList.add('is-ready'));
-  if (document.fonts && document.fonts.ready) {
-    Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 700))]).then(ready);
-  } else ready();
+  const fontsReady = (document.fonts && document.fonts.ready) ? Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 700))]) : Promise.resolve();
+  Promise.all([fontsReady, preloaded]).then(ready);
 
   /* ---------- Smart header ---------- */
   const header = $('#siteHeader');
@@ -1354,6 +1530,33 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
     }
   });
   matchMedia('(min-width: 920px)').addEventListener('change', e => { if (e.matches && menuOpen) { setMenu(false); menu.inert = true; } });
+
+  /* ---------- Hero pointer lens + glow (transform-only) ---------- */
+  const hero = $('.hero'), lens = $('#heroLens'), lensGrid = $('#heroLensGrid'), glow = $('#heroGlow');
+  if (finePointer && !reduceMotion && hero) {
+    const R = 220;
+    let rect = null, tx = 0, ty = 0, lx = 0, ly = 0, gx = 0, gy = 0, raf = 0;
+    const measure = () => { rect = hero.getBoundingClientRect(); lensGrid.style.width = rect.width + 'px'; lensGrid.style.height = rect.height + 'px'; };
+    const loop = () => {
+      lx += (tx - lx) * .2; ly += (ty - ly) * .2; gx += (tx - gx) * .07; gy += (ty - gy) * .07;
+      lens.style.transform = `translate3d(${lx}px,${ly}px,0)`;
+      lensGrid.style.transform = `translate3d(${R - lx}px,${R - ly}px,0)`;
+      glow.style.transform = `translate3d(${gx}px,${gy}px,0)`;
+      raf = (Math.abs(tx - lx) + Math.abs(ty - ly) + Math.abs(tx - gx) + Math.abs(ty - gy) > .4) ? requestAnimationFrame(loop) : 0;
+    };
+    hero.addEventListener('pointerenter', e => {
+      measure(); tx = lx = gx = e.clientX - rect.left; ty = ly = gy = e.clientY - rect.top;
+      hero.classList.add('is-pointer'); if (!raf) raf = requestAnimationFrame(loop);
+    });
+    hero.addEventListener('pointerleave', () => hero.classList.remove('is-pointer'));
+    hero.addEventListener('pointermove', e => {
+      if (!rect) measure();
+      tx = e.clientX - rect.left; ty = e.clientY - rect.top;
+      if (!raf) raf = requestAnimationFrame(loop);
+    }, { passive: true });
+    addEventListener('scroll', () => { rect = null; }, { passive: true });
+    addEventListener('resize', () => { rect = null; });
+  }
 
   /* ---------- Bento border tracking ---------- */
   if (finePointer && !reduceMotion) {
@@ -1491,12 +1694,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
     webapp:     { label: 'Web App / Custom Dashboard',    w: 4, weeks: [6, 12], team: ['Design', 'Engineering'] },
     motion:     { label: 'Motion & Launch Edits',         w: 1, weeks: [1, 2],  team: ['Motion'] }
   };
-  const BUDGETS = [
-    { label: 'Under $10k', max: 10000 },
-    { label: '$10k – $25k', max: 25000 },
-    { label: '$25k – $50k', max: 50000 },
-    { label: '$50k+', max: Infinity }
-  ];
   const TIMES = {
     asap:  { label: 'As soon as possible', weeks: 4 },
     short: { label: '1 – 3 months', weeks: 13 },
@@ -1519,9 +1716,8 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
 
   const state = () => {
     const types = $$('input[name="type"]:checked', form).map(i => i.value);
-    const b = $('input[name="budget"]:checked', form);
     const t = $('input[name="timeline"]:checked', form);
-    return { types, budget: b ? +b.value : null, time: t ? t.value : null };
+    return { types, time: t ? t.value : null };
   };
 
   const estimate = s => {
@@ -1546,7 +1742,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
   const updateSummary = () => {
     const s = state(), est = estimate(s);
     setText($('#sumType'), s.types.length ? s.types.map(k => TYPES[k].label).join(', ') : 'Not chosen yet', !s.types.length);
-    setText($('#sumBudget'), s.budget !== null ? BUDGETS[s.budget].label : 'Not chosen yet', s.budget === null);
     setText($('#sumTime'), s.time ? TIMES[s.time].label : 'Not chosen yet', !s.time);
     $$('#scopeMeter i').forEach((i, n) => i.classList.toggle('on', !!est && n < Math.max(1, est.levelIdx)));
     setText($('#scopeLabel'), est ? est.level.label : '—');
@@ -1554,10 +1749,8 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
     setText($('#scopeFrom'), est ? money(est.level.from) : '—');
     setText($('#scopeTeam'), est ? est.team.join(' + ') : '—');
     const notes = [];
-    if (est && s.budget !== null && BUDGETS[s.budget].max < est.level.from)
-      notes.push(`This scope usually starts around ${money(est.level.from)} — we can phase it to fit your budget.`);
     if (est && s.time && TIMES[s.time].weeks < est.lo)
-      notes.push(`That's a tight timeline for this scope — we'd suggest launching a focused first phase.`);
+      notes.push(`That's a tight timeline for this scope. We'd suggest launching a focused first phase.`);
     const note = $('#scopeNote');
     note.hidden = !notes.length;
     note.textContent = notes.join(' ');
@@ -1568,9 +1761,8 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
   const validate = n => {
     const s = state();
     if (n === 1) { showError('err1', !s.types.length); return !!s.types.length; }
-    if (n === 2) { showError('err2', s.budget === null); return s.budget !== null; }
-    if (n === 3) { showError('err3', !s.time); return !!s.time; }
-    if (n === 4) {
+    if (n === 2) { showError('err2', !s.time); return !!s.time; }
+    if (n === 3) {
       const name = $('#fName'), email = $('#fEmail');
       const okName = name.value.trim().length > 1;
       const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim());
@@ -1591,11 +1783,11 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
       li.classList.toggle('is-done', i + 1 < n);
       if (i + 1 === n) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current');
     });
-    bar.style.transform = `scaleX(${n / 4})`;
+    bar.style.transform = `scaleX(${n / 3})`;
     backBtn.hidden = n === 1;
-    nextLabel.textContent = n === 4 ? 'Send brief' : 'Continue';
-    count.textContent = `Step ${n} of 4`;
-    live.textContent = `Step ${n} of 4: ${$('.brief-q', steps[n - 1]).textContent}`;
+    nextLabel.textContent = n === 3 ? 'Send brief' : 'Continue';
+    count.textContent = `Step ${n} of 3`;
+    live.textContent = `Step ${n} of 3: ${$('.brief-q', steps[n - 1]).textContent}`;
   };
 
   const compose = () => {
@@ -1604,7 +1796,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
     return [
       'New project brief — via kuro website', '',
       `Project:   ${s.types.map(k => TYPES[k].label).join(', ')}`,
-      `Budget:    ${BUDGETS[s.budget].label}`,
       `Timeline:  ${TIMES[s.time].label}`,
       est ? `Scope:     ${est.level.label} · ${est.lo}–${est.hi} weeks` : '', '',
       `Name:      ${v('fName')}`,
@@ -1617,8 +1808,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
   form.addEventListener('change', e => {
     updateSummary();
     if (e.target.name === 'type') showError('err1', false);
-    if (e.target.name === 'budget') showError('err2', false);
-    if (e.target.name === 'timeline') showError('err3', false);
+    if (e.target.name === 'timeline') showError('err2', false);
   });
   form.addEventListener('input', e => {
     if (e.target.id === 'fName' && e.target.getAttribute('aria-invalid') === 'true' && e.target.value.trim().length > 1) { e.target.setAttribute('aria-invalid', 'false'); showError('errName', false); }
@@ -1627,7 +1817,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
   form.addEventListener('submit', e => {
     e.preventDefault();
     if (!validate(step)) return;
-    if (step < 4) { go(step + 1, 'next'); $('.brief-q', steps[step - 1]).focus({ preventScroll: true }); return; }
+    if (step < 3) { go(step + 1, 'next'); $('.brief-q', steps[step - 1]).focus({ preventScroll: true }); return; }
     lastBrief = compose();
     const s = state();
     const subject = `New project brief — ${$('#fCompany').value.trim() || $('#fName').value.trim()} (${s.types.map(k => TYPES[k].label).join(', ')})`;
@@ -1652,7 +1842,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
   });
   $('#briefReset').addEventListener('click', () => {
     form.reset(); updateSummary();
-    ['err1', 'err2', 'err3', 'errName', 'errEmail'].forEach(id => showError(id, false));
+    ['err1', 'err2', 'errName', 'errEmail'].forEach(id => showError(id, false));
     done.hidden = true; form.hidden = false; $('#briefSteps').hidden = false; $('.brief-bar').hidden = false;
     go(1, 'back'); $('.brief-q', steps[0]).focus({ preventScroll: true });
   });
