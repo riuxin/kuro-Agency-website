@@ -22,8 +22,8 @@ FEATURES IN index.html (v4 — editorial dark redesign)
   - Type: Geist (grotesk) + Instrument Serif italic accents + Geist Mono labels, fluid clamp() sizes
   - Glass sticky header: blur, condenses on scroll, hides on scroll-down, returns on scroll-up
   - Full-screen mobile menu with staggered entrance, focus trap, Esc to close
-  - Hero: line-mask entrance, SVG grid + pointer-following lens/glow (transform-only), capability marquee
-  - 01 What we do: 3-card bento (Web Engineering, AI Business Automation, Brand & Motion) with bullets
+  - Hero: flat matte surface, mono eyebrow, blunt headline, side-by-side CTAs, live proof strip, marquee
+  - 01 What we do: 3 compact key-point cards (hook line + 4 pills each); rows on desktop
   - 02 Selected work: Kourage Fitness (flagship, live domain) + two launch-ready landing page templates
   - templates/gaming/      NEXUS Arena — gaming cafe + game store (cart, station booking, pricing). Fictional brand.
   - templates/restaurant/  Ember & Oak — restaurant (menu, online ordering, table reservations). Fictional brand.

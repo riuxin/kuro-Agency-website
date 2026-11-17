@@ -30,7 +30,7 @@ The accent is used sparingly: dots, focus rings, italic serif words and meters. 
 | Token | Value | Usage |
 |---|---|---|
 | `--font-sans` | Geist 300–800 | Everything by default |
-| `--font-serif` | Instrument Serif *italic* | One emphasis word per headline (`.h-em`), with a gradient fill |
+| `--font-serif` | Instrument Serif *italic* | Reserved for the closing CTA only (`.h-em`). Section headings are plain white sans |
 | `--font-mono` | Geist Mono 400/500 | Eyebrows, indices, metadata, logo sub-tag |
 | `--fs-display` | `clamp(2.5rem, 1.05rem + 7.2vw, 8.25rem)`, capped at `9vw` | Hero H1 (letter-spacing −0.055em) |
 | `--fs-h2` | `clamp(2.125rem, 1.15rem + 3.7vw, 4.75rem)` | Section titles (−0.045em) |
