@@ -184,7 +184,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
 .mm-foot{margin-top:auto;padding-top:36px;display:grid;gap:22px}
 .mm-foot .btn{width:100%}
 .mm-meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:14px;color:var(--text-2)}
-.mm-social{display:flex;gap:18px}
 @media (min-width:920px){.mobile-menu{display:none}}
 
 /* =========================================================
@@ -575,6 +574,27 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
 @media (min-width:640px){.reel{grid-auto-columns:minmax(220px,38vw)}}
 @media (min-width:1100px){.reel{grid-auto-flow:row;grid-template-columns:repeat(4,minmax(0,1fr));overflow:visible;margin-inline:0;padding-inline:0}}
 .clip{position:relative;scroll-snap-align:start;display:flex;flex-direction:column;gap:14px}
+/* entrance: rise + slight tilt that settles; columns stagger via data-stagger */
+@media (prefers-reduced-motion:no-preference){
+  .js .clip[data-reveal]{transform:translate3d(0,72px,0) scale(.94) rotate(var(--tilt,0deg));transition:opacity 1s var(--ease),transform 1.25s var(--ease);transition-delay:var(--d,0ms)}
+  .js .clip[data-reveal].is-in{transform:none}
+}
+.clip:nth-child(odd){--tilt:-1.6deg}.clip:nth-child(even){--tilt:1.6deg}
+/* continuous parallax (desktop) and coverflow (rail) use individual transform properties so they compose with the entrance */
+.reel.fx .clip{will-change:translate}
+.reel.fx-rail .clip-media{transition:opacity .2s linear}
+/* editing-timeline progress */
+.reel-timeline{display:flex;align-items:center;gap:14px;margin-top:clamp(36px,5vw,56px);font-family:var(--font-mono);font-size:11.5px;letter-spacing:.08em;color:var(--text-3)}
+.tl-track{position:relative;flex:1;height:22px;border-radius:6px;border:1px solid var(--line);background:
+  repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 1px,transparent 1px 12px),var(--surface);overflow:hidden}
+.tl-fill{position:absolute;inset:0;transform-origin:left;transform:scaleX(0);background:linear-gradient(90deg,rgba(99,102,241,.35),rgba(139,92,246,.45))}
+.tl-head{position:absolute;top:-1px;bottom:-1px;left:0;width:2px;background:var(--indigo-soft);box-shadow:0 0 12px var(--indigo-hi)}
+.tl-head::before{content:'';position:absolute;top:-5px;left:-5px;border:6px solid transparent;border-top-color:var(--indigo-soft)}
+.tl-clips{position:absolute;inset:4px 0;display:grid;grid-template-columns:repeat(8,1fr);gap:3px;padding-inline:3px}
+.tl-clips i{border-radius:3px;background:rgba(165,180,252,.16);border:1px solid rgba(165,180,252,.18)}
+.tl-time{min-width:84px;text-align:right;color:var(--text-2);font-variant-numeric:tabular-nums}
+.tl-label{display:none}
+@media (min-width:640px){.tl-label{display:inline}}
 .clip-media{position:relative;aspect-ratio:9/16;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);background:var(--surface);isolation:isolate;transform:translateZ(0)}
 .clip-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
 .clip:hover .clip-media video{transform:scale(1.04)}
@@ -589,6 +609,15 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
 .clip-toggle .i-play{display:none}
 .clip.is-paused .clip-toggle .i-play{display:block}
 .clip.is-paused .clip-toggle .i-pause{display:none}
+.clip-play{position:absolute;left:50%;top:50%;z-index:2;display:grid;justify-items:center;gap:10px;transform:translate(-50%,-50%);pointer-events:none;transition:opacity .45s var(--ease),transform .6s var(--ease)}
+.clip-play-ic{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;color:var(--text);background:rgba(9,9,11,.55);border:1px solid rgba(255,255,255,.28);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 10px 40px -10px rgba(99,102,241,.7)}
+.clip-play-ic svg{width:18px;height:18px;margin-left:3px}
+.clip-hint{padding:4px 10px;border-radius:999px;background:rgba(9,9,11,.6);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text);white-space:nowrap}
+.clip:not(.is-paused) .clip-play,.clip.is-loading .clip-play{opacity:0;transform:translate(-50%,-50%) scale(.85)}
+.clip-media:hover .clip-play-ic{border-color:rgba(165,180,252,.7)}
+.clip.is-loading .clip-media::before{content:'';position:absolute;left:50%;top:50%;z-index:3;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:2px solid rgba(255,255,255,.25);border-top-color:var(--indigo-soft);animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (hover:none){.clip-media{cursor:pointer}}
 .clip-cap{position:absolute;left:14px;right:14px;bottom:14px;z-index:2;display:grid;gap:4px}
 .clip-cap b{font-size:17px;font-weight:600;letter-spacing:-.02em;line-height:1.2}
 .clip-cap span{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:rgba(250,250,250,.72)}
@@ -614,7 +643,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
 .copy-tip.show{opacity:1;transform:none}
 .footer-cols{display:grid;grid-template-columns:minmax(0,1fr);gap:40px;padding-block:56px;border-top:1px solid var(--line)}
 @media (min-width:640px){.footer-cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (min-width:1024px){.footer-cols{grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr))}}
+@media (min-width:1024px){.footer-cols{grid-template-columns:minmax(0,1.6fr) repeat(2,minmax(0,1fr))}}
 .f-col h3{font-family:var(--font-mono);font-size:11.5px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:18px}
 .f-col p,.f-col li{color:var(--text-2);font-size:15px}
 .f-col ul{display:grid;gap:10px}
@@ -625,10 +654,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
 .office{display:grid;gap:2px}
 .office b{color:var(--text);font-weight:500}
 .office span{font-size:13.5px;color:var(--text-3)}
-.social a{display:inline-flex;align-items:center;gap:10px}
-.social svg{width:16px;height:16px;flex:none}
-.social .ext{width:12px;height:12px;opacity:.5;transition:transform var(--dur) var(--ease),opacity var(--dur) var(--ease)}
-.social a:hover .ext{opacity:1;transform:translate(2px,-2px)}
 .f-time{display:inline-flex;align-items:center;gap:10px;margin-top:6px;font-family:var(--font-mono);font-size:12.5px;color:var(--text-2)}
 .footer-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 16px;padding-block:14px;border-top:1px solid var(--line);font-size:13.5px;color:var(--text-3)}
 .footer-bottom .links{display:flex;flex-wrap:wrap;gap:20px}
@@ -721,12 +746,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
     <div class="mm-meta mm-item" style="--i:6">
       <a href="mailto:team.kuroagency@hotmail.com">team.kuroagency@hotmail.com</a>
       <a href="https://wa.me/918700268026" target="_blank" rel="noopener noreferrer">WhatsApp +91 870 026 8026</a>
-    </div>
-    <div class="mm-social mm-item" style="--i:7">
-      <a class="u-link" href="https://x.com/" target="_blank" rel="noopener">X</a>
-      <a class="u-link" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="u-link" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
-      <a class="u-link" href="https://dribbble.com/" target="_blank" rel="noopener">Dribbble</a>
     </div>
   </div>
 </div>
@@ -1042,6 +1061,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
       <article class="clip" data-reveal>
         <div class="clip-media">
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
+          <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
           <button class="clip-toggle" type="button" aria-label="Pause cinematic food promo video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
           <video muted loop playsinline preload="none" poster="assets/motion/food-3d.jpg" aria-label="Cinematic food promo — reference clip by another creator"><source src="assets/motion/food-3d.mp4" type="video/mp4"></video>
           <div class="clip-cap"><b>Cinematic food promo</b><span>Restaurant · Reels</span></div>
@@ -1056,6 +1076,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
         <div class="clip-media fit">
           <img class="clip-bg" src="assets/motion/yes-chef.jpg" alt="" loading="lazy" decoding="async">
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
+          <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
           <button class="clip-toggle" type="button" aria-label="Pause “yes, chef” character edit video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
           <video muted loop playsinline preload="none" poster="assets/motion/yes-chef.jpg" aria-label="“Yes, Chef” character edit — reference clip by another creator"><source src="assets/motion/yes-chef.mp4" type="video/mp4"></video>
           <div class="clip-cap"><b>“Yes, Chef” character edit</b><span>TV edit · Subtitled</span></div>
@@ -1070,6 +1091,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
         <div class="clip-media fit">
           <img class="clip-bg" src="assets/motion/spiderverse.jpg" alt="" loading="lazy" decoding="async">
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
+          <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
           <button class="clip-toggle" type="button" aria-label="Pause kinetic lyric edit video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
           <video muted loop playsinline preload="none" poster="assets/motion/spiderverse.jpg" aria-label="Kinetic lyric edit — reference clip by another creator"><source src="assets/motion/spiderverse.mp4" type="video/mp4"></video>
           <div class="clip-cap"><b>Kinetic lyric edit</b><span>Film edit · Typography</span></div>
@@ -1083,6 +1105,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
       <article class="clip" data-reveal>
         <div class="clip-media">
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
+          <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
           <button class="clip-toggle" type="button" aria-label="Pause podcast clip · kinetic subs video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
           <video muted loop playsinline preload="none" poster="assets/motion/podcast-subs.jpg" aria-label="Podcast clip · kinetic subs — reference clip by another creator"><source src="assets/motion/podcast-subs.mp4" type="video/mp4"></video>
           <div class="clip-cap"><b>Podcast clip · kinetic subs</b><span>Talking head · Captions</span></div>
@@ -1096,6 +1119,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
       <article class="clip" data-reveal>
         <div class="clip-media">
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
+          <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
           <button class="clip-toggle" type="button" aria-label="Pause anime fight edit video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
           <video muted loop playsinline preload="none" poster="assets/motion/anime-120fps.jpg" aria-label="Anime fight edit — reference clip by another creator"><source src="assets/motion/anime-120fps.mp4" type="video/mp4"></video>
           <div class="clip-cap"><b>Anime fight edit</b><span>120fps · Sync to beat</span></div>
@@ -1109,6 +1133,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
       <article class="clip" data-reveal>
         <div class="clip-media">
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
+          <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
           <button class="clip-toggle" type="button" aria-label="Pause anime live wallpaper video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
           <video muted loop playsinline preload="none" poster="assets/motion/anime-wallpaper.jpg" aria-label="Anime live wallpaper — reference clip by another creator"><source src="assets/motion/anime-wallpaper.mp4" type="video/mp4"></video>
           <div class="clip-cap"><b>Anime live wallpaper</b><span>Seamless loop · Vertical</span></div>
@@ -1122,6 +1147,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
       <article class="clip" data-reveal>
         <div class="clip-media">
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
+          <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
           <button class="clip-toggle" type="button" aria-label="Pause kinetic typography video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
           <video muted loop playsinline preload="none" poster="assets/motion/kinetic-type.jpg" aria-label="Kinetic typography — reference clip by another creator"><source src="assets/motion/kinetic-type.mp4" type="video/mp4"></video>
           <div class="clip-cap"><b>Kinetic typography</b><span>Explainer · Short-form</span></div>
@@ -1135,6 +1161,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
       <article class="clip" data-reveal>
         <div class="clip-media">
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
+          <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
           <button class="clip-toggle" type="button" aria-label="Pause motion graphics reel video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
           <video muted loop playsinline preload="none" poster="assets/motion/motion-reel.jpg" aria-label="Motion graphics reel — reference clip by another creator"><source src="assets/motion/motion-reel.mp4" type="video/mp4"></video>
           <div class="clip-cap"><b>Motion graphics reel</b><span>UI · Promo · Titles</span></div>
@@ -1261,6 +1288,12 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
         <p class="sum-foot">Indicative only. You'll get a fixed quote after a short discovery call.</p>
       </div>
     </div>
+
+    <div class="reel-timeline" aria-hidden="true">
+      <span class="tl-label">Timeline</span>
+      <span class="tl-track" id="tlTrack"><span class="tl-clips"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><i class="tl-fill" id="tlFill"></i><i class="tl-head" id="tlHead"></i></span>
+      <span class="tl-time" id="tlTime">00:00:00</span>
+    </div>
   </div>
 </section>
 
@@ -1340,15 +1373,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
         <ul>
           <li><span class="office"><span>New projects</span><a href="mailto:team.kuroagency@hotmail.com">team.kuroagency@hotmail.com</a></span></li>
           <li><span class="office"><span>WhatsApp / Call</span><a href="https://wa.me/918700268026" target="_blank" rel="noopener noreferrer">+91 870 026 8026</a></span></li>
-        </ul>
-      </div>
-      <div class="f-col social">
-        <h3>Social</h3>
-        <ul>
-          <li><a href="https://x.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.65l-5.21-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23zm-1.16 17.52h1.83L7.08 4.13H5.12z"/></svg>Twitter / X<svg class="ext" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11l6-6m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-          <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zm1.78 13.02H3.56V9h3.56zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn<svg class="ext" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11l6-6m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-          <li><a href="https://github.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57l-.02-2.04c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.09-.73.09-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3"/></svg>GitHub<svg class="ext" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11l6-6m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-          <li><a href="https://dribbble.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M5.6 5.6c3.6 3.4 8.4 4.7 15.6 4.1M8 20.7c1.6-5 5.4-8 13.4-7.4M8.4 3.1c3.2 3.7 5.9 9.2 7.3 17.9"/></svg>Dribbble<svg class="ext" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11l6-6m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
         </ul>
       </div>
     </div>
@@ -1489,30 +1513,104 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
   }), { threshold: .12, rootMargin: '0px 0px -6% 0px' });
   $$('[data-reveal]').forEach(el => io.observe(el));
 
-  /* ---------- Motion reel: play only while visible ---------- */
+  /* ---------- Motion reel: hover to play (tap on touch), one clip at a time ---------- */
   const clips = $$('.clip');
+  const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  let current = null;
   const setPaused = (clip, paused) => {
     clip.classList.toggle('is-paused', paused);
-    const b = $('.clip-toggle', clip), t = $('.clip-cap b', clip).textContent.toLowerCase();
-    b.setAttribute('aria-label', (paused ? 'Play ' : 'Pause ') + t + ' video');
+    const t = $('.clip-cap b', clip).textContent.toLowerCase();
+    $('.clip-toggle', clip).setAttribute('aria-label', (paused ? 'Play ' : 'Pause ') + t + ' video');
   };
-  clips.forEach(clip => {
+  const play = clip => {
+    if (current && current !== clip) stop(current);
     const v = $('video', clip);
-    clip._userPaused = reduceMotion;
+    if (v.preload !== 'auto') v.preload = 'auto';   // nothing downloads until someone asks for it
+    clip.classList.add('is-loading');
+    current = clip;
+    v.play().catch(() => { clip.classList.remove('is-loading'); setPaused(clip, true); });
+  };
+  const stop = clip => { $('video', clip).pause(); if (current === clip) current = null; };
+  clips.forEach(clip => {
+    const v = $('video', clip), media = $('.clip-media', clip);
+    $('.clip-hint', clip).textContent = canHover ? 'Hover to play' : 'Tap to play';
     setPaused(clip, true);
-    $('.clip-toggle', clip).addEventListener('click', () => {
-      if (v.paused) { clip._userPaused = false; v.play().catch(() => {}); }
-      else { clip._userPaused = true; v.pause(); }
-    });
-    v.addEventListener('play', () => setPaused(clip, false));
-    v.addEventListener('pause', () => setPaused(clip, true));
+    v.addEventListener('playing', () => { clip.classList.remove('is-loading'); setPaused(clip, false); });
+    v.addEventListener('pause', () => { clip.classList.remove('is-loading'); setPaused(clip, true); });
+    if (canHover) {
+      media.addEventListener('pointerenter', () => play(clip));
+      media.addEventListener('pointerleave', () => stop(clip));
+    } else {
+      media.addEventListener('click', e => { if (e.target.closest('.clip-toggle')) return; v.paused ? play(clip) : stop(clip); });
+    }
+    $('.clip-toggle', clip).addEventListener('click', () => { v.paused ? play(clip) : stop(clip); });
   });
+  // Anything that scrolls off-screen stops playing
   const vio = new IntersectionObserver(entries => entries.forEach(e => {
-    const clip = e.target, v = $('video', clip);
-    if (e.isIntersecting && !clip._userPaused) { if (v.preload === 'none') v.preload = 'auto'; v.play().catch(() => setPaused(clip, true)); }
-    else if (!e.isIntersecting && !v.paused) v.pause();
-  }), { threshold: .4 });
+    if (!e.isIntersecting && !$('video', e.target).paused) stop(e.target);
+  }), { threshold: .15 });
   clips.forEach(c => vio.observe(c));
+
+  /* ---------- Reel scroll choreography (transform-only) ---------- */
+  const reel = $('.reel'), motionSec = $('#motion');
+  if (reel && motionSec && !reduceMotion) {
+    const clipsEls = $$('.clip', reel);
+    const SPEED = [-46, 30, -22, 54];              // px of drift per column across the section
+    const fill = $('#tlFill'), head = $('#tlHead'), track = $('#tlTrack'), time = $('#tlTime');
+    const wide = matchMedia('(min-width: 1100px)');
+    let raf = 0, active = false, cur = clipsEls.map(() => 0), trackW = 0;
+    const pad = n => String(n).padStart(2, '0');
+
+    const frame = () => {
+      raf = 0;
+      const vh = innerHeight, r = motionSec.getBoundingClientRect();
+      // section progress 0 → 1 while it passes through the viewport
+      const prog = Math.min(1, Math.max(0, (vh - r.top) / (r.height + vh)));
+      fill.style.transform = `scaleX(${prog})`;
+      head.style.transform = `translate3d(${prog * trackW}px,0,0)`;
+      const secs = prog * 160;                       // 8 clips × 20s reel
+      time.textContent = `${pad(Math.floor(secs / 60))}:${pad(Math.floor(secs % 60))}:${pad(Math.floor((secs % 1) * 30))}`;
+
+      let moving = false;
+      if (wide.matches) {
+        const rr = reel.getBoundingClientRect();
+        const p = Math.max(-1, Math.min(1, ((rr.top + rr.height / 2) - vh / 2) / vh)); // -1 above … 1 below
+        clipsEls.forEach((c, i) => {
+          const target = p * SPEED[i % 4];
+          cur[i] += (target - cur[i]) * .14;
+          if (Math.abs(target - cur[i]) > .2) moving = true;
+          c.style.translate = `0 ${cur[i].toFixed(2)}px`;
+        });
+      }
+      if (moving && active) raf = requestAnimationFrame(frame);
+    };
+    const kick = () => { if (!raf && active) raf = requestAnimationFrame(frame); };
+
+    // Rail (phones / tablets): centred card full size, neighbours scale down and dim
+    const railFx = () => {
+      if (wide.matches) return;
+      const rr = reel.getBoundingClientRect(), mid = rr.left + rr.width / 2;
+      clipsEls.forEach(c => {
+        const b = c.getBoundingClientRect();
+        const d = Math.min(1, Math.abs(b.left + b.width / 2 - mid) / rr.width);
+        c.style.scale = (1 - d * .1).toFixed(3);
+        $('.clip-media', c).style.opacity = (1 - d * .45).toFixed(3);
+      });
+    };
+    const reset = () => {
+      cur = clipsEls.map(() => 0);
+      clipsEls.forEach(c => { c.style.translate = ''; c.style.scale = ''; $('.clip-media', c).style.opacity = ''; });
+      reel.classList.toggle('fx', wide.matches); reel.classList.toggle('fx-rail', !wide.matches);
+      trackW = track.getBoundingClientRect().width - 2;
+      railFx(); kick();
+    };
+    new IntersectionObserver(([e]) => { active = e.isIntersecting; kick(); }, { rootMargin: '20% 0px' }).observe(motionSec);
+    addEventListener('scroll', kick, { passive: true });
+    addEventListener('resize', reset);
+    wide.addEventListener('change', reset);
+    reel.addEventListener('scroll', () => requestAnimationFrame(railFx), { passive: true });
+    reset();
+  }
 
   /* ---------- FAQ accordion ---------- */
   $$('.faq-item').forEach(item => {

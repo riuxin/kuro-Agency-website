@@ -28,7 +28,8 @@ FEATURES IN index.html (v4 — editorial dark redesign)
   - templates/gaming/      NEXUS Arena — gaming cafe + game store (cart, station booking, pricing). Fictional brand.
   - templates/restaurant/  Ember & Oak — restaurant (menu, online ordering, table reservations). Fictional brand.
   - 03 AI automation: WhatsApp/IG lead capture, automated booking, CRM sync workflows
-  - 04 Motion & edits: reference reel (clips labelled as other creators' work)
+  - 04 Motion & edits: 8 reference clips (labelled as other creators' work); hover to play (tap on touch),
+    scroll parallax by column, coverflow rail on phones, editing-timeline progress bar
   - 05 Brief builder: 4-step inquiry (website, gaming venue, AI automation, web app, motion) with live scope estimate
   - FAQ accordion with smooth height interpolation and animated plus/minus
   - Footer: big CTA, Mumbai · remote worldwide, live IST time, socials, share sheet with QR
@@ -37,6 +38,5 @@ FEATURES IN index.html (v4 — editorial dark redesign)
 PENDING
   - Confirm the '99 Performance' badge and automation metrics (< 5 sec, 10+ hrs/week) against real numbers
   - Brief budgets and FAQ prices are in USD ($10k+); consider INR tiers for local clients
-  - Add real X / LinkedIn / GitHub / Dribbble handles (currently platform home pages)
   - Optional: send briefs to a form backend (Formspree / Vercel function) instead of mailto
   - Domains to buy: kuro.graphics or studiokuro.com (verify availability first)
