@@ -6,7 +6,7 @@ The whole site lives in one self-contained `index.html`, with inline CSS and van
 This is a single-page marketing site for an independent design and engineering studio. Its main job is to turn visitors into enquiries through the **brief builder** (`#contact`). Every CTA on the page leads there.
 
 Section order:
-`Header → Hero (+ marquee) → 01 Capabilities (bento) → 02 Selected work → 03 Studio → 04 Brief builder → 05 FAQ → Footer CTA`
+`Header → Hero (+ marquee) → 01 What we do (bento) → 02 Selected work → 03 AI automation → 04 Motion & edits → 05 Brief builder → 06 FAQ → Footer CTA`
 
 ## Design tokens
 
@@ -76,7 +76,7 @@ Transitions name their properties explicitly and do not use `transition: all`, s
 ## Brief builder (`#contact`)
 | Step | Input | Validation message |
 |---|---|---|
-| 1 Project | Checkboxes, multi-select (6 types) | "Pick at least one option to continue." |
+| 1 Project | Checkboxes, multi-select (5 types: website, gaming venue, AI automation, web app, motion) | "Pick at least one option to continue." |
 | 2 Budget | Radios (4 tiers) | "Choose a range to continue — it doesn't need to be exact." |
 | 3 Timeline | Radios (4) | "Choose a timeline to continue." |
 | 4 Details | Name\*, Email\*, Company, Notes | "Enter your name so we know who to reply to." / "Enter a valid email, like name@company.com." |

@@ -20,16 +20,19 @@ FEATURES IN index.html (v4 — editorial dark redesign)
   - Glass sticky header: blur, condenses on scroll, hides on scroll-down, returns on scroll-up
   - Full-screen mobile menu with staggered entrance, focus trap, Esc to close
   - Hero: line-mask entrance, SVG grid + pointer-following lens/glow (transform-only), capability marquee
-  - Services bento grid (Brand, Engineering, Product, Growth) with pointer-tracking border glow
-  - Case studies: Downing, Club Championship, RaffClub — CSS/SVG cover art, zoom on hover
-  - Studio section: how we work + 4-step process
-  - Brief builder: 4-step project inquiry with live scope estimate, validation, mailto submit
+  - 01 What we do: 3-card bento (Web Engineering, AI Business Automation, Brand & Motion) with bullets
+  - 02 Selected work: Kourage Fitness (flagship, live domain), KaiGaming Cafe, Drift Gaming Cafe
+    (card 03 swaps to The Warrior Gym by setting WORK_SLOT_3 = 'warrior' in the script)
+  - 03 AI automation: WhatsApp/IG lead capture, automated booking, CRM sync workflows
+  - 04 Motion & edits: reference reel (clips labelled as other creators' work)
+  - 05 Brief builder: 4-step inquiry (website, gaming venue, AI automation, web app, motion) with live scope estimate
   - FAQ accordion with smooth height interpolation and animated plus/minus
-  - Footer: big CTA, London & Lisbon studios, live local time, socials, share sheet with QR
+  - Footer: big CTA, Mumbai · remote worldwide, live IST time, socials, share sheet with QR
   - Scroll reveals, reduced-motion support, WCAG 2.1 AA (axe-core: 0 violations)
 
 PENDING
-  - Confirm case-study copy (industry, year, services) for Downing / Club Championship / RaffClub
+  - Confirm the '99 Performance' badge and automation metrics (< 5 sec, 10+ hrs/week) against real numbers
+  - Brief budgets and FAQ prices are in USD ($10k+); consider INR tiers for local clients
   - Add real X / LinkedIn / GitHub / Dribbble handles (currently platform home pages)
   - Swap hello@kuro.graphics for the real studio email (kuro.graphics is not registered)
   - Optional: send briefs to a form backend (Formspree / Vercel function) instead of mailto
