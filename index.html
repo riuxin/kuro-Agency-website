@@ -573,11 +573,13 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
   overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;padding-bottom:14px;scrollbar-width:thin;scrollbar-color:var(--surface-3) transparent;
   margin-inline:calc(var(--gutter) * -1);padding-inline:var(--gutter);scroll-padding-inline:var(--gutter)}
 @media (min-width:640px){.reel{grid-auto-columns:minmax(220px,38vw)}}
-@media (min-width:1100px){.reel{grid-auto-flow:row;grid-template-columns:repeat(5,minmax(0,1fr));overflow:visible;margin-inline:0;padding-inline:0}}
+@media (min-width:1100px){.reel{grid-auto-flow:row;grid-template-columns:repeat(4,minmax(0,1fr));overflow:visible;margin-inline:0;padding-inline:0}}
 .clip{position:relative;scroll-snap-align:start;display:flex;flex-direction:column;gap:14px}
 .clip-media{position:relative;aspect-ratio:9/16;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);background:var(--surface);isolation:isolate;transform:translateZ(0)}
 .clip-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
 .clip:hover .clip-media video{transform:scale(1.04)}
+.clip-media.fit video{object-fit:contain}
+.clip-bg{position:absolute;inset:-10%;width:120%;height:120%;object-fit:cover;filter:blur(22px) brightness(.55) saturate(1.2);transform:scale(1.05)}
 .clip-media::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(9,9,11,.55) 0%,transparent 22%,transparent 62%,rgba(9,9,11,.85) 100%)}
 .clip-ref{position:absolute;left:12px;top:12px;z-index:2;display:inline-flex;align-items:center;gap:7px;padding:5px 10px;border-radius:999px;background:rgba(9,9,11,.62);border:1px solid var(--line-2);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text)}
 .clip-ref i{width:6px;height:6px;border-radius:50%;background:#fbbf24}
@@ -1033,7 +1035,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
     <header class="section-head">
       <p class="eyebrow" data-reveal><span class="idx">04</span><span class="rule"></span>Motion &amp; edits</p>
       <h2 class="section-title" id="motionTitle" data-reveal>Edits in this <em class="h-em">style</em>, made for you.</h2>
-      <p class="section-lead" data-reveal style="--d:100ms">A reference reel of styles we love and can produce — anime edits, cinematic promos, kinetic type and motion reels. These clips are by other creators; your project gets original work, built from scratch.</p>
+      <p class="section-lead" data-reveal style="--d:100ms">A reference reel of styles we love and can produce — chef &amp; food promos, TV and film edits, podcast captions, anime edits and motion reels. These clips are by other creators; your project gets original work, built from scratch.</p>
     </header>
 
     <div class="reel" data-stagger>
@@ -1047,6 +1049,47 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
         <div class="clip-info">
           <p>Moody, slow-motion food and kitchen promos that make people hungry.</p>
           <small>Reference film by SevenMagpie</small>
+          <a class="case-cta u-link" href="#contact" data-brief="motion">Brief a similar edit <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11l6-6m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </article>
+      <article class="clip" data-reveal>
+        <div class="clip-media fit">
+          <img class="clip-bg" src="assets/motion/yes-chef.jpg" alt="" loading="lazy" decoding="async">
+          <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
+          <button class="clip-toggle" type="button" aria-label="Pause “yes, chef” character edit video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
+          <video muted loop playsinline preload="none" poster="assets/motion/yes-chef.jpg" aria-label="“Yes, Chef” character edit — reference clip by another creator"><source src="assets/motion/yes-chef.mp4" type="video/mp4"></video>
+          <div class="clip-cap"><b>“Yes, Chef” character edit</b><span>TV edit · Subtitled</span></div>
+        </div>
+        <div class="clip-info">
+          <p>Story-driven edits that cut interview audio, captions and scenes into one emotional beat.</p>
+          <small>Reference edit · show: The Bear (FX)</small>
+          <a class="case-cta u-link" href="#contact" data-brief="motion">Brief a similar edit <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11l6-6m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </article>
+      <article class="clip" data-reveal>
+        <div class="clip-media fit">
+          <img class="clip-bg" src="assets/motion/spiderverse.jpg" alt="" loading="lazy" decoding="async">
+          <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
+          <button class="clip-toggle" type="button" aria-label="Pause kinetic lyric edit video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
+          <video muted loop playsinline preload="none" poster="assets/motion/spiderverse.jpg" aria-label="Kinetic lyric edit — reference clip by another creator"><source src="assets/motion/spiderverse.mp4" type="video/mp4"></video>
+          <div class="clip-cap"><b>Kinetic lyric edit</b><span>Film edit · Typography</span></div>
+        </div>
+        <div class="clip-info">
+          <p>Big, beat-synced type layered over footage — made for music, trailers and launches.</p>
+          <small>Reference edit · film: Spider-Man: Into the Spider-Verse (Sony Pictures Animation)</small>
+          <a class="case-cta u-link" href="#contact" data-brief="motion">Brief a similar edit <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11l6-6m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </article>
+      <article class="clip" data-reveal>
+        <div class="clip-media">
+          <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
+          <button class="clip-toggle" type="button" aria-label="Pause podcast clip · kinetic subs video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
+          <video muted loop playsinline preload="none" poster="assets/motion/podcast-subs.jpg" aria-label="Podcast clip · kinetic subs — reference clip by another creator"><source src="assets/motion/podcast-subs.mp4" type="video/mp4"></video>
+          <div class="clip-cap"><b>Podcast clip · kinetic subs</b><span>Talking head · Captions</span></div>
+        </div>
+        <div class="clip-info">
+          <p>Viral-style podcast clips with animated captions that keep people watching with the sound off.</p>
+          <small>Reference edit · original creator via Pinterest</small>
           <a class="case-cta u-link" href="#contact" data-brief="motion">Brief a similar edit <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11l6-6m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
       </article>
