@@ -2,6 +2,9 @@ KURO — an agency trio
 =====================
 Kuro = "black" in Japanese.
 
+CONTACT
+  team.kuroagency@hotmail.com · WhatsApp +91 870 026 8026
+
 FILES
   index.html            The site — one self-contained file (inline CSS + JS, no build step).
   DESIGN.md             Handoff spec: tokens, components, motion, breakpoints, accessibility.
@@ -21,8 +24,9 @@ FEATURES IN index.html (v4 — editorial dark redesign)
   - Full-screen mobile menu with staggered entrance, focus trap, Esc to close
   - Hero: line-mask entrance, SVG grid + pointer-following lens/glow (transform-only), capability marquee
   - 01 What we do: 3-card bento (Web Engineering, AI Business Automation, Brand & Motion) with bullets
-  - 02 Selected work: Kourage Fitness (flagship, live domain), KaiGaming Cafe, Drift Gaming Cafe
-    (card 03 swaps to The Warrior Gym by setting WORK_SLOT_3 = 'warrior' in the script)
+  - 02 Selected work: Kourage Fitness (flagship, live domain) + two launch-ready landing page templates
+  - templates/gaming/      NEXUS Arena — gaming cafe + game store (cart, station booking, pricing). Fictional brand.
+  - templates/restaurant/  Ember & Oak — restaurant (menu, online ordering, table reservations). Fictional brand.
   - 03 AI automation: WhatsApp/IG lead capture, automated booking, CRM sync workflows
   - 04 Motion & edits: reference reel (clips labelled as other creators' work)
   - 05 Brief builder: 4-step inquiry (website, gaming venue, AI automation, web app, motion) with live scope estimate
@@ -34,6 +38,5 @@ PENDING
   - Confirm the '99 Performance' badge and automation metrics (< 5 sec, 10+ hrs/week) against real numbers
   - Brief budgets and FAQ prices are in USD ($10k+); consider INR tiers for local clients
   - Add real X / LinkedIn / GitHub / Dribbble handles (currently platform home pages)
-  - Swap hello@kuro.graphics for the real studio email (kuro.graphics is not registered)
   - Optional: send briefs to a form backend (Formspree / Vercel function) instead of mailto
   - Domains to buy: kuro.graphics or studiokuro.com (verify availability first)

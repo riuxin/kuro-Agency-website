@@ -70,6 +70,8 @@ def build():
     # Local media (videos, posters) ship inside the theme; point URLs at the theme folder.
     theme_uri = "<?php echo esc_url(get_template_directory_uri()); ?>/assets/"
     html = html.replace('src="assets/', 'src="' + theme_uri).replace('poster="assets/', 'poster="' + theme_uri)
+    # Landing page templates also ship inside the theme.
+    html = html.replace('href="templates/', 'href="<?php echo esc_url(get_template_directory_uri()); ?>/templates/')
     header = "<?php\n/**\n * KURO — generated from index.html by wordpress/build_theme.py. Do not edit by hand.\n */\nif (!defined('ABSPATH')) { exit; }\n?>\n"
 
     if OUT_DIR.exists():
@@ -82,6 +84,8 @@ def build():
         shutil.copy(SHOT, OUT_DIR / "screenshot.png")
     if (ROOT / "assets").exists():
         shutil.copytree(ROOT / "assets", OUT_DIR / "assets")
+    if (ROOT / "templates").exists():
+        shutil.copytree(ROOT / "templates", OUT_DIR / "templates")
 
     with zipfile.ZipFile(ZIP, "w", zipfile.ZIP_DEFLATED) as z:
         for f in sorted(OUT_DIR.rglob("*")):

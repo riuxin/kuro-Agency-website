@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ember &amp; Oak — Restaurant (Landing Page Template by KURO)</title>
+<meta name="description" content="Landing page template for a restaurant: signature dishes, online ordering and table reservations. Designed by KURO.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f6f0e6">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231c1714'/%3E%3Cpath d='M32 12c8 10 12 17 12 24a12 12 0 0 1-24 0c0-5 3-9 6-12 1 4 3 6 5 6-2-6-1-12 1-18z' fill='%23ea580c'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Geist:wght@400..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#f6f0e6;--cream-2:#efe6d7;--paper:#fbf8f2;--ink:#1c1714;--ink-2:#4a403a;--ink-3:#6f645c;
+  --ember:#c2410c;--ember-2:#ea580c;--olive:#4d5b2e;--line:rgba(28,23,20,.12);--line-2:rgba(28,23,20,.22);
+  --ease:cubic-bezier(.16,1,.3,1);--r:18px;
+  --serif:'Fraunces',ui-serif,Georgia,serif;--sans:'Geist',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  --gutter:clamp(16px,4vw,40px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body,h1,h2,h3,p,ul,ol,dl,dd{margin:0;padding:0}
+ul,ol{list-style:none}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer;padding:0}
+html{background:var(--cream);scroll-padding-top:84px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+:focus-visible{outline:2px solid var(--ember);outline-offset:3px;border-radius:6px}
+.wrap{width:min(100% - var(--gutter)*2,1180px);margin-inline:auto}
+.kicker{font-size:12.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ember)}
+.h2{font-family:var(--serif);font-weight:500;font-size:clamp(2.1rem,1.4rem + 3vw,3.6rem);line-height:1.02;letter-spacing:-.02em;margin-top:12px}
+.h2 em,.hero h1 em{font-style:italic;color:var(--ember)}
+.lead{color:var(--ink-2);font-size:clamp(1rem,.96rem + .3vw,1.15rem);max-width:50ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:50px;padding:0 24px;border-radius:999px;font-weight:600;font-size:15px;white-space:nowrap;transition:transform .4s var(--ease),background-color .4s var(--ease),box-shadow .4s var(--ease)}
+.btn:active{transform:scale(.97)}
+.btn-dark{background:var(--ink);color:var(--cream)}
+.btn-dark:hover{background:var(--ember);box-shadow:0 12px 30px -10px rgba(194,65,12,.6)}
+.btn-line{border:1px solid var(--line-2)}
+.btn-line:hover{border-color:var(--ink)}
+section{padding-block:clamp(72px,10vw,120px)}
+.head{display:grid;gap:12px;margin-bottom:clamp(32px,5vw,52px)}
+
+.ribbon{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;padding:8px 16px;background:var(--ink);color:#d9cfc2;font-size:12.5px;text-align:center}
+.ribbon a{color:#fdba74;font-weight:600}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(246,240,230,.82);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:24px;height:70px}
+.logo{font-family:var(--serif);font-size:24px;font-weight:600;letter-spacing:-.01em}
+.logo span{font-style:italic;color:var(--ember)}
+.nav-links{display:none;gap:30px;margin-left:auto;font-size:15px;color:var(--ink-2)}
+.nav-links a:hover{color:var(--ink)}
+.order-btn{margin-left:auto;display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:999px;background:var(--ink);color:var(--cream);font-size:14px;font-weight:600}
+.order-btn b{min-width:20px;height:20px;padding:0 6px;border-radius:999px;display:grid;place-items:center;background:var(--ember-2);font-size:11.5px}
+@media (min-width:860px){.nav-links{display:flex}.order-btn{margin-left:0}}
+
+/* Hero */
+.hero{padding-block:clamp(48px,8vw,96px) clamp(64px,9vw,110px)}
+.hero-grid{display:grid;gap:48px;align-items:center}
+@media (min-width:960px){.hero-grid{grid-template-columns:1.05fr .95fr}}
+.open{display:inline-flex;align-items:center;gap:10px;padding:7px 14px;border-radius:999px;border:1px solid var(--line-2);font-size:13.5px;color:var(--ink-2)}
+.open i{width:8px;height:8px;border-radius:50%;background:#16a34a}
+.hero h1{margin-top:22px;font-family:var(--serif);font-weight:500;font-size:clamp(2.9rem,1.6rem + 5.6vw,6.2rem);line-height:.95;letter-spacing:-.035em}
+.hero .lead{margin-top:22px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.facts{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:36px;padding-top:22px;border-top:1px solid var(--line);font-size:14px;color:var(--ink-2)}
+.facts b{display:block;font-family:var(--serif);font-size:24px;font-weight:600;color:var(--ink)}
+.plate-wrap{position:relative;aspect-ratio:1;max-width:520px;width:100%;justify-self:center;overflow:clip}
+.plate-wrap::before{content:'';position:absolute;inset:6%;border-radius:50%;background:radial-gradient(circle at 50% 40%,rgba(234,88,12,.28),transparent 65%);filter:blur(30px)}
+.plate{position:relative;width:100%;height:100%;animation:spin 60s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sticker{position:absolute;right:2%;bottom:10%;width:112px;height:112px;border-radius:50%;display:grid;place-items:center;text-align:center;background:var(--ember);color:var(--cream);font-family:var(--serif);font-style:italic;font-size:15px;line-height:1.1;transform:rotate(-10deg);box-shadow:0 16px 30px -12px rgba(194,65,12,.7)}
+.sticker b{display:block;font-style:normal;font-size:26px}
+
+/* Menu */
+.menu-sec{background:var(--paper);border-block:1px solid var(--line)}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.tab{height:42px;padding:0 18px;border-radius:999px;border:1px solid var(--line-2);font-size:14.5px;color:var(--ink-2);transition:background-color .3s,color .3s,border-color .3s}
+.tab[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--cream)}
+.dishes{display:grid;gap:0 48px}
+@media (min-width:860px){.dishes{grid-template-columns:1fr 1fr}}
+.dish{display:grid;grid-template-columns:64px 1fr auto;gap:16px;align-items:center;padding:18px 0;border-bottom:1px dashed var(--line-2)}
+.dish[hidden]{display:none}
+.dish-art{width:64px;height:64px;border-radius:50%;background:var(--art);box-shadow:inset 0 0 0 5px #fff,0 6px 14px -6px rgba(28,23,20,.4)}
+.dish h3{display:flex;align-items:center;gap:8px;font-family:var(--serif);font-size:19px;font-weight:600;line-height:1.25}
+.veg{flex:none;width:14px;height:14px;border:1.5px solid #15803d;border-radius:3px;display:grid;place-items:center}
+.veg::after{content:'';width:6px;height:6px;border-radius:50%;background:#15803d}
+.veg.non{border-color:#b91c1c}.veg.non::after{background:#b91c1c}
+.dish p{font-size:14px;color:var(--ink-3);margin-top:2px}
+.dish-end{display:grid;gap:6px;justify-items:end}
+.dish-end b{font-family:var(--serif);font-size:18px;font-weight:600}
+.add{height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--line-2);font-size:13.5px;font-weight:600;transition:background-color .3s,color .3s,border-color .3s}
+.add:hover{border-color:var(--ink)}
+.add.in{background:var(--olive);border-color:var(--olive);color:#fff}
+
+/* Reserve */
+.reserve{display:grid;gap:28px;align-items:start}
+@media (min-width:960px){.reserve{grid-template-columns:.9fr 1.1fr;gap:56px}}
+.info{display:grid;gap:18px;margin-top:28px}
+.info div{display:grid;grid-template-columns:110px 1fr;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--line);font-size:15px}
+.info dt{font-weight:600}
+.info dd{color:var(--ink-2)}
+.form{padding:clamp(20px,3vw,32px);border-radius:24px;background:var(--paper);border:1px solid var(--line);box-shadow:0 30px 60px -40px rgba(28,23,20,.4);display:grid;gap:16px}
+.row{display:grid;gap:16px}
+@media (min-width:560px){.row{grid-template-columns:1fr 1fr}}
+.f{display:grid;gap:7px}
+.f label,.f > span{font-size:13.5px;font-weight:600;color:var(--ink-2)}
+.f input,.f select{height:50px;padding:0 14px;border-radius:12px;border:1px solid var(--line-2);background:#fff;font-size:16px;outline:none;transition:border-color .3s,box-shadow .3s}
+.f input:focus,.f select:focus{border-color:var(--ember);box-shadow:0 0 0 4px rgba(234,88,12,.15)}
+.f input[aria-invalid="true"]{border-color:#b91c1c}
+.err{font-size:13px;color:#b91c1c}
+.err[hidden]{display:none}
+.stepper{display:flex;align-items:center;justify-content:space-between;height:50px;padding:0 6px;border-radius:12px;border:1px solid var(--line-2);background:#fff}
+.stepper button{width:40px;height:40px;border-radius:10px;font-size:20px;font-weight:600}
+.stepper button:hover{background:var(--cream)}
+.stepper output{font-weight:600}
+.occ{display:flex;flex-wrap:wrap;gap:8px}
+.occ label{position:relative}
+.occ input{position:absolute;opacity:0;pointer-events:none}
+.occ span{display:inline-flex;height:38px;align-items:center;padding:0 14px;border-radius:999px;border:1px solid var(--line-2);font-size:14px;cursor:pointer;transition:background-color .3s,color .3s,border-color .3s}
+.occ input:checked + span{background:var(--ember);border-color:var(--ember);color:#fff}
+.occ input:focus-visible + span{outline:2px solid var(--ember);outline-offset:2px}
+.form .btn{width:100%}
+.ok{display:grid;gap:10px;justify-items:start;padding:clamp(20px,3vw,32px);border-radius:24px;background:var(--ink);color:var(--cream)}
+.ok[hidden]{display:none}
+.ok h3{font-family:var(--serif);font-size:30px;font-weight:500}
+.ok p{color:#d9cfc2}
+
+/* CTA + footer */
+.band{border-radius:32px;padding:clamp(32px,6vw,64px);background:var(--ink);color:var(--cream);display:grid;gap:18px;justify-items:start;position:relative;overflow:hidden}
+.band::after{content:'';position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(234,88,12,.5),transparent 70%)}
+.band h2{font-family:var(--serif);font-weight:500;font-size:clamp(2rem,1.3rem + 3.2vw,3.6rem);line-height:1.02;max-width:16ch;position:relative}
+.band h2 em{color:#fdba74}
+.band .btn-dark{background:var(--cream);color:var(--ink)}
+.band .btn-dark:hover{background:#fdba74}
+footer{padding-block:36px;color:var(--ink-3);font-size:13.5px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:28px}
+footer a{color:var(--ember);font-weight:600}
+.toast{position:fixed;left:50%;bottom:24px;z-index:90;max-width:calc(100% - 32px);padding:12px 18px;border-radius:999px;background:var(--ink);color:var(--cream);font-weight:600;font-size:14px;box-shadow:0 20px 50px -10px rgba(0,0,0,.4);transform:translate(-50%,160%);opacity:0;visibility:hidden;transition:transform .5s var(--ease),opacity .3s var(--ease),visibility 0s linear .5s}
+.toast.show{transform:translate(-50%,0);opacity:1;visibility:visible;transition:transform .5s var(--ease),opacity .3s var(--ease)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="ribbon">Landing page template designed by KURO · the restaurant, dishes and prices are fictional · <a href="/#contact">Get one for your business →</a></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top">Ember <span>&amp;</span> Oak</a>
+    <nav class="nav-links" aria-label="Primary"><a href="#menu">Menu</a><a href="#reserve">Reserve</a><a href="#visit">Visit</a></nav>
+    <button class="order-btn" type="button" id="orderBtn">Order online <b id="orderCount">0</b></button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="open"><i aria-hidden="true"></i>Open today · 12 PM – 11:30 PM</span>
+        <h1>Fire-kissed food,<br><em>slow</em> evenings.</h1>
+        <p class="lead">A wood-fired kitchen serving seasonal small plates, smoky mains and desserts worth staying for. Book a table or order to your door.</p>
+        <div class="ctas"><a class="btn btn-dark" href="#reserve">Reserve a table</a><a class="btn btn-line" href="#menu">View the menu</a></div>
+        <div class="facts"><span><b>Wood-fired</b>open kitchen</span><span><b>40+</b>seasonal dishes</span><span><b>45 min</b>delivery</span></div>
+      </div>
+      <div class="plate-wrap" aria-hidden="true">
+        <svg class="plate" viewBox="0 0 400 400">
+          <circle cx="200" cy="200" r="190" fill="#fff"/>
+          <circle cx="200" cy="200" r="190" fill="none" stroke="#e8dccb" stroke-width="2"/>
+          <circle cx="200" cy="200" r="150" fill="#fbf8f2" stroke="#efe6d7" stroke-width="2"/>
+          <path d="M120 230c10-60 60-100 120-90 40 8 60 50 40 90-18 36-70 52-110 40-30-9-55-20-50-40z" fill="#9a3412"/>
+          <path d="M140 220c14-40 50-66 92-60 28 4 42 32 28 58-14 26-52 36-80 28-22-6-44-12-40-26z" fill="#c2410c"/>
+          <ellipse cx="205" cy="205" rx="40" ry="26" fill="#ea580c" opacity=".85"/>
+          <g fill="#4d5b2e"><ellipse cx="150" cy="160" rx="16" ry="7" transform="rotate(-30 150 160)"/><ellipse cx="170" cy="150" rx="14" ry="6" transform="rotate(20 170 150)"/><ellipse cx="262" cy="250" rx="15" ry="6" transform="rotate(40 262 250)"/><ellipse cx="248" cy="268" rx="12" ry="5" transform="rotate(-20 248 268)"/></g>
+          <g fill="#fde68a"><circle cx="230" cy="185" r="5"/><circle cx="185" cy="230" r="4"/><circle cx="240" cy="225" r="3"/><circle cx="170" cy="200" r="3"/></g>
+          <g fill="#fff" opacity=".8"><circle cx="195" cy="190" r="2.5"/><circle cx="215" cy="212" r="2"/><circle cx="200" cy="222" r="2"/></g>
+        </svg>
+        <div class="sticker"><span>Chef's pick<b>Smoked</b>lamb</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-sec" id="menu" aria-labelledby="menuTitle">
+    <div class="wrap">
+      <div class="head"><span class="kicker">The menu</span><h2 class="h2" id="menuTitle">Cooked over <em>fire</em>, served with care.</h2><p class="lead">A short, seasonal menu. Add dishes to your order and we'll have them ready for pickup or delivery.</p></div>
+      <div class="tabs" role="tablist" aria-label="Menu categories">
+        <button class="tab" role="tab" type="button" aria-selected="true" data-c="small">Small plates</button>
+        <button class="tab" role="tab" type="button" aria-selected="false" data-c="mains">Mains</button>
+        <button class="tab" role="tab" type="button" aria-selected="false" data-c="sweet">Desserts</button>
+        <button class="tab" role="tab" type="button" aria-selected="false" data-c="drinks">Drinks</button>
+      </div>
+      <div class="dishes" id="dishes" role="tabpanel"></div>
+    </div>
+  </section>
+
+  <section id="reserve" aria-labelledby="resTitle">
+    <div class="wrap reserve">
+      <div id="visit">
+        <span class="kicker">Reserve &amp; visit</span>
+        <h2 class="h2" id="resTitle">Save your <em>seat</em> at the fire.</h2>
+        <p class="lead" style="margin-top:16px">Tables for up to 10. For bigger groups and private dining, call us and we'll set it up.</p>
+        <dl class="info">
+          <div><dt>Hours</dt><dd>Daily, 12 PM – 11:30 PM</dd></div>
+          <div><dt>Address</dt><dd>14 Harbour Lane, Mumbai (demo address)</dd></div>
+          <div><dt>Phone</dt><dd>+91 00000 00000 (demo)</dd></div>
+        </dl>
+      </div>
+      <div>
+        <form class="form" id="resForm" novalidate>
+          <div class="row">
+            <div class="f"><label for="rDate">Date</label><input id="rDate" type="date" required></div>
+            <div class="f"><label for="rTime">Time</label><select id="rTime"><option>12:30 PM</option><option>1:30 PM</option><option>7:00 PM</option><option selected>8:00 PM</option><option>9:00 PM</option><option>10:00 PM</option></select></div>
+          </div>
+          <div class="row">
+            <div class="f"><span id="gLbl">Guests</span><div class="stepper" role="group" aria-labelledby="gLbl"><button type="button" id="gMinus" aria-label="Fewer guests">−</button><output id="gOut" aria-live="polite">2 guests</output><button type="button" id="gPlus" aria-label="More guests">+</button></div></div>
+            <div class="f"><label for="rPhone">Phone</label><input id="rPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="98765 43210" aria-describedby="ePhone"><p class="err" id="ePhone" hidden>Enter a 10-digit phone number.</p></div>
+          </div>
+          <div class="f"><label for="rName">Name</label><input id="rName" type="text" autocomplete="name" placeholder="Your name" aria-describedby="eName"><p class="err" id="eName" hidden>Enter your name for the booking.</p></div>
+          <div class="f"><span>Occasion (optional)</span><div class="occ"><label><input type="radio" name="occ" value="Birthday"><span>Birthday</span></label><label><input type="radio" name="occ" value="Anniversary"><span>Anniversary</span></label><label><input type="radio" name="occ" value="Date night"><span>Date night</span></label><label><input type="radio" name="occ" value="Business"><span>Business</span></label></div></div>
+          <button class="btn btn-dark" type="submit">Request table</button>
+        </form>
+        <div class="ok" id="resOk" hidden tabindex="-1"><span class="kicker" style="color:#fdba74">Table requested</span><h3 id="okText">See you soon.</h3><p>We'll confirm on WhatsApp within 15 minutes. (Demo template — no booking is made.)</p><button class="btn btn-line" type="button" id="again" style="border-color:rgba(246,240,230,.3);color:var(--cream)">Book another table</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0" aria-labelledby="bandTitle">
+    <div class="wrap"><div class="band"><span class="kicker" style="color:#fdba74">Tonight</span><h2 id="bandTitle">Tables go fast after <em>8 PM.</em></h2><div class="ctas" style="margin-top:4px;position:relative"><a class="btn btn-dark" href="#reserve">Reserve now</a><a class="btn btn-line" href="#menu" style="border-color:rgba(246,240,230,.3)">Order online</a></div></div></div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>© Ember &amp; Oak — a fictional restaurant. Landing page template by <a href="/">KURO</a>.</span><span>Open daily · 12 PM – 11:30 PM</span></div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  const $ = (s, c = document) => c.querySelector(s), $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  const toast = m => { const t = $('#toast'); t.textContent = m; t.classList.add('show'); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('show'), 2600); };
+
+  const DISHES = [
+    ['small', 'Charred corn & chilli butter', 'Smoked butter, lime, crushed peanuts', 320, true, 'radial-gradient(circle,#fde68a,#d97706)'],
+    ['small', 'Tandoor paneer tikka', 'Hung curd, kasuri methi, mint chutney', 380, true, 'radial-gradient(circle,#fdba74,#c2410c)'],
+    ['small', 'Fire-roasted prawns', 'Garlic, Kokum butter, curry leaf', 520, false, 'radial-gradient(circle,#fca5a5,#b91c1c)'],
+    ['small', 'Burrata & smoked tomato', 'Basil oil, toasted sourdough', 460, true, 'radial-gradient(circle,#fff,#f87171)'],
+    ['mains', 'Slow-smoked lamb shoulder', '12-hour smoke, jus, charred onions', 890, false, 'radial-gradient(circle,#a16207,#451a03)'],
+    ['mains', 'Wood-fired mushroom risotto', 'Wild mushrooms, parmesan, truffle oil', 640, true, 'radial-gradient(circle,#fef3c7,#a8a29e)'],
+    ['mains', 'Ember chicken', 'Brined overnight, smoked chilli glaze', 720, false, 'radial-gradient(circle,#fb923c,#9a3412)'],
+    ['mains', 'Charcoal-grilled vegetables', 'Romesco, herbs, toasted seeds', 560, true, 'radial-gradient(circle,#bef264,#4d7c0f)'],
+    ['sweet', 'Burnt Basque cheesecake', 'Caramelised top, berry compote', 420, true, 'radial-gradient(circle,#fef3c7,#92400e)'],
+    ['sweet', 'Smoked chocolate pot', 'Sea salt, hazelnut crumble', 380, true, 'radial-gradient(circle,#78350f,#1c1917)'],
+    ['drinks', 'Smoked pineapple cooler', 'Charred pineapple, mint, soda', 240, true, 'radial-gradient(circle,#fde047,#ca8a04)'],
+    ['drinks', 'Cold brew tonic', 'House cold brew, tonic, orange', 220, true, 'radial-gradient(circle,#d6d3d1,#44403c)']
+  ];
+  $('#dishes').innerHTML = DISHES.map(([c, n, d, p, veg, art], i) => `
+    <div class="dish" data-c="${c}" ${c !== 'small' ? 'hidden' : ''}>
+      <span class="dish-art" style="--art:${art}" aria-hidden="true"></span>
+      <div><h3><span class="veg ${veg ? '' : 'non'}" role="img" aria-label="${veg ? 'Vegetarian' : 'Non-vegetarian'}"></span>${n}</h3><p>${d}</p></div>
+      <div class="dish-end"><b>₹${p}</b><button class="add" type="button" data-i="${i}" aria-label="Add ${n} to order">Add</button></div>
+    </div>`).join('');
+
+  $$('.tab').forEach(t => t.addEventListener('click', () => {
+    $$('.tab').forEach(o => o.setAttribute('aria-selected', String(o === t)));
+    $$('.dish').forEach(d => { d.hidden = d.dataset.c !== t.dataset.c; });
+  }));
+
+  const order = new Set();
+  $('#dishes').addEventListener('click', e => {
+    const b = e.target.closest('.add'); if (!b) return;
+    const i = +b.dataset.i;
+    if (order.has(i)) { order.delete(i); b.classList.remove('in'); b.textContent = 'Add'; }
+    else { order.add(i); b.classList.add('in'); b.textContent = 'Added ✓'; toast(DISHES[i][1] + ' added to your order'); }
+    $('#orderCount').textContent = order.size;
+  });
+  $('#orderBtn').addEventListener('click', () => {
+    if (!order.size) { document.getElementById('menu').scrollIntoView(); toast('Add a dish to start your order'); return; }
+    const total = [...order].reduce((n, i) => n + DISHES[i][3], 0);
+    toast(`Demo: ${order.size} item${order.size > 1 ? 's' : ''} · ₹${total} — this would open WhatsApp checkout`);
+  });
+
+  // Reservation
+  const date = $('#rDate'), t = new Date(), iso = d => d.toISOString().slice(0, 10);
+  date.value = iso(t); date.min = iso(t);
+  let guests = 2;
+  const setG = n => { guests = Math.min(10, Math.max(1, n)); $('#gOut').textContent = guests + (guests > 1 ? ' guests' : ' guest'); };
+  $('#gMinus').addEventListener('click', () => setG(guests - 1));
+  $('#gPlus').addEventListener('click', () => setG(guests + 1));
+  const check = (el, err, ok) => { el.setAttribute('aria-invalid', String(!ok)); $(err).hidden = ok; return ok; };
+  $('#resForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const okName = check($('#rName'), '#eName', $('#rName').value.trim().length > 1);
+    const okPhone = check($('#rPhone'), '#ePhone', $('#rPhone').value.replace(/\D/g, '').length >= 10);
+    if (!okName) return $('#rName').focus();
+    if (!okPhone) return $('#rPhone').focus();
+    const d = new Date(date.value + 'T00:00').toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' });
+    $('#okText').textContent = `${guests} ${guests > 1 ? 'guests' : 'guest'} · ${d} · ${$('#rTime').value}`;
+    $('#resForm').hidden = true; $('#resOk').hidden = false; $('#resOk').focus();
+  });
+  $('#again').addEventListener('click', () => { $('#resForm').reset(); date.value = iso(t); setG(2); $('#resOk').hidden = true; $('#resForm').hidden = false; $('#rName').focus(); });
+})();
+</script>
+</body>
+</html>
