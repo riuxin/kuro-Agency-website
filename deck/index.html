@@ -36,7 +36,7 @@ img,video{display:block}
 :focus-visible{outline:2px solid #fff;outline-offset:4px;border-radius:4px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-.stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform:translate(-50%,-50%) scale(var(--s,1));overflow:hidden;background:var(--bg)}
+.stage{position:fixed;left:50%;top:50%;width:1920px;height:1080px;transform:translate(-50%,-50%) scale(var(--s,1));overflow:hidden;background:var(--bg)}
 .slide{position:absolute;inset:0;padding:150px var(--pad-x) 140px;visibility:hidden;overflow:hidden;background:var(--bg)}
 .slide.is-on,.slide.is-out{visibility:visible}
 .slide.is-on{z-index:2}.slide.is-out{z-index:1}
@@ -206,11 +206,11 @@ img,video{display:block}
 .b-bar{display:flex;align-items:center;gap:9px;height:46px;padding:0 18px;background:#161616;border-bottom:1px solid var(--line)}
 .b-bar i{width:12px;height:12px;border-radius:50%;background:#2e2e2e}
 .b-url{margin:0 auto;min-width:340px;height:28px;padding:0 16px;border-radius:8px;background:#0c0c0c;display:grid;place-items:center;font-family:var(--mono);font-size:14px;color:var(--t2)}
-.b-view{position:relative;height:600px;overflow:hidden;background:#0b0b0b}
+.b-view{position:relative;height:var(--bvh,600px);overflow:hidden;background:#0b0b0b}
 .b-view img{width:100%}
 .b-view img.scrolls{animation:scrollshot 34s ease-in-out infinite alternate;animation-play-state:paused}
 .slide.in .b-view img.scrolls{animation-play-state:running}
-@keyframes scrollshot{0%,8%{transform:translateY(0)}92%,100%{transform:translateY(calc(-100% + 600px))}}
+@keyframes scrollshot{0%,8%{transform:translateY(0)}92%,100%{transform:translateY(calc(-100% + var(--bvh,600px)))}}
 .case .phone{width:250px;height:526px;border-radius:44px;padding:9px}
 .case .phone .screen{border-radius:36px}
 .case .phone .island{width:76px;height:22px;margin-left:-38px;top:10px}
@@ -335,11 +335,185 @@ img,video{display:block}
 .close .kanji-s{position:absolute;right:140px;top:170px;font-family:'Noto Serif JP',serif;font-weight:700;font-size:360px;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.06);opacity:0;transition:opacity 3s ease 1.2s;pointer-events:none}
 .close.in .kanji-s{opacity:1}
 
+
+/* =========================================================
+   FLOW MODE — phones & tablets (html.fm)
+   The deck becomes a vertically scrolling page; each slide
+   reflows for the screen and animates in as it scrolls into view.
+   ========================================================= */
+html.fm,html.fm body{height:auto;overflow-x:hidden;overflow-y:auto}
+.fm .stage{position:relative;left:auto;top:auto;width:100%;height:auto;transform:none;overflow:visible}
+.fm .slide{position:relative;inset:auto;visibility:visible;display:block;min-height:100svh;padding:104px 22px 72px;overflow:clip;border-top:1px solid var(--line)}
+.fm .slide:first-child{border-top:0}
+.fm .h-xl{font-size:clamp(40px,11vw,92px)!important}
+.fm .h-l{font-size:clamp(34px,9.4vw,76px)!important}
+.fm .h-m{font-size:clamp(28px,7.4vw,54px)!important}
+.fm .p-l{font-size:clamp(17px,4.4vw,22px)!important;margin-top:22px!important}
+.fm .p{font-size:clamp(15px,4vw,19px)!important}
+.fm .lbl{font-size:12px}
+.fm [style*="margin-top:40px"],.fm [style*="margin-top:36px"],.fm [style*="margin-top:28px"],.fm [style*="margin-top:26px"]{margin-top:18px!important}
+
+/* HUD: slim fixed bar with progress */
+.fm .hud-top{position:fixed;left:0;right:0;top:0;padding:16px 22px;background:rgba(5,5,5,.92);border-bottom:1px solid var(--line)}
+.fm .hud-top::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--t1);transform-origin:left;transform:scaleX(var(--p,0));transition:transform .6s var(--ease)}
+.fm .hud-mark{font-size:15px}.fm .hud-mark span{font-size:13px}
+.fm .hud-sec{font-size:10px;letter-spacing:.14em}
+.fm .hud-bot{display:none}
+
+/* intro */
+.fm .intro{display:grid;place-items:center;padding:72px 22px 140px}
+.fm .intro .kanji{width:90vw;height:90vw;margin:-45vw 0 0 -45vw;font-size:78vw}
+.fm .intro-line{width:60vw;margin-bottom:26px}
+.fm .kuro{font-size:min(22vw,26vh);letter-spacing:.1em;margin-right:-.1em}
+.fm .tagline{margin-top:30px;font-size:clamp(11px,3vw,16px);letter-spacing:.26em;margin-right:-.26em;padding:0 8px;line-height:1.8}
+.fm .pillars{margin-top:14px;font-size:clamp(11px,2.6vw,13px);letter-spacing:.2em;margin-right:-.2em}
+.fm .wave{bottom:96px;height:28px;gap:3px}
+.fm .intro-note{left:0;right:0;bottom:56px;text-align:center;font-size:11px}
+.fm .intro-hint{left:0;right:0;bottom:26px;justify-content:center;font-size:11px}
+
+/* clients */
+.fm .sec-head{grid-template-columns:1fr;gap:16px}
+.fm .sec-head .p{justify-self:start}
+.fm .logo-wall{grid-template-columns:repeat(2,1fr);margin-top:34px}
+.fm .logo-cell{height:120px}
+.fm .logo-cell img{max-height:52px}
+.fm .logo-cell .reg{left:12px;top:10px;font-size:10px}
+.fm .logo-cell .nm{left:12px;bottom:8px;font-size:12px}
+.fm .logo-ph{font-size:10px}.fm .logo-ph i{width:34px;height:34px}
+
+/* video opener + reels */
+.fm .formats{position:static;grid-template-columns:1fr;margin-top:30px}
+.fm .formats li{font-size:18px;padding:14px 0;gap:16px}
+.fm .formats li span{font-size:12px}
+.fm .v-open .cue{position:static!important;margin-top:26px;font-size:12px}
+.fm .reel{display:block}
+.fm .reel-info{gap:14px}
+.fm .reel-client{font-size:17px}
+.fm .reel-dl div{grid-template-columns:1fr;gap:6px;padding:14px 0}
+.fm .reel-dl dt{font-size:11px;padding-top:0}
+.fm .reel-dl dd{font-size:16px}
+.fm .reel-stage{margin-top:38px;height:auto}
+.fm .reel-num{font-size:62vw}
+.fm .phone{width:min(290px,70vw);height:auto;aspect-ratio:384/808;border-radius:46px;padding:9px}
+.fm .screen{border-radius:38px}
+.fm .island{width:30%;height:4%;margin-left:-15%;top:2%}
+.fm .island::after{right:12%;top:28%;width:8px;height:8px}
+.fm .phone::before{top:24%;height:7%;box-shadow:0 70px 0 #2c2c2e}
+.fm .phone::after{top:30%;height:11%}
+.fm .sound{height:36px;padding:0 14px;font-size:11px;bottom:16px}
+.fm .drop b{font-size:12px}.fm .drop small{font-size:12px}.fm .drop i{width:42px;height:42px}
+
+/* websites */
+.fm .approach{grid-template-columns:1fr;margin-top:30px}
+.fm .approach li{grid-template-columns:40px 1fr;padding:16px 0}
+.fm .approach li span{font-size:12px;padding-top:4px}
+.fm .approach li b{font-size:19px}
+.fm .approach li em{font-size:15px}
+.fm .case{display:block}
+.fm .case-info{gap:16px}
+.fm .case-link{font-size:18px}
+.fm .case-desc{font-size:16px}
+.fm .feat{grid-template-columns:1fr}
+.fm .feat li{font-size:15px;padding:12px 0}
+.fm .feat li::before{margin-top:7px}
+.fm .meta{flex-wrap:wrap;gap:16px 28px}
+.fm .meta dt{font-size:11px}.fm .meta dd{font-size:15px}
+.fm .case-media{margin-top:40px;padding:0 0 34px 28px;--bvh:58vw}
+.fm .browser{border-radius:12px}
+.fm .b-bar{height:30px;gap:6px;padding:0 10px}.fm .b-bar i{width:8px;height:8px}
+.fm .b-url{min-width:0;height:20px;padding:0 10px;font-size:10px;border-radius:5px}
+.fm .case-phone{left:0;bottom:0}
+.fm .case .phone{width:min(124px,30vw);border-radius:22px;padding:5px}
+.fm .case .phone .screen{border-radius:18px}
+
+/* performance marketing */
+.fm .ads{display:block}
+.fm .ads-left{gap:18px}
+.fm .svc{grid-template-columns:1fr}
+.fm .svc li{font-size:15px;padding:11px 0}
+.fm .objective p{font-size:15px}
+.fm .dash{margin-top:34px;padding:16px;gap:14px;border-radius:16px}
+.fm .dash-top{flex-direction:column;align-items:flex-start;gap:6px}
+.fm .dash-top b{font-size:17px}.fm .dash-top span{font-size:10px}
+.fm .kpis{grid-template-columns:1fr 1fr;gap:8px}
+.fm .kpi{padding:12px}.fm .kpi b{font-size:14px}.fm .kpi small{font-size:11px}
+.fm .chart{height:170px;padding:14px 14px 34px}.fm .chart .ct{font-size:13px}
+.fm .chart svg{left:14px;right:14px;top:42px;width:calc(100% - 28px);height:calc(100% - 78px)}
+.fm .phases{left:14px;right:14px;font-size:9px}
+.fm .creatives{grid-template-columns:1fr;gap:8px}
+.fm .creative{grid-template-columns:56px 1fr}
+.fm .creative .drop-box{width:56px;height:84px}
+.fm .creative b{font-size:15px}.fm .creative small{font-size:11px}
+.fm .disc{font-size:13px}
+
+/* automation */
+.fm .compare{grid-template-columns:1fr;gap:30px;margin-top:30px}
+.fm .manual li{font-size:15px}
+.fm .flow{grid-template-columns:1fr;gap:28px}
+.fm .node{min-height:0;padding:18px;border-radius:14px}
+.fm .node b{font-size:20px}.fm .node small{font-size:14px}.fm .node span{font-size:11px}
+.fm .link{top:auto;right:auto;left:28px;bottom:-29px;width:1px;height:28px}
+.fm .link::after{top:0;left:-1px;width:3px;height:12px;transform:translateY(-14px);animation-name:pulse-y}
+@keyframes pulse-y{to{transform:translateY(30px)}}
+.fm .flow-note{margin-top:0;font-size:11px}
+.fm .cats{grid-template-columns:1fr;margin-top:30px}
+.fm .cats li{font-size:15px;padding:13px 0}
+.fm .arch{height:auto;margin-top:30px;display:grid;gap:20px}
+.fm .arch svg{display:none}
+.fm .col{position:static;width:auto!important;display:grid;gap:8px;align-content:start}
+.fm .col + .col::before{content:'';display:block;width:1px;height:16px;margin:-6px 0 2px 24px;background:var(--line3)}
+.fm .box{font-size:15px;padding:12px 16px}.fm .box small{font-size:11px}
+.fm .core{padding:18px 20px}.fm .core b{font-size:20px}.fm .core ul{font-size:15px}
+.fm .arch-note{position:static;font-size:11px}
+.fm .demos{grid-template-columns:1fr;margin-top:28px;gap:12px}
+.fm .demo{height:140px}
+.fm .case-ph b{font-size:18px}.fm .case-ph p{font-size:15px}
+
+/* why */
+.fm .why{display:block}
+.fm .why-list{margin-top:34px}
+.fm .why-list li{grid-template-columns:1fr;gap:4px;padding:16px 0}
+.fm .why-list b{font-size:clamp(34px,10vw,56px)}
+.fm .why-list span{font-size:16px}
+
+/* closing */
+.fm .close{display:block;padding-top:120px}
+.fm .close-bot{grid-template-columns:1fr;gap:30px;padding-top:30px}
+.fm .close .rule{margin-top:40px}
+.fm .close-mark b{font-size:40px}.fm .close-mark span{font-size:11px;letter-spacing:.2em}
+.fm .contacts{grid-template-columns:1fr}
+.fm .contacts dd{font-size:16px;word-break:break-word}
+.fm .qr-box{width:150px;height:150px;padding:10px}
+.fm .close .kanji-s{font-size:52vw;right:-4vw;top:80px}
+
+/* tablets in flow mode get two columns where it helps */
+@media (min-width:640px){
+  .fm .slide{padding:120px 48px 84px}
+  .fm .logo-wall{grid-template-columns:repeat(3,1fr)}
+  .fm .formats,.fm .approach,.fm .svc,.fm .cats,.fm .feat{grid-template-columns:1fr 1fr;column-gap:32px}
+  .fm .kpis{grid-template-columns:repeat(4,1fr)}
+  .fm .creatives{grid-template-columns:repeat(3,1fr)}
+  .fm .creative{grid-template-columns:1fr}
+  .fm .col{grid-template-columns:repeat(3,1fr)}
+  .fm .col .lbl{grid-column:1/-1}
+  .fm .col .core{grid-column:1/-1}
+  .fm .demos{grid-template-columns:1fr 1fr}
+  .fm .case-ph{grid-column:1/-1}
+  .fm .contacts{grid-template-columns:1fr 1fr}
+  .fm .close-bot{grid-template-columns:1fr auto}
+  .fm .close-bot .contacts{grid-column:1/-1;grid-row:2}
+}
+@media (min-width:760px){
+  .fm .reel{display:grid;grid-template-columns:1fr 290px;column-gap:44px;align-items:center}
+  .fm .reel.flip{grid-template-columns:290px 1fr}
+  .fm .reel-stage{margin-top:0}
+  .fm .why-list li{grid-template-columns:240px 1fr;align-items:baseline;gap:20px}
+  .fm .case-media{--bvh:52vw}
+}
+
 /* ---------- utility overlays ---------- */
 .edit-bar{position:fixed;left:50%;top:16px;transform:translateX(-50%);z-index:99;display:none;padding:10px 18px;border-radius:10px;background:#f5f5f5;color:#050505;font:500 14px var(--sans)}
 body.editing .edit-bar{display:block}
-.rotate{position:fixed;inset:auto 0 0;z-index:99;display:none;padding:14px 18px;background:#111;border-top:1px solid #222;color:#bbb;font:14px var(--sans);text-align:center}
-@media (orientation:portrait) and (max-width:820px){.rotate{display:block}}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition-duration:.01ms!important;transition-delay:0ms!important}
@@ -361,7 +535,6 @@ body.editing .edit-bar{display:block}
 </head>
 <body>
 <div class="edit-bar" role="status">Edit mode: click any text to change it (not saved, edit content.js to keep changes). Press Esc to finish.</div>
-<div class="rotate">Rotate your phone or open on a larger screen for the full presentation.</div>
 <p class="sr" id="live" aria-live="polite"></p>
 
 <div class="stage at-intro" id="stage">
@@ -708,9 +881,11 @@ body.editing .edit-bar{display:block}
   slides.forEach((s, i) => { s.setAttribute('role', 'group'); s.setAttribute('aria-roledescription', 'slide'); s.setAttribute('aria-label', `${i + 1} of ${N}`); s.setAttribute('aria-hidden', 'true'); s.inert = true; });
 
   const fit = () => stage.style.setProperty('--s', Math.min(innerWidth / 1920, innerHeight / 1080));
-  addEventListener('resize', fit); fit();
 
   let cur = -1, busy = false;
+  /* Flow mode (phones, portrait / small tablets): scroll instead of slides */
+  const wantsFlow = () => innerWidth < 1200 || innerHeight < 650 || innerHeight > innerWidth * 1.05;
+  let fm = false, revealIO = null, mediaIO = null, spyIO = null;
   const DUR = reduce ? 0 : 1150;
 
   const media = (s, on) => $$('video', s).forEach(v => {
@@ -720,16 +895,19 @@ body.editing .edit-bar{display:block}
 
   const hud = i => {
     const s = slides[i];
+    if (!s) return;
     stage.classList.toggle('at-intro', i === 0);
     $('#hudSec').textContent = s.dataset.section || '';
     $('#count').innerHTML = `<b>${pad(i + 1)}</b> / ${pad(N)}`;
     $('#prog').style.setProperty('--p', (i + 1) / N);
+    stage.style.setProperty('--p', (i + 1) / N);
     $('#live').textContent = `Slide ${i + 1} of ${N}: ${s.dataset.title || ''}`;
     if (location.hash !== '#' + (i + 1)) history.replaceState(null, '', '#' + (i + 1));
   };
 
   const go = (n, instant) => {
     n = Math.max(0, Math.min(N - 1, n));
+    if (fm) { slides[n].scrollIntoView({ behavior: reduce || instant ? 'auto' : 'smooth', block: 'start' }); return; }
     if (n === cur || busy) return;
     const prev = cur >= 0 ? slides[cur] : null, next = slides[n], dir = n > cur ? 1 : -1;
     const vertical = prev && prev.dataset.chapter && prev.dataset.chapter === next.dataset.chapter;
@@ -753,7 +931,7 @@ body.editing .edit-bar{display:block}
     }
     setTimeout(() => { prev.classList.remove('is-out', 'in'); media(prev, false); busy = false; }, DUR);
   };
-  const step = d => go(cur + d);
+  const step = d => go(Math.max(0, cur) + d);
 
   /* keyboard */
   document.addEventListener('keydown', e => {
@@ -769,6 +947,7 @@ body.editing .edit-bar{display:block}
   /* wheel / trackpad: one gesture = one slide */
   let wheelAcc = 0, wheelLock = 0;
   addEventListener('wheel', e => {
+    if (fm) return;
     e.preventDefault();
     const now = performance.now();
     if (now < wheelLock) return;
@@ -779,6 +958,7 @@ body.editing .edit-bar{display:block}
   let tx = 0, ty = 0;
   addEventListener('touchstart', e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
   addEventListener('touchend', e => {
+    if (fm) return;
     const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
     if (Math.max(Math.abs(dx), Math.abs(dy)) < 50) return;
     step((Math.abs(dx) > Math.abs(dy) ? -dx : -dy) > 0 ? 1 : -1);
@@ -787,7 +967,7 @@ body.editing .edit-bar{display:block}
   $('#next').addEventListener('click', () => step(1));
   const toggleFS = () => { if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen && document.documentElement.requestFullscreen().catch(() => {}); };
   $('#fs').addEventListener('click', toggleFS);
-  addEventListener('hashchange', () => { const n = parseInt(location.hash.slice(1), 10) - 1; if (!isNaN(n) && n !== cur) go(n); });
+  addEventListener('hashchange', () => { const n = parseInt(location.hash.slice(1), 10) - 1; if (!isNaN(n) && n !== cur && !fm) go(n); });
 
   /* pointer parallax (transform-only, via the individual translate property) */
   if (!reduce && matchMedia('(pointer: fine)').matches) {
@@ -852,12 +1032,37 @@ body.editing .edit-bar{display:block}
     svg.innerHTML = pairs.map(([a, b]) => { const d = curve(pt(a, 'r'), pt(b, 'l')); return `<path class="wire" d="${d}"/><path class="flowing" d="${d}"/>`; }).join('');
   };
 
+  /* mode switching */
+  const hint = $('.intro-hint');
+  const enterFlow = () => {
+    const at = Math.max(0, cur);
+    fm = true; document.documentElement.classList.add('fm');
+    hint.firstChild.textContent = 'Scroll to begin ';
+    slides.forEach(s => { s.classList.remove('is-on', 'is-out'); s.setAttribute('aria-hidden', 'false'); s.inert = false; s.getAnimations().forEach(a => a.cancel()); });
+    revealIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealIO.unobserve(e.target); } }), { threshold: .12 });
+    mediaIO = new IntersectionObserver(es => es.forEach(e => media(e.target, e.isIntersecting)), { threshold: .45 });
+    spyIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { cur = slides.indexOf(e.target); hud(cur); } }), { rootMargin: '-45% 0px -50% 0px' });
+    slides.forEach(s => { revealIO.observe(s); mediaIO.observe(s); spyIO.observe(s); });
+    requestAnimationFrame(() => slides[at].scrollIntoView({ block: 'start' }));
+  };
+  const enterDeck = () => {
+    const at = Math.max(0, cur);
+    fm = false; document.documentElement.classList.remove('fm');
+    hint.firstChild.textContent = 'Press → to begin ';
+    [revealIO, mediaIO, spyIO].forEach(o => o && o.disconnect());
+    slides.forEach(s => { s.classList.remove('in', 'is-on', 'is-out'); s.setAttribute('aria-hidden', 'true'); s.inert = true; media(s, false); });
+    scrollTo(0, 0); fit(); drawArch();
+    cur = -1; go(at, true);
+  };
+  const setMode = () => { const want = wantsFlow(); if (want && !fm) enterFlow(); else if (!want && fm) enterDeck(); else if (!fm) fit(); };
+  addEventListener('resize', setMode);
+
   /* start */
   const startAt = Math.max(0, Math.min(N - 1, (parseInt(location.hash.slice(1), 10) || 1) - 1));
-  // draw the diagram while its slide is laid out but invisible
-  drawArch();
-  go(startAt, true);
-  if (document.fonts) document.fonts.ready.then(drawArch);
+  cur = startAt;
+  if (wantsFlow()) { cur = startAt; enterFlow(); }
+  else { cur = -1; fit(); drawArch(); go(startAt, true); }
+  if (document.fonts) document.fonts.ready.then(() => { if (!fm) drawArch(); });
   slides[0].addEventListener('click', e => { if (!e.target.closest('button,a,[data-drop]')) step(1); });
 })();
 </script>
