@@ -13,6 +13,12 @@ FILES
   Trend_Styles.html     6 style demos + ZARZ container style
   KURO_v3.zip           Zipped package of the previous (v3) site
 
+PITCH DECK  (live at /deck/)
+  deck/index.html   Web presentation, 17 slides, 16:9, cinematic transitions
+  deck/content.js   EDIT THIS: clients, reels, website case studies, automation demos, contact
+  deck/assets/      Images used by the deck (put reel videos in deck/reels/)
+  Keys: → / ↓ / Space next · ← / ↑ previous · F full screen · E quick text edit · Ctrl+P save as PDF
+
 LIVE
   https://kuro-agency-website.vercel.app/
   repo: github.com/riuxin/kuro-Agency-website
