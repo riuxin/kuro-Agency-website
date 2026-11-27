@@ -621,7 +621,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
 .tl-fill{position:absolute;inset:0;transform-origin:left;transform:scaleX(0);background:linear-gradient(90deg,rgba(99,102,241,.35),rgba(139,92,246,.45))}
 .tl-head{position:absolute;top:-1px;bottom:-1px;left:0;width:2px;background:var(--indigo-soft);box-shadow:0 0 12px var(--indigo-hi)}
 .tl-head::before{content:'';position:absolute;top:-5px;left:-5px;border:6px solid transparent;border-top-color:var(--indigo-soft)}
-.tl-clips{position:absolute;inset:4px 0;display:grid;grid-template-columns:repeat(12,1fr);gap:3px;padding-inline:3px}
+.tl-clips{position:absolute;inset:4px 0;display:grid;grid-template-columns:repeat(11,1fr);gap:3px;padding-inline:3px}
 .tl-clips i{border-radius:3px;background:rgba(165,180,252,.16);border:1px solid rgba(165,180,252,.18)}
 .tl-time{min-width:84px;text-align:right;color:var(--text-2);font-variant-numeric:tabular-nums}
 .tl-label{display:none}
@@ -1094,20 +1094,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
         <div class="clip-media">
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
           <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
-          <button class="clip-toggle" type="button" aria-label="Pause case study · b-roll &amp; charts video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
-          <video loop playsinline preload="none" poster="assets/motion/sharan-cupid-case-study.jpg" aria-label="Case study · b-roll &amp; charts — reference clip by another creator"><source src="assets/motion/sharan-cupid-case-study.mp4" type="video/mp4"></video>
-          <div class="clip-cap"><b>Case study · b-roll &amp; charts</b><span>Finance · Editorial</span></div>
-        </div>
-        <div class="clip-info">
-          <p>Four b-roll registers cut against studio head with sourced editorial bar charts.</p>
-          <small>Reference edit · Sharan Hegde</small>
-          <a class="case-cta u-link" href="#contact" data-brief="motion">Brief a similar edit <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11l6-6m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        </div>
-      </article>
-      <article class="clip" data-reveal>
-        <div class="clip-media">
-          <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
-          <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
           <button class="clip-toggle" type="button" aria-label="Pause news card + kinetic title video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
           <video loop playsinline preload="none" poster="assets/motion/sharan-ndtv-newscard.jpg" aria-label="News card + kinetic title — reference clip by another creator"><source src="assets/motion/sharan-ndtv-newscard.mp4" type="video/mp4"></video>
           <div class="clip-cap"><b>News card + kinetic title</b><span>Graphics · Lower thirds</span></div>
@@ -1249,7 +1235,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
 
     <div class="reel-timeline" aria-hidden="true">
       <span class="tl-label">Timeline</span>
-      <span class="tl-track" id="tlTrack"><span class="tl-clips"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><i class="tl-fill" id="tlFill"></i><i class="tl-head" id="tlHead"></i></span>
+      <span class="tl-track" id="tlTrack"><span class="tl-clips"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><i class="tl-fill" id="tlFill"></i><i class="tl-head" id="tlHead"></i></span>
       <span class="tl-time" id="tlTime">00:00:00</span>
     </div>
 
@@ -1684,7 +1670,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
       const prog = Math.min(1, Math.max(0, (vh - r.top) / (r.height + vh)));
       fill.style.transform = `scaleX(${prog})`;
       head.style.transform = `translate3d(${prog * trackW}px,0,0)`;
-      const secs = prog * 240;                       // 12 clips × 20s reel
+      const secs = prog * 220;                       // 11 clips × 20s reel
       time.textContent = `${pad(Math.floor(secs / 60))}:${pad(Math.floor(secs % 60))}:${pad(Math.floor((secs % 1) * 30))}`;
 
       let moving = false;
