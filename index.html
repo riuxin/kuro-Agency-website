@@ -640,6 +640,12 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
 .clip-toggle .i-play{display:none}
 .clip.is-paused .clip-toggle .i-play{display:block}
 .clip.is-paused .clip-toggle .i-pause{display:none}
+.clip-sound{position:absolute;right:60px;top:10px;z-index:2;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:var(--text);background:rgba(9,9,11,.5);border:1px solid var(--line-2);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);opacity:.85;transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease)}
+.clip-sound:hover{opacity:1;transform:scale(1.06)}
+.clip-sound svg{width:15px;height:15px}
+.clip-sound .i-muted{display:none}
+.clip.is-muted .clip-sound .i-sound{display:none}
+.clip.is-muted .clip-sound .i-muted{display:block}
 .clip-play{position:absolute;left:50%;top:50%;z-index:2;display:grid;justify-items:center;gap:10px;transform:translate(-50%,-50%);pointer-events:none;transition:opacity .45s var(--ease),transform .6s var(--ease)}
 .clip-play-ic{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;color:var(--text);background:rgba(9,9,11,.55);border:1px solid rgba(255,255,255,.28);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 10px 40px -10px rgba(99,102,241,.7)}
 .clip-play-ic svg{width:18px;height:18px;margin-left:3px}
@@ -1075,7 +1081,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
           <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
           <button class="clip-toggle" type="button" aria-label="Pause paper-collage explainer video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
-          <video muted loop playsinline preload="none" poster="assets/motion/varun-mayya-explainer.jpg" aria-label="Paper-collage explainer — reference clip by another creator"><source src="assets/motion/varun-mayya-explainer.mp4" type="video/mp4"></video>
+          <video loop playsinline preload="none" poster="assets/motion/varun-mayya-explainer.jpg" aria-label="Paper-collage explainer — reference clip by another creator"><source src="assets/motion/varun-mayya-explainer.mp4" type="video/mp4"></video>
           <div class="clip-cap"><b>Paper-collage explainer</b><span>Talking head · Kinetic type</span></div>
         </div>
         <div class="clip-info">
@@ -1089,7 +1095,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
           <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
           <button class="clip-toggle" type="button" aria-label="Pause case study · b-roll &amp; charts video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
-          <video muted loop playsinline preload="none" poster="assets/motion/sharan-cupid-case-study.jpg" aria-label="Case study · b-roll &amp; charts — reference clip by another creator"><source src="assets/motion/sharan-cupid-case-study.mp4" type="video/mp4"></video>
+          <video loop playsinline preload="none" poster="assets/motion/sharan-cupid-case-study.jpg" aria-label="Case study · b-roll &amp; charts — reference clip by another creator"><source src="assets/motion/sharan-cupid-case-study.mp4" type="video/mp4"></video>
           <div class="clip-cap"><b>Case study · b-roll &amp; charts</b><span>Finance · Editorial</span></div>
         </div>
         <div class="clip-info">
@@ -1103,7 +1109,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
           <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
           <button class="clip-toggle" type="button" aria-label="Pause news card + kinetic title video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
-          <video muted loop playsinline preload="none" poster="assets/motion/sharan-ndtv-newscard.jpg" aria-label="News card + kinetic title — reference clip by another creator"><source src="assets/motion/sharan-ndtv-newscard.mp4" type="video/mp4"></video>
+          <video loop playsinline preload="none" poster="assets/motion/sharan-ndtv-newscard.jpg" aria-label="News card + kinetic title — reference clip by another creator"><source src="assets/motion/sharan-ndtv-newscard.mp4" type="video/mp4"></video>
           <div class="clip-cap"><b>News card + kinetic title</b><span>Graphics · Lower thirds</span></div>
         </div>
         <div class="clip-info">
@@ -1117,7 +1123,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
           <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
           <button class="clip-toggle" type="button" aria-label="Pause cutaway-per-sentence reel video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
-          <video muted loop playsinline preload="none" poster="assets/motion/raj-shamani-food-broll.jpg" aria-label="Cutaway-per-sentence reel — reference clip by another creator"><source src="assets/motion/raj-shamani-food-broll.mp4" type="video/mp4"></video>
+          <video loop playsinline preload="none" poster="assets/motion/raj-shamani-food-broll.jpg" aria-label="Cutaway-per-sentence reel — reference clip by another creator"><source src="assets/motion/raj-shamani-food-broll.mp4" type="video/mp4"></video>
           <div class="clip-cap"><b>Cutaway-per-sentence reel</b><span>B-roll · Keyword captions</span></div>
         </div>
         <div class="clip-info">
@@ -1131,7 +1137,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
           <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
           <button class="clip-toggle" type="button" aria-label="Pause brand integration &amp; pacing video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
-          <video muted loop playsinline preload="none" poster="assets/motion/raj-shamani-brand-card.jpg" aria-label="Brand integration &amp; pacing — reference clip by another creator"><source src="assets/motion/raj-shamani-brand-card.mp4" type="video/mp4"></video>
+          <video loop playsinline preload="none" poster="assets/motion/raj-shamani-brand-card.jpg" aria-label="Brand integration &amp; pacing — reference clip by another creator"><source src="assets/motion/raj-shamani-brand-card.mp4" type="video/mp4"></video>
           <div class="clip-cap"><b>Brand integration &amp; pacing</b><span>Sponsored · End-card</span></div>
         </div>
         <div class="clip-info">
@@ -1145,7 +1151,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
           <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
           <button class="clip-toggle" type="button" aria-label="Pause comped assets · no b-roll video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
-          <video muted loop playsinline preload="none" poster="assets/motion/ali-abdaal-comped-assets.jpg" aria-label="Comped assets · no b-roll — reference clip by another creator"><source src="assets/motion/ali-abdaal-comped-assets.mp4" type="video/mp4"></video>
+          <video loop playsinline preload="none" poster="assets/motion/ali-abdaal-comped-assets.jpg" aria-label="Comped assets · no b-roll — reference clip by another creator"><source src="assets/motion/ali-abdaal-comped-assets.mp4" type="video/mp4"></video>
           <div class="clip-cap"><b>Comped assets · no b-roll</b><span>Punch-ins · Pill captions</span></div>
         </div>
         <div class="clip-info">
@@ -1159,7 +1165,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
           <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
           <button class="clip-toggle" type="button" aria-label="Pause serif topic cards &amp; badges video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
-          <video muted loop playsinline preload="none" poster="assets/motion/ali-abdaal-topic-cards.jpg" aria-label="Serif topic cards &amp; badges — reference clip by another creator"><source src="assets/motion/ali-abdaal-topic-cards.mp4" type="video/mp4"></video>
+          <video loop playsinline preload="none" poster="assets/motion/ali-abdaal-topic-cards.jpg" aria-label="Serif topic cards &amp; badges — reference clip by another creator"><source src="assets/motion/ali-abdaal-topic-cards.mp4" type="video/mp4"></video>
           <div class="clip-cap"><b>Serif topic cards &amp; badges</b><span>Talking head · Props</span></div>
         </div>
         <div class="clip-info">
@@ -1174,7 +1180,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
           <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
           <button class="clip-toggle" type="button" aria-label="Pause luxury house tour video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
-          <video muted loop playsinline preload="none" poster="assets/motion/futuro-avenue-house-tour.jpg" aria-label="Luxury house tour — reference clip by another creator"><source src="assets/motion/futuro-avenue-house-tour.mp4" type="video/mp4"></video>
+          <video loop playsinline preload="none" poster="assets/motion/futuro-avenue-house-tour.jpg" aria-label="Luxury house tour — reference clip by another creator"><source src="assets/motion/futuro-avenue-house-tour.mp4" type="video/mp4"></video>
           <div class="clip-cap"><b>Luxury house tour</b><span>Real estate · 4K Sony FX6</span></div>
         </div>
         <div class="clip-info">
@@ -1188,7 +1194,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
           <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
           <button class="clip-toggle" type="button" aria-label="Pause podcast showreel · FX video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
-          <video muted loop playsinline preload="none" poster="assets/motion/wesmile-podcast-showreel.jpg" aria-label="Podcast showreel · FX — reference clip by another creator"><source src="assets/motion/wesmile-podcast-showreel.mp4" type="video/mp4"></video>
+          <video loop playsinline preload="none" poster="assets/motion/wesmile-podcast-showreel.jpg" aria-label="Podcast showreel · FX — reference clip by another creator"><source src="assets/motion/wesmile-podcast-showreel.mp4" type="video/mp4"></video>
           <div class="clip-cap"><b>Podcast showreel · FX</b><span>B-roll · Motion graphics</span></div>
         </div>
         <div class="clip-info">
@@ -1202,7 +1208,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
           <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
           <button class="clip-toggle" type="button" aria-label="Pause split-stack podcast hook video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
-          <video muted loop playsinline preload="none" poster="assets/motion/doac-podcast-split.jpg" aria-label="Split-stack podcast hook — reference clip by another creator"><source src="assets/motion/doac-podcast-split.mp4" type="video/mp4"></video>
+          <video loop playsinline preload="none" poster="assets/motion/doac-podcast-split.jpg" aria-label="Split-stack podcast hook — reference clip by another creator"><source src="assets/motion/doac-podcast-split.mp4" type="video/mp4"></video>
           <div class="clip-cap"><b>Split-stack podcast hook</b><span>YouTube Short · Captions</span></div>
         </div>
         <div class="clip-info">
@@ -1216,7 +1222,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
           <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
           <button class="clip-toggle" type="button" aria-label="Pause podcast clip · cyan captions video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
-          <video muted loop playsinline preload="none" poster="assets/motion/wtf-kumar-birla-captions.jpg" aria-label="Podcast clip · cyan captions — reference clip by another creator"><source src="assets/motion/wtf-kumar-birla-captions.mp4" type="video/mp4"></video>
+          <video loop playsinline preload="none" poster="assets/motion/wtf-kumar-birla-captions.jpg" aria-label="Podcast clip · cyan captions — reference clip by another creator"><source src="assets/motion/wtf-kumar-birla-captions.mp4" type="video/mp4"></video>
           <div class="clip-cap"><b>Podcast clip · cyan captions</b><span>Podcast · Headline bar</span></div>
         </div>
         <div class="clip-info">
@@ -1230,7 +1236,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
           <span class="clip-ref"><i aria-hidden="true"></i>Reference</span>
           <span class="clip-play" aria-hidden="true"><span class="clip-play-ic"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span class="clip-hint">Hover to play</span></span>
           <button class="clip-toggle" type="button" aria-label="Pause two-cam editorial cut video"><svg class="i-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg></button>
-          <video muted loop playsinline preload="none" poster="assets/motion/modern-wisdom-two-cam.jpg" aria-label="Two-cam editorial cut — reference clip by another creator"><source src="assets/motion/modern-wisdom-two-cam.mp4" type="video/mp4"></video>
+          <video loop playsinline preload="none" poster="assets/motion/modern-wisdom-two-cam.jpg" aria-label="Two-cam editorial cut — reference clip by another creator"><source src="assets/motion/modern-wisdom-two-cam.mp4" type="video/mp4"></video>
           <div class="clip-cap"><b>Two-cam editorial cut</b><span>Podcast · Shot-reverse-shot</span></div>
         </div>
         <div class="clip-info">
@@ -1585,37 +1591,75 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;op
   }), { threshold: .12, rootMargin: '0px 0px -6% 0px' });
   $$('[data-reveal]').forEach(el => io.observe(el));
 
-  /* ---------- Motion reel: hover to play (tap on touch), one clip at a time ---------- */
+  /* ---------- Motion reel: hover to play (tap on touch), one clip at a time, with sound ---------- */
   const clips = $$('.clip');
   const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
-  let current = null;
+  let current = null, wantSound = true;
   const setPaused = (clip, paused) => {
     clip.classList.toggle('is-paused', paused);
     const t = $('.clip-cap b', clip).textContent.toLowerCase();
     $('.clip-toggle', clip).setAttribute('aria-label', (paused ? 'Play ' : 'Pause ') + t + ' video');
   };
+  const setMuted = (clip, muted) => {
+    const v = $('video', clip);
+    v.muted = muted;
+    clip.classList.toggle('is-muted', muted);
+    const btn = $('.clip-sound', clip);
+    if (btn) btn.setAttribute('aria-label', (muted ? 'Unmute ' : 'Mute ') + $('.clip-cap b', clip).textContent.toLowerCase() + ' video');
+  };
   const play = clip => {
     if (current && current !== clip) stop(current);
     const v = $('video', clip);
     if (v.preload !== 'auto') v.preload = 'auto';   // nothing downloads until someone asks for it
+    setMuted(clip, !wantSound);
     clip.classList.add('is-loading');
     current = clip;
-    v.play().catch(() => { clip.classList.remove('is-loading'); setPaused(clip, true); });
+    v.play().catch(() => {
+      if (!v.muted) {
+        // Browser blocked unmuted autoplay before user gesture; fall back to muted until clicked
+        setMuted(clip, true);
+        v.play().catch(() => { clip.classList.remove('is-loading'); setPaused(clip, true); });
+      } else {
+        clip.classList.remove('is-loading');
+        setPaused(clip, true);
+      }
+    });
   };
   const stop = clip => { $('video', clip).pause(); if (current === clip) current = null; };
   clips.forEach(clip => {
     const v = $('video', clip), media = $('.clip-media', clip);
-    $('.clip-hint', clip).textContent = canHover ? 'Hover to play' : 'Tap to play';
+    media.insertAdjacentHTML('beforeend', '<button class="clip-sound" type="button" aria-label="Mute video"><svg class="i-sound" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 6.2H5l3.5-3v9.6L5 9.8H2.5V6.2z" fill="currentColor"/><path d="M10.8 5.3a3.8 3.8 0 010 5.4M12.7 3.5a6.3 6.3 0 010 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg><svg class="i-muted" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 6.2H5l3.5-3v9.6L5 9.8H2.5V6.2z" fill="currentColor"/><path d="M10.8 5.8l3.6 4.4M14.4 5.8l-3.6 4.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>');
+    $('.clip-hint', clip).textContent = canHover ? 'Hover to play · Click for sound' : 'Tap to play';
     setPaused(clip, true);
+    setMuted(clip, !wantSound);
     v.addEventListener('playing', () => { clip.classList.remove('is-loading'); setPaused(clip, false); });
     v.addEventListener('pause', () => { clip.classList.remove('is-loading'); setPaused(clip, true); });
     if (canHover) {
       media.addEventListener('pointerenter', () => play(clip));
       media.addEventListener('pointerleave', () => stop(clip));
+      media.addEventListener('click', e => {
+        if (e.target.closest('.clip-toggle, .clip-sound')) return;
+        wantSound = true;
+        setMuted(clip, false);
+        if (v.paused) play(clip);
+      });
     } else {
-      media.addEventListener('click', e => { if (e.target.closest('.clip-toggle')) return; v.paused ? play(clip) : stop(clip); });
+      media.addEventListener('click', e => {
+        if (e.target.closest('.clip-toggle, .clip-sound')) return;
+        wantSound = true;
+        setMuted(clip, false);
+        v.paused ? play(clip) : stop(clip);
+      });
     }
-    $('.clip-toggle', clip).addEventListener('click', () => { v.paused ? play(clip) : stop(clip); });
+    $('.clip-toggle', clip).addEventListener('click', () => {
+      if (v.paused) { wantSound = true; play(clip); } else { stop(clip); }
+    });
+    $('.clip-sound', clip).addEventListener('click', () => {
+      const nextMuted = !v.muted;
+      wantSound = !nextMuted;
+      setMuted(clip, nextMuted);
+      if (v.paused) play(clip);
+    });
   });
   // Anything that scrolls off-screen stops playing
   const vio = new IntersectionObserver(entries => entries.forEach(e => {
